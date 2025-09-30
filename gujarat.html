@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gujarat Tourism – Land of Vibrant Culture</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      color:#2c3e50;
+      background:
+        radial-gradient(circle at top left, rgba(255,153,51,0.3) 0%,transparent 50%),
+        radial-gradient(circle at top right, rgba(19,136,8,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom left, rgba(0,70,151,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255,153,51,0.3) 0%,transparent 50%),
+        linear-gradient(135deg,#f8f4e6,#fff8dc,#f0f8e8,#e6f3ff,#fff8dc);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+
+    /* Floating Images */
+    .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
+    .floating-img {
+      position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
+      box-shadow:0 20px 60px rgba(255,153,51,0.2); transition:.3s;
+    }
+    .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
+    .floating-img-1 {
+      top:10%; left:5%; width:300px; height:200px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Rani_ki_vav_at_patan_gujarat.jpg/800px-Rani_ki_vav_at_patan_gujarat.jpg') center/cover;
+      animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    .floating-img-2 {
+      top:20%; right:10%; width:260px; height:180px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Statue_of_Unity_01.jpg/800px-Statue_of_Unity_01.jpg') center/cover;
+      animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
+    }
+    .floating-img-3 {
+      top:50%; left:8%; width:280px; height:190px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Gir_National_Park.jpg/800px-Gir_National_Park.jpg') center/cover;
+      animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
+    }
+    .floating-img-4 {
+      top:60%; right:5%; width:320px; height:210px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Sun Temple at Modhera.jpg/800px-Sun Temple at Modhera.jpg') center/cover;
+      animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
+    @keyframes float2 {0%,100%{transform:translate(0)}33%{transform:translate(10px,-20px)}66%{transform:translate(-5px,-10px)}}
+    @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
+    @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
+
+    /* Navbar */
+    .navbar {
+      position:fixed; top:0; width:100%; padding:15px 0;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
+      border-bottom:3px solid #ff9933; z-index:1000;
+    }
+    .nav-content { max-width:1200px; margin:0 auto; display:flex;justify-content:space-between;align-items:center;padding:0 20px; }
+    .logo { font-weight:700; font-size:24px; color:#138808; display:flex;align-items:center;gap:8px; }
+    .nav-links { display:flex; gap:25px; }
+    .nav-links a { text-decoration:none;color:#2c3e50;font-weight:500;transition:.3s; }
+    .nav-links a:hover { color:#ff9933; }
+    .back-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:10px 18px;border-radius:25px;font-size:14px;font-weight:600;
+      text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
+    }
+    .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    /* Hero */
+    .hero {
+      height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,153,51,0.1)0%,transparent 70%),
+        radial-gradient(circle at 80% 20%,rgba(19,136,8,0.1)0%,transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(0,70,151,0.1)0%,transparent 50%);
+      position:relative;z-index:1;
+    }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,6rem);font-weight:900;
+      background:linear-gradient(135deg,#ff9933,#138808,#004797);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 3s ease-in-out infinite;margin-bottom:0.5rem;
+    }
+    .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
+    .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
+    .cta-button {
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      color:#fff;padding:14px 28px;border-radius:50px;
+      font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);
+      transition:.3s;margin:0 5px;
+    }
+    .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    /* Action Buttons */
+    .action-buttons {
+      position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;
+    }
+    .action-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:12px 18px;border:none;border-radius:25px;cursor:pointer;
+      font-weight:600;display:flex;align-items:center;gap:6px;
+      box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;
+    }
+    .action-btn:hover{transform:translateY(-2px) scale(1.05);}
+
+    /* Sections */
+    .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+    .section-title h2 {
+      font-size:2.5rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
+    .category-header {text-align:center;margin:40px 0 20px;position:relative;}
+    .category-header h3 {
+      font-size:2rem;font-weight:600;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .category-header::after {
+      content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;
+    }
+    .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
+
+    .card {
+      background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;
+      transition:all .3s;
+    }
+    .card:hover {transform:translateY(-8px) scale(1.02);}
+    .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+    .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
+    .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+    .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
+    .map-btn {
+      background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+      border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
+      display:flex;align-items:center;gap:6px;transition:.3s;
+    }
+    .map-btn:hover{transform:scale(1.05);}
+
+    /* Modal */
+    .modal {
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
+      justify-content:center;align-items:center;
+    }
+    .modal.open{display:flex;}
+    .modal-content {
+      background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;
+    }
+    .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
+    .image-scroller {
+      display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;
+    }
+    .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
+    .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
+
+    /* AI Form */
+    .ai-container {
+      background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
+      box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
+    }
+    .ai-title {
+      font-size:2.5rem;font-weight:700;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+    }
+    .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
+    .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
+    .form-group select,.form-group textarea {
+      width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;
+      font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);
+    }
+    .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
+    .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .checkbox-item {
+      display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;
+    }
+    .checkbox-item:hover {background:rgba(255,153,51,0.2);}
+    .get-recommendations {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;
+    }
+    .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
+    .ai-results h3 {
+      font-size:2rem;font-weight:700;
+      background:linear-gradient(135deg,#138808,#ff9933);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;margin-bottom:20px;
+    }
+    .recommendation-text {
+      background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;
+    }
+
+    /* Animations */
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){
+      .floating-images{display:none;}
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating BG -->
+  <div class="floating-images">
+    <div class="floating-img floating-img-1"></div>
+    <div class="floating-img floating-img-2"></div>
+    <div class="floating-img floating-img-3"></div>
+    <div class="floating-img floating-img-4"></div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
+    <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><span style="font-size:28px;">🏛️</span> Gujarat Tourism</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#ai-recommendations">AI Plan</a>
+        <a href="#attractions">Attractions</a>
+        <a href="index.html" class="back-btn"><span>←</span>Back to India</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div>
+      <h1>Gujarat</h1>
+      <div class="subtitle">Land of Vibrant Culture</div>
+      <p>Discover ancient heritage, vibrant festivals, and diverse wildlife</p>
+      <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
+      <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
+    </div>
+  </section>
+
+  <!-- AI Planner -->
+  <section id="ai-recommendations" class="section">
+    <div class="ai-container">
+      <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
+      <p style="color:#666;margin-bottom:30px;">
+        Tell us your trip details and interests—get a custom Gujarat itinerary!
+      </p>
+      <form id="preferences-form" class="ai-form">
+        <div class="form-group">
+          <label for="duration">Trip Duration</label>
+          <select id="duration" name="duration">
+            <option value="">Select…</option>
+            <option>1–2 days</option><option>3–5 days</option>
+            <option>1 week</option><option>2+ weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select…</option>
+            <option>Budget (₹1k–3k/day)</option>
+            <option>Moderate (₹3k–7k/day)</option>
+            <option>Luxury (₹7k+/day)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="style">Travel Style</label>
+          <select id="style" name="style">
+            <option value="">Select…</option>
+            <option>Solo</option><option>Couple</option><option>Family</option>
+            <option>Friends</option><option>Business</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Interests (multi-select)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="heritage"/>
+              <label>🏛️ Heritage Sites</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="wildlife"/>
+              <label>🐯 Wildlife</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="culture"/>
+              <label>🎭 Culture & Festivals</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="pilgrimage"/>
+              <label>⛪ Pilgrimage Sites</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="desert"/>
+              <label>🏜️ Desert</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="beach"/>
+              <label>🏖️ Beaches</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Rani ki Vav, Gir National Park…"></textarea>
+        </div>
+        <button type="submit" class="get-recommendations">
+          <span>✨</span>Get Recommendations
+        </button>
+      </form>
+
+      <div id="ai-results" class="ai-results">
+        <h3>🎯 Your Gujarat Travel Plan</h3>
+        <div id="recommendation-content" class="recommendation-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attractions -->
+  <section id="attractions" class="section">
+    <div class="section-title">
+      <h2>⭐ Top Attractions in Gujarat</h2>
+      <p>Discover the soul of vibrant Gujarat</p>
+    </div>
+
+    <!-- Heritage Sites -->
+    <div class="category-header"><h3>🏛️ Heritage & Historical Sites</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏛️ Rani ki Vav</h4>
+        <p>UNESCO World Heritage stepwell in Patan with intricate sculptures and architectural marvels.</p>
+        <div class="tags">
+          <span class="tag">UNESCO</span>
+          <span class="tag">Stepwell</span>
+          <span class="tag">Architecture</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Rani ki Vav, Patan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>🏛️ Statue of Unity</h4>
+        <p>Tallest statue in the world, honoring Sardar Vallabhbhai Patel, with museum and viewing deck.</p>
+        <div class="tags">
+          <span class="tag">Tallest</span><span class="tag">Sardar Patel</span><span class="tag">Museum</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Statue of Unity, Kevadia')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>🏛️ Sun Temple, Modhera</h4>
+        <p>Ancient Hindu temple dedicated to the Sun God with exquisite stone carvings and astronomical features.</p>
+        <div class="tags">
+          <span class="tag">Hindu</span><span class="tag">Temple</span><span class="tag">Carvings</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Sun Temple, Modhera')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Wildlife -->
+    <div class="category-header"><h3>🐯 Wildlife & National Parks</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🐯 Gir National Park</h4>
+        <p>Only home of Asiatic lions in the world, with diverse flora and fauna in a dry forest ecosystem.</p>
+        <div class="tags"><span class="tag">Lions</span><span class="tag">National Park</span><span class="tag">Asiatic</span></div>
+        <button class="map-btn" onclick="openMap('Gir National Park, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦩 Nal Sarovar Bird Sanctuary</h4>
+        <p>Largest wetland bird sanctuary in Gujarat, home to over 250 bird species including flamingos.</p>
+        <div class="tags"><span class="tag">Birds</span><span class="tag">Sanctuary</span><span class="tag">Flamingos</span></div>
+        <button class="map-btn" onclick="openMap('Nal Sarovar Bird Sanctuary, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦏 Velavadar Blackbuck National Park</h4>
+        <p>Home to blackbucks, wolves, and diverse wildlife in grassland ecosystem.</p>
+        <div class="tags"><span class="tag">Blackbuck</span><span class="tag">Grassland</span><span class="tag">Wildlife</span></div>
+        <button class="map-btn" onclick="openMap('Velavadar Blackbuck National Park, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Culture & Festivals -->
+    <div class="category-header"><h3>🎭 Culture & Festivals</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🎭 Rann Utsav</h4>
+        <p>Magical festival in the white desert of Kutch, featuring cultural performances and handicrafts.</p>
+        <div class="tags"><span class="tag">Festival</span><span class="tag">Desert</span><span class="tag">Kutch</span></div>
+        <button class="map-btn" onclick="openMap('Rann Utsav, Kutch')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎭 Kutch Desert</h4>
+        <p>Vast white desert with unique landscape, traditional crafts, and cultural experiences.</p>
+        <div class="tags"><span class="tag">Desert</span><span class="tag">Landscape</span><span class="tag">Crafts</span></div>
+        <button class="map-btn" onclick="openMap('Kutch Desert, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎭 Dholavira</h4>
+        <p>Harappan civilization site with well-preserved ruins and water conservation systems.</p>
+        <div class="tags"><span class="tag">Harappan</span><span class="tag">Archaeology</span><span class="tag">UNESCO</span></div>
+        <button class="map-btn" onclick="openMap('Dholavira, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Pilgrimage Sites -->
+    <div class="category-header"><h3>⛪ Pilgrimage Sites</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>⛪ Somnath Temple</h4>
+        <p>First among the twelve Jyotirlingas, ancient Shiva temple with rich spiritual significance.</p>
+        <div class="tags"><span class="tag">Jyotirlinga</span><span class="tag">Shiva</span><span class="tag">Spiritual</span></div>
+        <button class="map-btn" onclick="openMap('Somnath Temple, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛪ Dwarkadhish Temple</h4>
+        <p>Ancient Krishna temple in Dwarka, one of the Char Dham pilgrimage sites.</p>
+        <div class="tags"><span class="tag">Krishna</span><span class="tag">Char Dham</span><span class="tag">Ancient</span></div>
+        <button class="map-btn" onclick="openMap('Dwarkadhish Temple, Dwarka')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛪ Palitana Temples</h4>
+        <p>Complex of over 900 Jain temples on Shatrunjaya Hill, a major pilgrimage destination.</p>
+        <div class="tags"><span class="tag">Jain</span><span class="tag">Temples</span><span class="tag">Pilgrimage</span></div>
+        <button class="map-btn" onclick="openMap('Palitana Temples, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Beaches -->
+    <div class="category-header"><h3>🏖️ Beaches & Coastal Areas</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏖️ Mandvi Beach</h4>
+        <p>Pristine beach in Kutch with historic shipbuilding traditions and beautiful sunsets.</p>
+        <div class="tags"><span class="tag">Beach</span><span class="tag">Kutch</span><span class="tag">Shipbuilding</span></div>
+        <button class="map-btn" onclick="openMap('Mandvi Beach, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏖️ Tithal Beach</h4>
+        <p>Unique black sand beach in Valsad with beautiful coastal scenery.</p>
+        <div class="tags"><span class="tag">Beach</span><span class="tag">Black Sand</span><span class="tag">Coastal</span></div>
+        <button class="map-btn" onclick="openMap('Tithal Beach, Valsad')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏖️ Gopnath Beach</h4>
+        <p>Scenic coastal destination near Somnath with pristine waters and historical significance.</p>
+        <div class="tags"><span class="tag">Beach</span><span class="tag">Coastal</span><span class="tag">Historical</span></div>
+        <button class="map-btn" onclick="openMap('Gopnath Beach, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Cities -->
+    <div class="category-header"><h3>🏙️ Major Towns & Cities</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏙️ Ahmedabad</h4>
+        <p>UNESCO World Heritage city with historic architecture, textile heritage, and vibrant markets.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">Architecture</span><span class="tag">Markets</span></div>
+        <button class="map-btn" onclick="openMap('Ahmedabad, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏘️ Vadodara</h4>
+        <p>Cultural capital with palaces, gardens, and rich artistic heritage.</p>
+        <div class="tags"><span class="tag">Cultural</span><span class="tag">Palaces</span><span class="tag">Gardens</span></div>
+        <button class="map-btn" onclick="openMap('Vadodara, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏰 Surat</h4>
+        <p>Diamond cutting and polishing hub with historical significance and beautiful gardens.</p>
+        <div class="tags"><span class="tag">Diamond</span><span class="tag">Hub</span><span class="tag">Gardens</span></div>
+        <button class="map-btn" onclick="openMap('Surat, Gujarat')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map + Photos Modal -->
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Loading…</h2>
+      <div class="image-scroller" id="image-scroller">
+        <!-- Dynamically filled with images -->
+      </div>
+      <div class="modal-actions" id="modal-actions">
+        <!-- Buttons inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Cohere API Configuration
+    const COHERE_API_KEY = 'wudMNVCbpo2A8Ggo58iYUBzLpmDv9qaRj5moB2Vd';
+
+    document.addEventListener('DOMContentLoaded',() => {
+      document.getElementById('weather-btn')
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/GJXX0001:1:GJ','_blank'));
+      document.getElementById('travel-planner-btn')
+        .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
+      document.getElementById('preferences-form')
+        .addEventListener('submit',handleForm);
+      setupModal();
+    });
+
+    async function handleForm(e){
+      e.preventDefault();
+      const fd=new FormData(e.target),
+            prefs={ duration:fd.get('duration'), budget:fd.get('budget'),
+                    style:fd.get('style'), additional:fd.get('additional')||'None',
+                    interests:[] };
+      document.querySelectorAll('input[name="interests"]:checked')
+        .forEach(ch=>prefs.interests.push(ch.value));
+      if(!prefs.duration||!prefs.budget||prefs.interests.length===0){
+        return alert('Select duration, budget & at least one interest!');
+      }
+      await getAI(prefs);
+    }
+
+    function formatAI(text){
+      text=text.trim().replace(/^["']|["']$/g,'');
+      text=text.replace(/\\n/g,'\n').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+      text=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      text=text.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g,'<em>$1</em>');
+      if(!text.includes('<p>'))text='<p>'+text+'</p>';
+      text=text.replace(/<p><\/p>/g,'').replace(/<p>\s*<br>/g,'<p>');
+      return text;
+    }
+
+    async function getAI(p){
+      const results=document.getElementById('ai-results'),
+            content=document.getElementById('recommendation-content');
+      results.style.display='block';
+      content.innerHTML=`<div style="text-align:center;padding:20px;"><div style="font-size:2rem;">🤖</div><p>Generating your Gujarat travel plan…</p></div>`;
+      
+      const prompt = `
+You are a travel expert for Gujarat, India. Given these preferences, craft a personalized itinerary:
+
+Duration: ${p.duration}
+Budget: ${p.budget}
+Style: ${p.style}
+Interests: ${p.interests.join(', ')}
+Additional: ${p.additional}
+
+Include:
+1. Top destinations in Gujarat
+2. Attractions per interest
+3. Sample day-wise itinerary
+4. Budget tips
+5. Best seasons
+6. Local food & experiences
+7. Transport suggestions
+
+Make it engaging, detailed, and practical.`;
+
+      try {
+        // Using Cohere API
+        const response = await fetch('https://api.cohere.ai/v1/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${COHERE_API_KEY}`
+          },
+          body: JSON.stringify({
+            message: prompt,
+            model: "c4ai-aya-expanse-32b",
+            temperature: 0.3
+          })
+        });
+
+        if(!response.ok) throw 'AI error';
+        const data = await response.json();
+        const ai = data.text || data.response || data;
+        content.innerHTML=`<div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">${formatAI(ai)}</div><div style="text-align:center;margin-top:20px;"><button onclick="window.print()" style="margin:5px;padding:10px 20px;">🖨️ Print</button><button onclick="sharePlan()" style="margin:5px;padding:10px 20px;">📤 Share</button></div>`;
+      } catch(err){
+        content.innerHTML=`<p style="color:red;text-align:center;">Failed to generate. Please try again.</p>`;
+      }
+    }
+
+    function sharePlan(){
+      const txt=document.getElementById('recommendation-content').innerText;
+      if(navigator.share) navigator.share({title:'Gujarat Travel Plan',text:txt});
+      else navigator.clipboard.writeText(txt).then(()=>alert('Copied to clipboard'));
+    }
+
+    /* Modal & Maps */
+    function setupModal(){
+      const modal=document.getElementById('mapModal'),
+            close=modal.querySelector('.close');
+      close.onclick=()=>modal.classList.remove('open');
+      window.onclick=e=>{ if(e.target===modal) modal.classList.remove('open'); };
+    }
+
+    async function openMap(loc){
+      const modal=document.getElementById('mapModal'),
+            title=modal.querySelector('#modal-title'),
+            scroller=modal.querySelector('#image-scroller'),
+            actions=modal.querySelector('#modal-actions');
+      title.textContent=loc;
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;">Loading images…</p>`;
+      actions.innerHTML='';
+      modal.classList.add('open');
+
+      // Predefined image URLs for Gujarat locations
+      const imageMap = {
+        'Rani ki Vav, Patan': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Rani_ki_vav_at_patan_gujarat.jpg/800px-Rani_ki_vav_at_patan_gujarat.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Rani_ki_vav_interior.jpg/800px-Rani_ki_vav_interior.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Rani_ki_vav_detail.jpg/800px-Rani_ki_vav_detail.jpg'
+        ],
+        'Statue of Unity, Kevadia': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Statue_of_Unity_01.jpg/800px-Statue_of_Unity_01.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Statue_of_Unity_view.jpg/800px-Statue_of_Unity_view.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Statue_of_Unity_museum.jpg/800px-Statue_of_Unity_museum.jpg'
+        ],
+        'Sun Temple, Modhera': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Sun Temple at Modhera.jpg/800px-Sun Temple at Modhera.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Modhera_Sun_Temple.jpg/800px-Modhera_Sun_Temple.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Modhera_Sun_Temple_carvings.jpg/800px-Modhera_Sun_Temple_carvings.jpg'
+        ],
+        'Gir National Park, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Gir_National_Park.jpg/800px-Gir_National_Park.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Gir_Lion.jpg/800px-Gir_Lion.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Gir_Forest.jpg/800px-Gir_Forest.jpg'
+        ],
+        'Nal Sarovar Bird Sanctuary, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Nal_Sarovar_Bird_Sanctuary.jpg/800px-Nal_Sarovar_Bird_Sanctuary.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Nal_Sarovar_flamingos.jpg/800px-Nal_Sarovar_flamingos.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Nal_Sarovar_wetland.jpg/800px-Nal_Sarovar_wetland.jpg'
+        ],
+        'Velavadar Blackbuck National Park, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Velavadar_Blackbuck_National_Park.jpg/800px-Velavadar_Blackbuck_National_Park.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Velavadar_Blackbuck.jpg/800px-Velavadar_Blackbuck.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Velavadar_grassland.jpg/800px-Velavadar_grassland.jpg'
+        ],
+        'Rann Utsav, Kutch': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Rann_of_Kutch.jpg/800px-Rann_of_Kutch.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Rann_Utsav_cultural_show.jpg/800px-Rann_Utsav_cultural_show.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Rann_Utsav_camp.jpg/800px-Rann_Utsav_camp.jpg'
+        ],
+        'Kutch Desert, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Rann_of_Kutch.jpg/800px-Rann_of_Kutch.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Kutch_white_desert.jpg/800px-Kutch_white_desert.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Kutch_salt_desert.jpg/800px-Kutch_salt_desert.jpg'
+        ],
+        'Dholavira, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Dholavira_Harappan_site.jpg/800px-Dholavira_Harappan_site.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Dholavira_ruins.jpg/800px-Dholavira_ruins.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Dholavira_water_system.jpg/800px-Dholavira_water_system.jpg'
+        ],
+        'Somnath Temple, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Somnath_Temple.jpg/800px-Somnath_Temple.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Somnath_Temple_interior.jpg/800px-Somnath_Temple_interior.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Somnath_Temple_sea_view.jpg/800px-Somnath_Temple_sea_view.jpg'
+        ],
+        'Dwarkadhish Temple, Dwarka': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Dwarkadhish_Temple.jpg/800px-Dwarkadhish_Temple.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Dwarka_Temple_interior.jpg/800px-Dwarka_Temple_interior.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Dwarka_Temple_pilgrims.jpg/800px-Dwarka_Temple_pilgrims.jpg'
+        ],
+        'Palitana Temples, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Palitana_Temples.jpg/800px-Palitana_Temples.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Palitana_Temple_complex.jpg/800px-Palitana_Temple_complex.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Palitana_Temple_path.jpg/800px-Palitana_Temple_path.jpg'
+        ],
+        'Mandvi Beach, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Mandvi_Beach.jpg/800px-Mandvi_Beach.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Mandvi_Beach_shipyard.jpg/800px-Mandvi_Beach_shipyard.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Mandvi_Beach_sunset.jpg/800px-Mandvi_Beach_sunset.jpg'
+        ],
+        'Tithal Beach, Valsad': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Tithal_Beach.jpg/800px-Tithal_Beach.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Tithal_Beach_black_sand.jpg/800px-Tithal_Beach_black_sand.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Tithal_Beach_coast.jpg/800px-Tithal_Beach_coast.jpg'
+        ],
+        'Gopnath Beach, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Gopnath_Beach.jpg/800px-Gopnath_Beach.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Gopnath_Beach_coast.jpg/800px-Gopnath_Beach_coast.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Gopnath_Beach_water.jpg/800px-Gopnath_Beach_water.jpg'
+        ],
+        'Ahmedabad, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ahmedabad_cityscape.jpg/800px-Ahmedabad_cityscape.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Ahmedabad_heritage_area.jpg/800px-Ahmedabad_heritage_area.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Ahmedabad_market.jpg/800px-Ahmedabad_market.jpg'
+        ],
+        'Vadodara, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Vadodara_palace.jpg/800px-Vadodara_palace.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Vadodara_laxmi_vilas_palace.jpg/800px-Vadodara_laxmi_vilas_palace.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Vadodara_garden.jpg/800px-Vadodara_garden.jpg'
+        ],
+        'Surat, Gujarat': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Surat_cityscape.jpg/800px-Surat_cityscape.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Surat_diamond_market.jpg/800px-Surat_diamond_market.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Surat_garden.jpg/800px-Surat_garden.jpg'
+        ]
+      };
+
+      // Get images for the location
+      const images = imageMap[loc] || [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Rani_ki_vav_at_patan_gujarat.jpg/800px-Rani_ki_vav_at_patan_gujarat.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Statue_of_Unity_01.jpg/800px-Statue_of_Unity_01.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Gir_National_Park.jpg/800px-Gir_National_Park.jpg'
+      ];
+
+      // Create image scroller with error handling
+      scroller.innerHTML = '';
+      images.forEach(imgUrl => {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = loc;
+        img.onerror = function() {
+          this.src = 'https://via.placeholder.com/600x400/cccccc/666666?text=Image+Not+Available';
+        };
+        scroller.appendChild(img);
+      });
+
+      // Buttons
+      const enc = encodeURIComponent(loc);
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn"><span>📸</span>View Photos</a>
+      `;
+    }
+  </script>
+</body>
+</html>

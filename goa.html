@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Goa Tourism – Pearl of the Orient</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      color:#2c3e50;
+      background:
+        radial-gradient(circle at top left, rgba(255,153,51,0.3) 0%,transparent 50%),
+        radial-gradient(circle at top right, rgba(19,136,8,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom left, rgba(0,70,151,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255,153,51,0.3) 0%,transparent 50%),
+        linear-gradient(135deg,#f8f4e6,#fff8dc,#f0f8e8,#e6f3ff,#fff8dc);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+
+    /* Floating Images */
+    .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
+    .floating-img {
+      position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
+      box-shadow:0 20px 60px rgba(255,153,51,0.2); transition:.3s;
+    }
+    .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
+    .floating-img-1 {
+      top:10%; left:5%; width:300px; height:200px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Basilica_of_Bom_Jesus.jpg/800px-Basilica_of_Bom_Jesus.jpg') center/cover;
+      animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    .floating-img-2 {
+      top:20%; right:10%; width:260px; height:180px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Palolem_beach.jpg/800px-Palolem_beach.jpg') center/cover;
+      animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
+    }
+    .floating-img-3 {
+      top:50%; left:8%; width:280px; height:190px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Dudhsagar_Waterfalls.jpg/800px-Dudhsagar_Waterfalls.jpg') center/cover;
+      animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
+    }
+    .floating-img-4 {
+      top:60%; right:5%; width:320px; height:210px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Fort_Aguada.jpg/800px-Fort_Aguada.jpg') center/cover;
+      animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
+    @keyframes float2 {0%,100%{transform:translate(0)}33%{transform:translate(10px,-20px)}66%{transform:translate(-5px,-10px)}}
+    @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
+    @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
+
+    /* Navbar */
+    .navbar {
+      position:fixed; top:0; width:100%; padding:15px 0;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
+      border-bottom:3px solid #ff9933; z-index:1000;
+    }
+    .nav-content { max-width:1200px; margin:0 auto; display:flex;justify-content:space-between;align-items:center;padding:0 20px; }
+    .logo { font-weight:700; font-size:24px; color:#138808; display:flex;align-items:center;gap:8px; }
+    .nav-links { display:flex; gap:25px; }
+    .nav-links a { text-decoration:none;color:#2c3e50;font-weight:500;transition:.3s; }
+    .nav-links a:hover { color:#ff9933; }
+    .back-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:10px 18px;border-radius:25px;font-size:14px;font-weight:600;
+      text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
+    }
+    .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    /* Hero */
+    .hero {
+      height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,153,51,0.1)0%,transparent 70%),
+        radial-gradient(circle at 80% 20%,rgba(19,136,8,0.1)0%,transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(0,70,151,0.1)0%,transparent 50%);
+      position:relative;z-index:1;
+    }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,6rem);font-weight:900;
+      background:linear-gradient(135deg,#ff9933,#138808,#004797);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 3s ease-in-out infinite;margin-bottom:0.5rem;
+    }
+    .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
+    .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
+    .cta-button {
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      color:#fff;padding:14px 28px;border-radius:50px;
+      font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);
+      transition:.3s;margin:0 5px;
+    }
+    .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    /* Action Buttons */
+    .action-buttons {
+      position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;
+    }
+    .action-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:12px 18px;border:none;border-radius:25px;cursor:pointer;
+      font-weight:600;display:flex;align-items:center;gap:6px;
+      box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;
+    }
+    .action-btn:hover{transform:translateY(-2px) scale(1.05);}
+
+    /* Sections */
+    .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+    .section-title h2 {
+      font-size:2.5rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
+    .category-header {text-align:center;margin:40px 0 20px;position:relative;}
+    .category-header h3 {
+      font-size:2rem;font-weight:600;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .category-header::after {
+      content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;
+    }
+    .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
+
+    .card {
+      background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;
+      transition:all .3s;
+    }
+    .card:hover {transform:translateY(-8px) scale(1.02);}
+    .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+    .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
+    .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+    .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
+    .map-btn {
+      background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+      border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
+      display:flex;align-items:center;gap:6px;transition:.3s;
+    }
+    .map-btn:hover{transform:scale(1.05);}
+
+    /* Modal */
+    .modal {
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
+      justify-content:center;align-items:center;
+    }
+    .modal.open{display:flex;}
+    .modal-content {
+      background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;
+    }
+    .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
+    .image-scroller {
+      display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;
+    }
+    .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
+    .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
+
+    /* AI Form */
+    .ai-container {
+      background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
+      box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
+    }
+    .ai-title {
+      font-size:2.5rem;font-weight:700;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+    }
+    .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
+    .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
+    .form-group select,.form-group textarea {
+      width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;
+      font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);
+    }
+    .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
+    .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .checkbox-item {
+      display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;
+    }
+    .checkbox-item:hover {background:rgba(255,153,51,0.2);}
+    .get-recommendations {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;
+    }
+    .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
+    .ai-results h3 {
+      font-size:2rem;font-weight:700;
+      background:linear-gradient(135deg,#138808,#ff9933);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;margin-bottom:20px;
+    }
+    .recommendation-text {
+      background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;
+    }
+
+    /* Animations */
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){
+      .floating-images{display:none;}
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating BG -->
+  <div class="floating-images">
+    <div class="floating-img floating-img-1"></div>
+    <div class="floating-img floating-img-2"></div>
+    <div class="floating-img floating-img-3"></div>
+    <div class="floating-img floating-img-4"></div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
+    <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><span style="font-size:28px;">🏖️</span> Goa Tourism</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#ai-recommendations">AI Plan</a>
+        <a href="#attractions">Attractions</a>
+        <a href="index.html" class="back-btn"><span>←</span>Back to India</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div>
+      <h1>Goa</h1>
+      <div class="subtitle">Pearl of the Orient</div>
+      <p>Discover golden beaches, vibrant culture, and Portuguese heritage</p>
+      <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
+      <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
+    </div>
+  </section>
+
+  <!-- AI Planner -->
+  <section id="ai-recommendations" class="section">
+    <div class="ai-container">
+      <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
+      <p style="color:#666;margin-bottom:30px;">
+        Tell us your trip details and interests—get a custom Goa itinerary!
+      </p>
+      <form id="preferences-form" class="ai-form">
+        <div class="form-group">
+          <label for="duration">Trip Duration</label>
+          <select id="duration" name="duration">
+            <option value="">Select…</option>
+            <option>1–2 days</option><option>3–5 days</option>
+            <option>1 week</option><option>2+ weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select…</option>
+            <option>Budget (₹1k–3k/day)</option>
+            <option>Moderate (₹3k–7k/day)</option>
+            <option>Luxury (₹7k+/day)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="style">Travel Style</label>
+          <select id="style" name="style">
+            <option value="">Select…</option>
+            <option>Solo</option><option>Couple</option><option>Family</option>
+            <option>Friends</option><option>Business</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Interests (multi-select)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="beach"/>
+              <label>🏖️ Beaches</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="history"/>
+              <label>🏛️ Historical Sites</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="culture"/>
+              <label>🎭 Culture & Heritage</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="nature"/>
+              <label>🌳 Nature & Wildlife</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="food"/>
+              <label>🦐 Local Food</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="nightlife"/>
+              <label>🍹 Nightlife</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Anjuna Beach, Fort Aguada…"></textarea>
+        </div>
+        <button type="submit" class="get-recommendations">
+          <span>✨</span>Get Recommendations
+        </button>
+      </form>
+
+      <div id="ai-results" class="ai-results">
+        <h3>🎯 Your Goa Travel Plan</h3>
+        <div id="recommendation-content" class="recommendation-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attractions -->
+  <section id="attractions" class="section">
+    <div class="section-title">
+      <h2>⭐ Top Attractions in Goa</h2>
+      <p>Discover the soul of the Pearl of the Orient</p>
+    </div>
+
+    <!-- Beaches -->
+    <div class="category-header"><h3>🏖️ Beaches</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏖️ Anjuna Beach</h4>
+        <p>Famous for its vibrant flea market and trance parties, Anjuna is a favorite among backpackers and party-goers.</p>
+        <div class="tags">
+          <span class="tag">Party</span>
+          <span class="tag">Market</span>
+          <span class="tag">Backpackers</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Anjuna Beach, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>🏖️ Palolem Beach</h4>
+        <p>Tranquil crescent-shaped beach with palm-fringed shores and stunning sunsets, perfect for relaxation.</p>
+        <div class="tags">
+          <span class="tag">Tranquil</span><span class="tag">Sunset</span><span class="tag">Relaxation</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Palolem Beach, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>🏖️ Calangute Beach</h4>
+        <p>Popular tourist destination known as the "Queen of Beaches" with water sports and vibrant nightlife.</p>
+        <div class="tags">
+          <span class="tag">Queen</span><span class="tag">Water Sports</span><span class="tag">Nightlife</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Calangute Beach, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Historical -->
+    <div class="category-header"><h3>🏛️ Historical & Cultural Sites</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>⛪ Basilica of Bom Jesus</h4>
+        <p>UNESCO World Heritage site housing the mortal remains of St. Francis Xavier, an architectural marvel.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">Religious</span><span class="tag">Architecture</span></div>
+        <button class="map-btn" onclick="openMap('Basilica of Bom Jesus, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏰 Fort Aguada</h4>
+        <p>17th-century Portuguese fort overlooking the Arabian Sea with a lighthouse and beautiful views.</p>
+        <div class="tags"><span class="tag">Fort</span><span class="tag">Portuguese</span><span class="tag">Lighthouse</span></div>
+        <button class="map-btn" onclick="openMap('Fort Aguada, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Reis Magos Fort</h4>
+        <p>Historic fort on the banks of the Mandovi River, now housing a cultural center and art gallery.</p>
+        <div class="tags"><span class="tag">Fort</span><span class="tag">Mandovi</span><span class="tag">Gallery</span></div>
+        <button class="map-btn" onclick="openMap('Reis Magos Fort, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Culture & Heritage -->
+    <div class="category-header"><h3>🎭 Culture & Heritage</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🎭 Shanta Durga Temple</h4>
+        <p>One of the most important Hindu temples in Goa, dedicated to the goddess Shanta Durga.</p>
+        <div class="tags"><span class="tag">Hindu</span><span class="tag">Temple</span><span class="tag">Sacred</span></div>
+        <button class="map-btn" onclick="openMap('Shanta Durga Temple, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎭 Mangueshi Temple</h4>
+        <p>Largest and most important temple in Goa, dedicated to Lord Shiva with beautiful architecture.</p>
+        <div class="tags"><span class="tag">Shiva</span><span class="tag">Temple</span><span class="tag">Architecture</span></div>
+        <button class="map-btn" onclick="openMap('Mangueshi Temple, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎭 Se Cathedral</h4>
+        <p>Historic cathedral built to commemorate victory over Bijapur Sultanate, features the famous golden cross.</p>
+        <div class="tags"><span class="tag">Cathedral</span><span class="tag">Historic</span><span class="tag">Golden Cross</span></div>
+        <button class="map-btn" onclick="openMap('Se Cathedral, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Nature & Wildlife -->
+    <div class="category-header"><h3>🌳 Nature & Wildlife</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌊 Dudhsagar Falls</h4>
+        <p>Stunning four-tiered waterfall surrounded by lush green forests, accessible by train or trek.</p>
+        <div class="tags"><span class="tag">Waterfall</span><span class="tag">Trek</span><span class="tag">Forest</span></div>
+        <button class="map-btn" onclick="openMap('Dudhsagar Falls, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌿 Salim Ali Bird Sanctuary</h4>
+        <p>Important bird sanctuary located on the island of Chorao, home to numerous migratory species.</p>
+        <div class="tags"><span class="tag">Birds</span><span class="tag">Sanctuary</span><span class="tag">Migratory</span></div>
+        <button class="map-btn" onclick="openMap('Salim Ali Bird Sanctuary, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌿 Bondla Wildlife Sanctuary</h4>
+        <p>Smallest wildlife sanctuary in Goa with diverse flora and fauna, including deer, bears, and leopards.</p>
+        <div class="tags"><span class="tag">Wildlife</span><span class="tag">Deer</span><span class="tag">Sanctuary</span></div>
+        <button class="map-btn" onclick="openMap('Bondla Wildlife Sanctuary, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Food & Nightlife -->
+    <div class="category-header"><h3>🦐 Food & Nightlife</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🦐 Arpora Saturday Night Market</h4>
+        <p>Popular night market with food stalls, handicrafts, and live music, a must-visit for food lovers.</p>
+        <div class="tags"><span class="tag">Market</span><span class="tag">Food</span><span class="tag">Nightlife</span></div>
+        <button class="map-btn" onclick="openMap('Arpora Saturday Night Market, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🍹 Tito's Street</h4>
+        <p>Famous for its vibrant nightlife, packed with clubs, bars, and restaurants that come alive after dark.</p>
+        <div class="tags"><span class="tag">Nightlife</span><span class="tag">Clubs</span><span class="tag">Bars</span></div>
+        <button class="map-btn" onclick="openMap('Tito's Street, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦐 Feni Distillery</h4>
+        <p>Experience the production of Goa's traditional alcohol, Feni, made from cashew or coconut.</p>
+        <div class="tags"><span class="tag">Alcohol</span><span class="tag">Traditional</span><span class="tag">Distillery</span></div>
+        <button class="map-btn" onclick="openMap('Feni Distillery, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Cities -->
+    <div class="category-header"><h3>🏙️ Major Towns & Cities</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏙️ Panaji</h4>
+        <p>Capital city with Portuguese colonial architecture, vibrant markets, and beautiful riverfronts.</p>
+        <div class="tags"><span class="tag">Capital</span><span class="tag">Architecture</span><span class="tag">Riverfront</span></div>
+        <button class="map-btn" onclick="openMap('Panaji, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏘️ Margao</h4>
+        <p>Commercial hub of South Goa with traditional markets and cultural significance.</p>
+        <div class="tags"><span class="tag">Commercial</span><span class="tag">Markets</span><span class="tag">South Goa</span></div>
+        <button class="map-btn" onclick="openMap('Margao, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏰 Mormugao</h4>
+        <p>Historic port town with beautiful views of the Arabian Sea and important naval base.</p>
+        <div class="tags"><span class="tag">Port</span><span class="tag">Sea Views</span><span class="tag">Naval</span></div>
+        <button class="map-btn" onclick="openMap('Mormugao, Goa')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map + Photos Modal -->
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Loading…</h2>
+      <div class="image-scroller" id="image-scroller">
+        <!-- Dynamically filled with images -->
+      </div>
+      <div class="modal-actions" id="modal-actions">
+        <!-- Buttons inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Cohere API Configuration
+    const COHERE_API_KEY = 'wudMNVCbpo2A8Ggo58iYUBzLpmDv9qaRj5moB2Vd';
+
+    document.addEventListener('DOMContentLoaded',() => {
+      document.getElementById('weather-btn')
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/GAXX0001:1:GA','_blank'));
+      document.getElementById('travel-planner-btn')
+        .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
+      document.getElementById('preferences-form')
+        .addEventListener('submit',handleForm);
+      setupModal();
+    });
+
+    async function handleForm(e){
+      e.preventDefault();
+      const fd=new FormData(e.target),
+            prefs={ duration:fd.get('duration'), budget:fd.get('budget'),
+                    style:fd.get('style'), additional:fd.get('additional')||'None',
+                    interests:[] };
+      document.querySelectorAll('input[name="interests"]:checked')
+        .forEach(ch=>prefs.interests.push(ch.value));
+      if(!prefs.duration||!prefs.budget||prefs.interests.length===0){
+        return alert('Select duration, budget & at least one interest!');
+      }
+      await getAI(prefs);
+    }
+
+    function formatAI(text){
+      text=text.trim().replace(/^["']|["']$/g,'');
+      text=text.replace(/\\n/g,'\n').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+      text=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      text=text.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g,'<em>$1</em>');
+      if(!text.includes('<p>'))text='<p>'+text+'</p>';
+      text=text.replace(/<p><\/p>/g,'').replace(/<p>\s*<br>/g,'<p>');
+      return text;
+    }
+
+    async function getAI(p){
+      const results=document.getElementById('ai-results'),
+            content=document.getElementById('recommendation-content');
+      results.style.display='block';
+      content.innerHTML=`<div style="text-align:center;padding:20px;"><div style="font-size:2rem;">🤖</div><p>Generating your Goa travel plan…</p></div>`;
+      
+      const prompt = `
+You are a travel expert for Goa, India. Given these preferences, craft a personalized itinerary:
+
+Duration: ${p.duration}
+Budget: ${p.budget}
+Style: ${p.style}
+Interests: ${p.interests.join(', ')}
+Additional: ${p.additional}
+
+Include:
+1. Top destinations in Goa
+2. Attractions per interest
+3. Sample day-wise itinerary
+4. Budget tips
+5. Best seasons
+6. Local food & experiences
+7. Transport suggestions
+
+Make it engaging, detailed, and practical.`;
+
+      try {
+        // Using Cohere API
+        const response = await fetch('https://api.cohere.ai/v1/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${COHERE_API_KEY}`
+          },
+          body: JSON.stringify({
+            message: prompt,
+            model: "c4ai-aya-expanse-32b",
+            temperature: 0.3
+          })
+        });
+
+        if(!response.ok) throw 'AI error';
+        const data = await response.json();
+        const ai = data.text || data.response || data;
+        content.innerHTML=`<div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">${formatAI(ai)}</div><div style="text-align:center;margin-top:20px;"><button onclick="window.print()" style="margin:5px;padding:10px 20px;">🖨️ Print</button><button onclick="sharePlan()" style="margin:5px;padding:10px 20px;">📤 Share</button></div>`;
+      } catch(err){
+        content.innerHTML=`<p style="color:red;text-align:center;">Failed to generate. Please try again.</p>`;
+      }
+    }
+
+    function sharePlan(){
+      const txt=document.getElementById('recommendation-content').innerText;
+      if(navigator.share) navigator.share({title:'Goa Travel Plan',text:txt});
+      else navigator.clipboard.writeText(txt).then(()=>alert('Copied to clipboard'));
+    }
+
+    /* Modal & Maps */
+    function setupModal(){
+      const modal=document.getElementById('mapModal'),
+            close=modal.querySelector('.close');
+      close.onclick=()=>modal.classList.remove('open');
+      window.onclick=e=>{ if(e.target===modal) modal.classList.remove('open'); };
+    }
+
+    async function openMap(loc){
+      const modal=document.getElementById('mapModal'),
+            title=modal.querySelector('#modal-title'),
+            scroller=modal.querySelector('#image-scroller'),
+            actions=modal.querySelector('#modal-actions');
+      title.textContent=loc;
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;">Loading images…</p>`;
+      actions.innerHTML='';
+      modal.classList.add('open');
+
+      // Predefined image URLs for Goa locations
+      const imageMap = {
+        'Anjuna Beach, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Anjuna_Beach.jpg/800px-Anjuna_Beach.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Anjuna_Beach_at_sunset.jpg/800px-Anjuna_Beach_at_sunset.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Anjuna_Beach_flea_market.jpg/800px-Anjuna_Beach_flea_market.jpg'
+        ],
+        'Palolem Beach, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Palolem_beach.jpg/800px-Palolem_beach.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Palolem_beach_sunset.jpg/800px-Palolem_beach_sunset.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Palolem_beach_huts.jpg/800px-Palolem_beach_huts.jpg'
+        ],
+        'Calangute Beach, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Calangute_Beach.jpg/800px-Calangute_Beach.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Calangute_Beach_water_sports.jpg/800px-Calangute_Beach_water_sports.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Calangute_Beach_sunset.jpg/800px-Calangute_Beach_sunset.jpg'
+        ],
+        'Basilica of Bom Jesus, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Basilica_of_Bom_Jesus.jpg/800px-Basilica_of_Bom_Jesus.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Basilica_of_Bom_Jesus_interior.jpg/800px-Basilica_of_Bom_Jesus_interior.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bom_Jesus_Basilica_Goa.jpg/800px-Bom_Jesus_Basilica_Goa.jpg'
+        ],
+        'Fort Aguada, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Fort_Aguada.jpg/800px-Fort_Aguada.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Fort_Aguada_sunset.jpg/800px-Fort_Aguada_sunset.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Fort_Aguada_lighthouse.jpg/800px-Fort_Aguada_lighthouse.jpg'
+        ],
+        'Reis Magos Fort, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Reis_Magos_Fort.jpg/800px-Reis_Magos_Fort.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Reis_Magos_Fort_view.jpg/800px-Reis_Magos_Fort_view.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Reis_Magos_Fort_interior.jpg/800px-Reis_Magos_Fort_interior.jpg'
+        ],
+        'Shanta Durga Temple, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Shanta_Durga_Temple.jpg/800px-Shanta_Durga_Temple.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Shanta_Durga_Temple_festival.jpg/800px-Shanta_Durga_Temple_festival.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Shanta_Durga_Temple_complex.jpg/800px-Shanta_Durga_Temple_complex.jpg'
+        ],
+        'Mangueshi Temple, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Mangueshi_Temple.jpg/800px-Mangueshi_Temple.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Mangueshi_Temple_main_hall.jpg/800px-Mangueshi_Temple_main_hall.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Mangueshi_Temple_architecture.jpg/800px-Mangueshi_Temple_architecture.jpg'
+        ],
+        'Se Cathedral, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Se_Cathedral.jpg/800px-Se_Cathedral.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Se_Cathedral_interior.jpg/800px-Se_Cathedral_interior.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Se_Cathedral_golden_cross.jpg/800px-Se_Cathedral_golden_cross.jpg'
+        ],
+        'Dudhsagar Falls, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Dudhsagar_Waterfalls.jpg/800px-Dudhsagar_Waterfalls.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Dudhsagar_Falls_trek.jpg/800px-Dudhsagar_Falls_trek.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Dudhsagar_Falls_train_view.jpg/800px-Dudhsagar_Falls_train_view.jpg'
+        ],
+        'Salim Ali Bird Sanctuary, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Salim_Ali_Bird_Sanctuary.jpg/800px-Salim_Ali_Bird_Sanctuary.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Bird_Sanctuary_Goa.jpg/800px-Bird_Sanctuary_Goa.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bird_Sanctuary_water_birds.jpg/800px-Bird_Sanctuary_water_birds.jpg'
+        ],
+        'Bondla Wildlife Sanctuary, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Bondla_Wildlife_Sanctuary.jpg/800px-Bondla_Wildlife_Sanctuary.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Bondla_Sanctuary_deer.jpg/800px-Bondla_Sanctuary_deer.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Bondla_Sanctuary_forest.jpg/800px-Bondla_Sanctuary_forest.jpg'
+        ],
+        'Arpora Saturday Night Market, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Arpora_Market.jpg/800px-Arpora_Market.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Arpora_Market_food_stalls.jpg/800px-Arpora_Market_food_stalls.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Arpora_Market_crowd.jpg/800px-Arpora_Market_crowd.jpg'
+        ],
+        'Tito\'s Street, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Titos_Street.jpg/800px-Titos_Street.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Titos_Street_night.jpg/800px-Titos_Street_night.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Titos_Street_bars.jpg/800px-Titos_Street_bars.jpg'
+        ],
+        'Feni Distillery, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Feni_distillery.jpg/800px-Feni_distillery.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cashew_Feni_production.jpg/800px-Cashew_Feni_production.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Feni_bottles.jpg/800px-Feni_bottles.jpg'
+        ],
+        'Panaji, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Panaji_cityscape.jpg/800px-Panaji_cityscape.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Panaji_riverfront.jpg/800px-Panaji_riverfront.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Panaji_portuguese_architecture.jpg/800px-Panaji_portuguese_architecture.jpg'
+        ],
+        'Margao, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Margao_market.jpg/800px-Margao_market.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Margao_bus_station.jpg/800px-Margao_bus_station.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Margao_city_view.jpg/800px-Margao_city_view.jpg'
+        ],
+        'Mormugao, Goa': [
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Mormugao_port.jpg/800px-Mormugao_port.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Mormugao_harbor.jpg/800px-Mormugao_harbor.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Mormugao_sea_view.jpg/800px-Mormugao_sea_view.jpg'
+        ]
+      };
+
+      // Get images for the location
+      const images = imageMap[loc] || [
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Basilica_of_Bom_Jesus.jpg/800px-Basilica_of_Bom_Jesus.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Palolem_beach.jpg/800px-Palolem_beach.jpg',
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Dudhsagar_Waterfalls.jpg/800px-Dudhsagar_Waterfalls.jpg'
+      ];
+
+      // Create image scroller with error handling
+      scroller.innerHTML = '';
+      images.forEach(imgUrl => {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = loc;
+        img.onerror = function() {
+          this.src = 'https://via.placeholder.com/600x400/cccccc/666666?text=Image+Not+Available';
+        };
+        scroller.appendChild(img);
+      });
+
+      // Buttons
+      const enc = encodeURIComponent(loc);
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn"><span>📸</span>View Photos</a>
+      `;
+    }
+  </script>
+</body>
+</html>
