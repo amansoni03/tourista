@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Himachal Pradesh Tourism – Land of Gods</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      color:#2c3e50;
+      background:
+        radial-gradient(circle at top left, rgba(255,153,51,0.3) 0%,transparent 50%),
+        radial-gradient(circle at top right, rgba(19,136,8,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom left, rgba(0,70,151,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255,153,51,0.3) 0%,transparent 50%),
+        linear-gradient(135deg,#f8f4e6,#fff8dc,#f0f8e8,#e6f3ff,#fff8dc);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+
+    /* Floating Images */
+    .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
+    .floating-img {
+      position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
+      box-shadow:0 20px 60px rgba(255,153,51,0.2); transition:.3s;
+    }
+    .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
+    .floating-img-1 {
+      top:10%; left:5%; width:300px; height:200px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Shimla_Mall_Road.jpg/800px-Shimla_Mall_Road.jpg') center/cover;
+      animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    .floating-img-2 {
+      top:20%; right:10%; width:260px; height:180px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Rohtang_Pass%2CManali%2C_Himachal_Pradesh.jpg/800px-Rohtang_Pass%2CManali%2C_Himachal_Pradesh.jpg') center/cover;
+      animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
+    }
+    .floating-img-3 {
+      top:50%; left:8%; width:280px; height:190px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Kee_monastery_Spiti_Valley_%28edited%29.jpg/800px-Kee_monastery_Spiti_Valley_%28edited%29.jpg') center/cover;
+      animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
+    }
+    .floating-img-4 {
+      top:60%; right:5%; width:320px; height:210px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Hidimba_Devi_Temple%2C_Manali.jpg/800px-Hidimba_Devi_Temple%2C_Manali.jpg') center/cover;
+      animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
+    @keyframes float2 {0%,100%{transform:translate(0)}33%{transform:translate(10px,-20px)}66%{transform:translate(-5px,-10px)}}
+    @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
+    @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
+
+    /* Navbar */
+    .navbar {
+      position:fixed; top:0; width:100%; padding:15px 0;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
+      border-bottom:3px solid #ff9933; z-index:1000;
+    }
+    .nav-content { max-width:1200px; margin:0 auto; display:flex;justify-content:space-between;align-items:center;padding:0 20px; }
+    .logo { font-weight:700; font-size:24px; color:#138808; display:flex;align-items:center;gap:8px; }
+    .nav-links { display:flex; gap:25px; }
+    .nav-links a { text-decoration:none;color:#2c3e50;font-weight:500;transition:.3s; }
+    .nav-links a:hover { color:#ff9933; }
+    .back-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:10px 18px;border-radius:25px;font-size:14px;font-weight:600;
+      text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
+    }
+    .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    /* Hero */
+    .hero {
+      height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,153,51,0.1)0%,transparent 70%),
+        radial-gradient(circle at 80% 20%,rgba(19,136,8,0.1)0%,transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(0,70,151,0.1)0%,transparent 50%);
+      position:relative;z-index:1;
+    }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,6rem);font-weight:900;
+      background:linear-gradient(135deg,#ff9933,#138808,#004797);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 3s ease-in-out infinite;margin-bottom:0.5rem;
+    }
+    .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
+    .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
+    .cta-button {
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      color:#fff;padding:14px 28px;border-radius:50px;
+      font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);
+      transition:.3s;margin:0 5px;
+    }
+    .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    /* Action Buttons */
+    .action-buttons {
+      position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;
+    }
+    .action-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:12px 18px;border:none;border-radius:25px;cursor:pointer;
+      font-weight:600;display:flex;align-items:center;gap:6px;
+      box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;
+    }
+    .action-btn:hover{transform:translateY(-2px) scale(1.05);}
+
+    /* Sections */
+    .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+    .section-title h2 {
+      font-size:2.5rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
+    .category-header {text-align:center;margin:40px 0 20px;position:relative;}
+    .category-header h3 {
+      font-size:2rem;font-weight:600;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .category-header::after {
+      content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;
+    }
+    .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
+
+    .card {
+      background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;
+      transition:all .3s;
+    }
+    .card:hover {transform:translateY(-8px) scale(1.02);}
+    .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+    .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
+    .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+    .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
+    .map-btn {
+      background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+      border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
+      display:flex;align-items:center;gap:6px;transition:.3s;
+    }
+    .map-btn:hover{transform:scale(1.05);}
+
+    /* Modal */
+    .modal {
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
+      justify-content:center;align-items:center;
+    }
+    .modal.open{display:flex;}
+    .modal-content {
+      background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;
+    }
+    .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
+    .image-scroller {
+      display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;
+    }
+    .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
+    .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
+
+    /* AI Form */
+    .ai-container {
+      background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
+      box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
+    }
+    .ai-title {
+      font-size:2.5rem;font-weight:700;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+    }
+    .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
+    .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
+    .form-group select,.form-group textarea {
+      width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;
+      font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);
+    }
+    .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
+    .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .checkbox-item {
+      display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;
+    }
+    .checkbox-item:hover {background:rgba(255,153,51,0.2);}
+    .get-recommendations {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;
+    }
+    .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+
+    .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
+    .ai-results h3 {
+      font-size:2rem;font-weight:700;
+      background:linear-gradient(135deg,#138808,#ff9933);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;margin-bottom:20px;
+    }
+    .recommendation-text {
+      background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;
+    }
+
+    /* Animations */
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){
+      .floating-images{display:none;}
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating BG -->
+  <div class="floating-images">
+    <div class="floating-img floating-img-1"></div>
+    <div class="floating-img floating-img-2"></div>
+    <div class="floating-img floating-img-3"></div>
+    <div class="floating-img floating-img-4"></div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
+    <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><span style="font-size:28px;">🏔️</span> HP Tourism</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#ai-recommendations">AI Plan</a>
+        <a href="#attractions">Attractions</a>
+        <a href="index.html" class="back-btn"><span>←</span>Back to India</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div>
+      <h1>Himachal Pradesh</h1>
+      <div class="subtitle">Land of Gods</div>
+      <p>Discover majestic mountains, ancient temples, and adventure in the Himalayas</p>
+      <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
+      <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
+    </div>
+  </section>
+
+  <!-- AI Planner -->
+  <section id="ai-recommendations" class="section">
+    <div class="ai-container">
+      <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
+      <p style="color:#666;margin-bottom:30px;">
+        Tell us your trip details and interests—get a custom Himachal itinerary!
+      </p>
+      <form id="preferences-form" class="ai-form">
+        <div class="form-group">
+          <label for="duration">Trip Duration</label>
+          <select id="duration" name="duration">
+            <option value="">Select…</option>
+            <option>1–2 days</option><option>3–5 days</option>
+            <option>1 week</option><option>2+ weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select…</option>
+            <option>Budget (₹1k–3k/day)</option>
+            <option>Moderate (₹3k–7k/day)</option>
+            <option>Luxury (₹7k+/day)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="style">Travel Style</label>
+          <select id="style" name="style">
+            <option value="">Select…</option>
+            <option>Solo</option><option>Couple</option><option>Family</option>
+            <option>Friends</option><option>Business</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Interests (multi-select)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="temples"/>
+              <label>🛕 Temples & Monasteries</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="hillstations"/>
+              <label>🏔️ Hill Stations</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="adventure"/>
+              <label>🧗 Adventure Sports</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="nature"/>
+              <label>🌲 Nature & Trekking</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="culture"/>
+              <label>🎭 Culture & Heritage</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="peace"/>
+              <label>🧘 Peaceful Retreat</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Shimla and Manali…"></textarea>
+        </div>
+        <button type="submit" class="get-recommendations">
+          <span>✨</span>Get Recommendations
+        </button>
+      </form>
+
+      <div id="ai-results" class="ai-results">
+        <h3>🎯 Your Himachal Travel Plan</h3>
+        <div id="recommendation-content" class="recommendation-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attractions -->
+  <section id="attractions" class="section">
+    <div class="section-title">
+      <h2>⭐ Top Attractions in Himachal Pradesh</h2>
+      <p>Discover the soul of the Himalayan paradise</p>
+    </div>
+
+    <!-- Hill Stations -->
+    <div class="category-header"><h3>🏔️ Famous Hill Stations</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>👑 Shimla</h4>
+        <p>The Queen of Hills—colonial architecture, Mall Road shopping, and panoramic Himalayan views from every corner.</p>
+        <div class="tags">
+          <span class="tag">Colonial</span>
+          <span class="tag">Shopping</span>
+          <span class="tag">Must-Visit</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Shimla, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>🏂 Manali</h4>
+        <p>Adventure capital of Himachal—snow sports at Solang Valley, ancient Hadimba temple, and gateway to Rohtang Pass.</p>
+        <div class="tags">
+          <span class="tag">Adventure</span><span class="tag">Snow</span><span class="tag">Popular</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Manali, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>🌄 Dharamshala</h4>
+        <p>Little Lhasa—home to Dalai Lama, Tibetan monasteries, cricket stadium, and stunning Dhauladhar mountain views.</p>
+        <div class="tags">
+          <span class="tag">Buddhist</span><span class="tag">Culture</span><span class="tag">Peaceful</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Dharamshala, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>🌲 Dalhousie</h4>
+        <p>Colonial charm—pine forests, Victorian architecture, Khajjiar mini Switzerland, and serene mountain retreats.</p>
+        <div class="tags">
+          <span class="tag">Colonial</span><span class="tag">Forests</span><span class="tag">Romantic</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Dalhousie, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>🏞️ Kasol</h4>
+        <p>Backpacker's paradise—Parvati Valley, Israeli cafes, trekking trails, and vibrant hippie culture by the river.</p>
+        <div class="tags">
+          <span class="tag">Backpacking</span><span class="tag">Trekking</span><span class="tag">Offbeat</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Kasol, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+
+      <div class="card">
+        <h4>❄️ Spiti Valley</h4>
+        <p>Cold desert—ancient monasteries, barren landscapes, crystal-clear skies, and one of India's most remote regions.</p>
+        <div class="tags">
+          <span class="tag">Remote</span><span class="tag">Buddhist</span><span class="tag">Offbeat</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Spiti Valley, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Temples & Monasteries -->
+    <div class="category-header"><h3>🛕 Temples & Monasteries</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🕉️ Hidimba Devi Temple</h4>
+        <p>Ancient wooden temple in Manali—dedicated to Hidimba from Mahabharata, surrounded by deodar cedar forests.</p>
+        <div class="tags"><span class="tag">Ancient</span><span class="tag">Architecture</span><span class="tag">Sacred</span></div>
+        <button class="map-btn" onclick="openMap('Hidimba Devi Temple, Manali')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🙏 Baijnath Temple</h4>
+        <p>13th-century Shiva temple—intricate stone carvings, ancient architecture, and one of Himachal's oldest temples.</p>
+        <div class="tags"><span class="tag">Shiva</span><span class="tag">History</span><span class="tag">Architecture</span></div>
+        <button class="map-btn" onclick="openMap('Baijnath Temple, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🔥 Jwalamukhi Temple</h4>
+        <p>Natural flame temple—eternal flames burning for centuries, one of 51 Shakti Peethas, major pilgrimage site.</p>
+        <div class="tags"><span class="tag">Shakti</span><span class="tag">Pilgrimage</span><span class="tag">Unique</span></div>
+        <button class="map-btn" onclick="openMap('Jwalamukhi Temple, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Key Monastery</h4>
+        <p>1000-year-old Buddhist monastery—Spiti Valley's largest gompa, ancient murals, Tibetan scriptures, stunning location.</p>
+        <div class="tags"><span class="tag">Buddhist</span><span class="tag">Ancient</span><span class="tag">Spiti</span></div>
+        <button class="map-btn" onclick="openMap('Key Monastery, Spiti Valley')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>📿 Tabo Monastery</h4>
+        <p>Ajanta of the Himalayas—1000-year-old murals, UNESCO heritage site, one of world's oldest Buddhist monasteries.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">Murals</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Tabo Monastery, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>☸️ Dalai Lama Temple</h4>
+        <p>Tsuglagkhang Complex in McLeod Ganj—residence of Dalai Lama, Tibetan culture center, peaceful meditation.</p>
+        <div class="tags"><span class="tag">Dalai Lama</span><span class="tag">Tibetan</span><span class="tag">Peace</span></div>
+        <button class="map-btn" onclick="openMap('Dalai Lama Temple, Dharamshala')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Adventure -->
+    <div class="category-header"><h3>🎿 Adventure & Sports</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏂 Solang Valley</h4>
+        <p>Adventure hub—paragliding, skiing, zorbing, cable car rides, and breathtaking views near Manali.</p>
+        <div class="tags"><span class="tag">Skiing</span><span class="tag">Paragliding</span><span class="tag">Popular</span></div>
+        <button class="map-btn" onclick="openMap('Solang Valley, Manali')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌊 River Rafting in Kullu</h4>
+        <p>White-water thrills—Beas River rapids, professional guides, stunning valley scenery, various difficulty levels.</p>
+        <div class="tags"><span class="tag">Rafting</span><span class="tag">Water Sports</span><span class="tag">Thrilling</span></div>
+        <button class="map-btn" onclick="openMap('Kullu River Rafting, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🪂 Bir Billing</h4>
+        <p>World's second-best paragliding site—spectacular takeoff point, Tibetan colony, cafe culture, meditation centers.</p>
+        <div class="tags"><span class="tag">Paragliding</span><span class="tag">World-Class</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Bir Billing, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛰️ Rohtang Pass</h4>
+        <p>13,050 ft high pass—snow activities, stunning views, gateway to Lahaul-Spiti, seasonal access (May-Nov).</p>
+        <div class="tags"><span class="tag">High Altitude</span><span class="tag">Snow</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Rohtang Pass, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🚶 Triund Trek</h4>
+        <p>Popular day trek—Dhauladhar views, camping under stars, accessible for beginners, stunning sunrise/sunset.</p>
+        <div class="tags"><span class="tag">Trekking</span><span class="tag">Camping</span><span class="tag">Beginner</span></div>
+        <button class="map-btn" onclick="openMap('Triund Trek, Dharamshala')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎿 Kufri</h4>
+        <p>Winter sports—skiing, tobogganing, horse riding, Himalayan Nature Park, panoramic views near Shimla.</p>
+        <div class="tags"><span class="tag">Skiing</span><span class="tag">Winter</span><span class="tag">Family</span></div>
+        <button class="map-btn" onclick="openMap('Kufri, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Nature -->
+    <div class="category-header"><h3>🌲 Nature & Wildlife</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌿 Great Himalayan National Park</h4>
+        <p>UNESCO World Heritage—pristine forests, 375+ fauna species, 209 bird species, trekking trails, biodiversity hotspot.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">Wildlife</span><span class="tag">Trekking</span></div>
+        <button class="map-btn" onclick="openMap('Great Himalayan National Park')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌾 Khajjiar</h4>
+        <p>Mini Switzerland of India—meadows, deodar forests, Khajji Nag temple, horse riding, peaceful lake.</p>
+        <div class="tags"><span class="tag">Meadows</span><span class="tag">Scenic</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('Khajjiar, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💧 Bhagsu Waterfall</h4>
+        <p>Popular cascades near McLeod Ganj—trekking trail, cafes, Bhagsunath temple, refreshing natural pool.</p>
+        <div class="tags"><span class="tag">Waterfall</span><span class="tag">Trekking</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Bhagsu Waterfall, Dharamshala')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Chandratal Lake</h4>
+        <p>Moon Lake—crystal-clear high-altitude lake, camping site, trekking base, stunning reflections, Spiti Valley gem.</p>
+        <div class="tags"><span class="tag">Lake</span><span class="tag">Camping</span><span class="tag">Remote</span></div>
+        <button class="map-btn" onclick="openMap('Chandratal Lake, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌸 Kinnaur Valley</h4>
+        <p>Land of Gods—apple orchards, Baspa Valley, ancient villages, Kinnaur Kailash, Tibetan culture, scenic drives.</p>
+        <div class="tags"><span class="tag">Valley</span><span class="tag">Culture</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Kinnaur Valley, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌳 Pin Valley National Park</h4>
+        <p>Snow leopard habitat—Spiti Valley, rare wildlife, ibex, Himalayan fox, cold desert ecosystem, trekking routes.</p>
+        <div class="tags"><span class="tag">Wildlife</span><span class="tag">Snow Leopard</span><span class="tag">Remote</span></div>
+        <button class="map-btn" onclick="openMap('Pin Valley National Park')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Culture -->
+    <div class="category-header"><h3>🎭 Culture & Heritage</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏰 Kangra Fort</h4>
+        <p>Ancient fort—1000+ years old, largest fort in Himalayas, panoramic views, museums, rich history.</p>
+        <div class="tags"><span class="tag">Fort</span><span class="tag">History</span><span class="tag">Museum</span></div>
+        <button class="map-btn" onclick="openMap('Kangra Fort, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎨 Naggar Castle</h4>
+        <p>Heritage hotel—Kullu Valley views, Roerich Art Gallery, medieval architecture, cultural center.</p>
+        <div class="tags"><span class="tag">Heritage</span><span class="tag">Art</span><span class="tag">Castle</span></div>
+        <button class="map-btn" onclick="openMap('Naggar Castle, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎪 Kullu Dussehra</h4>
+        <p>Week-long festival—unique tradition, deity processions, cultural performances, international folk festival.</p>
+        <div class="tags"><span class="tag">Festival</span><span class="tag">Culture</span><span class="tag">Unique</span></div>
+        <button class="map-btn" onclick="openMap('Kullu Dussehra, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Viceregal Lodge</h4>
+        <p>British heritage—Shimla's architectural gem, once summer residence of British Viceroy, guided tours, gardens.</p>
+        <div class="tags"><span class="tag">Colonial</span><span class="tag">Museum</span><span class="tag">Architecture</span></div>
+        <button class="map-btn" onclick="openMap('Viceregal Lodge, Shimla')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>👘 Bhimakali Temple</h4>
+        <p>Sarahan—ancient wooden temple, blend of Hindu-Buddhist architecture, stunning Kinnaur views, rich history.</p>
+        <div class="tags"><span class="tag">Ancient</span><span class="tag">Architecture</span><span class="tag">Sacred</span></div>
+        <button class="map-btn" onclick="openMap('Bhimakali Temple, Sarahan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🪕 Chamba Town</h4>
+        <p>Ancient town—Chaugan meadow, temples, handicrafts, miniature paintings, medieval charm, Ravi River.</p>
+        <div class="tags"><span class="tag">Historic</span><span class="tag">Art</span><span class="tag">Crafts</span></div>
+        <button class="map-btn" onclick="openMap('Chamba, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Major Cities -->
+    <div class="category-header"><h3>🏙️ Major Cities & Towns</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏛️ Shimla City</h4>
+        <p>State capital—Mall Road, Ridge, Christ Church, Jakhu Temple, toy train, colonial architecture, bustling markets.</p>
+        <div class="tags"><span class="tag">Capital</span><span class="tag">Shopping</span><span class="tag">Urban</span></div>
+        <button class="map-btn" onclick="openMap('Shimla City, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏘️ Manali Town</h4>
+        <p>Tourist hub—Old Manali, Manu temple, shopping centers, cafes, gateway to mountain adventures, vibrant nightlife.</p>
+        <div class="tags"><span class="tag">Tourist Hub</span><span class="tag">Cafes</span><span class="tag">Shopping</span></div>
+        <button class="map-btn" onclick="openMap('Manali Town, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌆 Mandi</h4>
+        <p>Chhoti Kashi—80+ temples, Beas River, Rewalsar Lake, gateway to Kullu-Manali, ancient architecture.</p>
+        <div class="tags"><span class="tag">Temples</span><span class="tag">River</span><span class="tag">Gateway</span></div>
+        <button class="map-btn" onclick="openMap('Mandi, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏡 Kasauli</h4>
+        <p>Colonial cantonment—peaceful hill station, Christ Church, Monkey Point, Kasauli Brewery, nature walks.</p>
+        <div class="tags"><span class="tag">Colonial</span><span class="tag">Peaceful</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Kasauli, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Palampur</h4>
+        <p>Tea capital—lush tea gardens, Dhauladhar views, Neugal Khad, trekking base, pleasant climate year-round.</p>
+        <div class="tags"><span class="tag">Tea Gardens</span><span class="tag">Scenic</span><span class="tag">Trekking</span></div>
+        <button class="map-btn" onclick="openMap('Palampur, Himachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Kaza</h4>
+        <p>Spiti headquarters—base for monastery visits, cold desert, high-altitude villages, stunning landscapes, remote charm.</p>
+        <div class="tags"><span class="tag">Remote</span><span class="tag">Base Town</span><span class="tag">Spiti</span></div>
+        <button class="map-btn" onclick="openMap('Kaza, Spiti Valley')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map + Photos Modal -->
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Loading…</h2>
+      <div class="image-scroller" id="image-scroller">
+        <!-- Dynamically filled with images -->
+      </div>
+      <div class="modal-actions" id="modal-actions">
+        <!-- Buttons inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GM_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
+    const GM_HOST = 'google-map-places.p.rapidapi.com';
+    const COHERE_API_KEY = 'wudMNVCbpo2A8Ggo58iYUBzLpmDv9qaRj5moB2Vd';
+
+    document.addEventListener('DOMContentLoaded',() => {
+      document.getElementById('weather-btn')
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/Shimla+Himachal+Pradesh','_blank'));
+      document.getElementById('travel-planner-btn')
+        .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
+      document.getElementById('preferences-form')
+        .addEventListener('submit',handleForm);
+      setupModal();
+    });
+
+    async function handleForm(e){
+      e.preventDefault();
+      const fd=new FormData(e.target),
+            prefs={ duration:fd.get('duration'), budget:fd.get('budget'),
+                    style:fd.get('style'), additional:fd.get('additional')||'None',
+                    interests:[] };
+      document.querySelectorAll('input[name="interests"]:checked')
+        .forEach(ch=>prefs.interests.push(ch.value));
+      if(!prefs.duration||!prefs.budget||prefs.interests.length===0){
+        return alert('Select duration, budget & at least one interest!');
+      }
+      await getAI(prefs);
+    }
+
+    function formatAI(text){
+      text=text.trim().replace(/^["']|["']$/g,'');
+      text=text.replace(/\\n/g,'\n').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+      text=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      text=text.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g,'<em>$1</em>');
+      if(!text.includes('<p>'))text='<p>'+text+'</p>';
+      text=text.replace(/<p><\/p>/g,'').replace(/<p>\s*<br>/g,'<p>');
+      return text;
+    }
+
+    async function getAI(p){
+      const results=document.getElementById('ai-results'),
+            content=document.getElementById('recommendation-content');
+      results.style.display='block';
+      content.innerHTML=`
+        <div style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;">🤖</div>
+          <p>Generating your Himachal travel plan…</p>
+        </div>`;
+      
+      const prompt = `You are a travel expert for Himachal Pradesh, India. Given these preferences, craft a personalized itinerary:
+
+Duration: ${p.duration}
+Budget: ${p.budget}
+Style: ${p.style}
+Interests: ${p.interests.join(', ')}
+Additional: ${p.additional}
+
+Include:
+1. Top destinations in Himachal Pradesh (Shimla, Manali, Dharamshala, Spiti, etc.)
+2. Attractions per interest
+3. Sample day-wise itinerary
+4. Budget tips
+5. Best seasons to visit
+6. Local food & experiences (Himachali cuisine)
+7. Transport suggestions
+
+Make it engaging, detailed, and practical. Format with clear sections.`;
+
+      try {
+        const resp = await fetch('https://api.cohere.ai/v1/chat',{
+          method:'POST',
+          headers:{
+            'Authorization': `Bearer ${COHERE_API_KEY}`,
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify({ 
+            message: prompt,
+            model: "command-r-plus",
+            temperature: 0.3
+          })
+        });
+        
+        if(!resp.ok) throw new Error('AI API error');
+        const data=await resp.json();
+        let ai = data.text || data.message || 'Unable to generate response';
+        
+        content.innerHTML=`
+          <div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">
+            ${formatAI(ai)}
+          </div>
+          <div style="text-align:center;margin-top:20px;">
+            <button onclick="window.print()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#138808;color:#fff;">🖨️ Print</button>
+            <button onclick="sharePlan()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#ff9933;color:#fff;">📤 Share</button>
+          </div>`;
+      } catch(err){
+        console.error('AI Error:', err);
+        content.innerHTML=`<p style="color:red;text-align:center;">Failed to generate recommendations. Please try again or check your API key.</p>`;
+      }
+    }
+
+    function sharePlan(){
+      const txt=document.getElementById('recommendation-content').innerText;
+      if(navigator.share) {
+        navigator.share({title:'Himachal Travel Plan',text:txt})
+          .catch(err=>console.log('Share failed',err));
+      } else {
+        navigator.clipboard.writeText(txt)
+          .then(()=>alert('Plan copied to clipboard!'))
+          .catch(()=>alert('Unable to copy'));
+      }
+    }
+
+    /* Modal & Maps */
+    function setupModal(){
+      const modal=document.getElementById('mapModal'),
+            close=modal.querySelector('.close');
+      close.onclick=()=>modal.classList.remove('open');
+      window.onclick=e=>{ if(e.target===modal) modal.classList.remove('open'); };
+    }
+
+    async function openMap(loc){
+      const modal=document.getElementById('mapModal'),
+            title=modal.querySelector('#modal-title'),
+            scroller=modal.querySelector('#image-scroller'),
+            actions=modal.querySelector('#modal-actions');
+      title.textContent=loc;
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;">Loading images…</p>`;
+      actions.innerHTML='';
+      modal.classList.add('open');
+
+      // 1) Street view
+      const enc=encodeURIComponent(loc),
+            url=`https://${GM_HOST}/maps/api/streetview?size=600x400&location=${enc}`;
+      try{
+        const res=await fetch(url,{method:'GET',headers:{
+          'x-rapidapi-key':GM_KEY,'x-rapidapi-host':GM_HOST
+        }});
+        if(!res.ok) throw 'no streetview';
+        const blob=await res.blob(),
+              svURL=URL.createObjectURL(blob);
+        // Build scroller with 2 images
+        scroller.innerHTML=`
+          <img src="${svURL}" alt="Streetview of ${loc}"/>
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map snapshot"/>
+        `;
+      }catch(e){
+        scroller.innerHTML=`<p style="color:#999;padding:30px;text-align:center;">Street view not available for this location</p>`;
+      }
+
+      // Buttons
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>📸</span>View Photos</a>
+      `;
+    }
+  </script>
+</body>
+</html>
