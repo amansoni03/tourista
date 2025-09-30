@@ -761,22 +761,33 @@ Include:
 Make it engaging, detailed, and practical. Format with clear sections.`;
 
       try {
-        const resp = await fetch('https://api.cohere.ai/v1/chat',{
+        const resp = await fetch('https://api.cohere.com/v2/chat',{
           method:'POST',
           headers:{
             'Authorization': `Bearer ${COHERE_API_KEY}`,
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            'Accept': 'application/json'
           },
           body:JSON.stringify({ 
-            message: prompt,
-            model: "command-r-plus",
+            model: "c4ai-aya-expanse-32b",
+            messages: [
+              {
+                role: "user",
+                content: prompt
+              }
+            ],
             temperature: 0.3
           })
         });
         
-        if(!resp.ok) throw new Error('AI API error');
-        const data=await resp.json();
-        let ai = data.text || data.message || 'Unable to generate response';
+        if(!resp.ok) {
+          const errorData = await resp.json();
+          console.error('API Error:', errorData);
+          throw new Error('AI API error');
+        }
+        
+        const data = await resp.json();
+        let ai = data.message?.content?.[0]?.text || data.text || 'Unable to generate response';
         
         content.innerHTML=`
           <div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">
@@ -788,7 +799,7 @@ Make it engaging, detailed, and practical. Format with clear sections.`;
           </div>`;
       } catch(err){
         console.error('AI Error:', err);
-        content.innerHTML=`<p style="color:red;text-align:center;">Failed to generate recommendations. Please try again or check your API key.</p>`;
+        content.innerHTML=`<p style="color:red;text-align:center;">Failed to generate recommendations. Please check console for details.</p>`;
       }
     }
 
