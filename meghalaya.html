@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meghalaya Tourism – Abode of Clouds</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      color:#2c3e50;
+      background:
+        radial-gradient(circle at top left, rgba(255,153,51,0.3) 0%,transparent 50%),
+        radial-gradient(circle at top right, rgba(19,136,8,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom left, rgba(0,70,151,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255,153,51,0.3) 0%,transparent 50%),
+        linear-gradient(135deg,#f8f4e6,#fff8dc,#f0f8e8,#e6f3ff,#fff8dc);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+    .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
+    .floating-img {
+      position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
+      box-shadow:0 20px 60px rgba(255,153,51,0.2); transition:.3s;
+    }
+    .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
+    .floating-img-1 {
+      top:10%; left:5%; width:300px; height:200px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Double_decker_living_root_bridge.jpg/800px-Double_decker_living_root_bridge.jpg') center/cover;
+      animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    .floating-img-2 {
+      top:20%; right:10%; width:260px; height:180px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Nohkalikai_Falls.jpg/800px-Nohkalikai_Falls.jpg') center/cover;
+      animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
+    }
+    .floating-img-3 {
+      top:50%; left:8%; width:280px; height:190px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Umngot_River_Dawki.jpg/800px-Umngot_River_Dawki.jpg') center/cover;
+      animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
+    }
+    .floating-img-4 {
+      top:60%; right:5%; width:320px; height:210px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Shillong_Peak_Meghalaya.jpg/800px-Shillong_Peak_Meghalaya.jpg') center/cover;
+      animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
+    @keyframes float2 {0%,100%{transform:translate(0)}33%{transform:translate(10px,-20px)}66%{transform:translate(-5px,-10px)}}
+    @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
+    @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
+
+    .navbar {
+      position:fixed; top:0; width:100%; padding:15px 0;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
+      border-bottom:3px solid #ff9933; z-index:1000;
+    }
+    .nav-content { max-width:1200px; margin:0 auto; display:flex;justify-content:space-between;align-items:center;padding:0 20px; }
+    .logo { font-weight:700; font-size:24px; color:#138808; display:flex;align-items:center;gap:8px; }
+    .nav-links { display:flex; gap:25px; }
+    .nav-links a { text-decoration:none;color:#2c3e50;font-weight:500;transition:.3s; }
+    .nav-links a:hover { color:#ff9933; }
+    .back-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:10px 18px;border-radius:25px;font-size:14px;font-weight:600;
+      text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
+    }
+    .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .hero {
+      height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,153,51,0.1)0%,transparent 70%),
+        radial-gradient(circle at 80% 20%,rgba(19,136,8,0.1)0%,transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(0,70,151,0.1)0%,transparent 50%);
+      position:relative;z-index:1;
+    }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,6rem);font-weight:900;
+      background:linear-gradient(135deg,#ff9933,#138808,#004797);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 3s ease-in-out infinite;margin-bottom:0.5rem;
+    }
+    .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
+    .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
+    .cta-button {display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff9933,#138808);color:#fff;padding:14px 28px;border-radius:50px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 5px;}
+    .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .action-buttons {position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;}
+    .action-btn {background:linear-gradient(135deg,#ff9933,#138808);color:#fff; padding:12px 18px;border:none;border-radius:25px;cursor:pointer; font-weight:600;display:flex;align-items:center;gap:6px; box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;}
+    .action-btn:hover{transform:translateY(-2px) scale(1.05);}
+    .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+    .section-title h2 {font-size:2.5rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
+    .category-header {text-align:center;margin:40px 0 20px;position:relative;}
+    .category-header h3 { font-size:2rem;font-weight:600;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .category-header::after {content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;}
+    .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
+    .card { background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;transition:all .3s;}
+    .card:hover {transform:translateY(-8px) scale(1.02);}
+    .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+    .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
+    .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+    .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
+    .map-btn { background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+      border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
+      display:flex;align-items:center;gap:6px;transition:.3s;}
+    .map-btn:hover{transform:scale(1.05);}
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
+      justify-content:center;align-items:center;}
+    .modal.open{display:flex;}
+    .modal-content {background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;}
+    .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
+    .image-scroller {display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;}
+    .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
+    .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
+    .ai-container {
+      background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
+      box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
+    }
+    .ai-title { font-size:2.5rem;font-weight:700;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+    }
+    .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
+    .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
+    .form-group select,.form-group textarea {width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);}
+    .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
+    .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .checkbox-item {display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;}
+    .checkbox-item:hover {background:rgba(255,153,51,0.2);}
+    .get-recommendations {background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;}
+    .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
+    .ai-results h3 {font-size:2rem;font-weight:700;
+      background:linear-gradient(135deg,#138808,#ff9933);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;margin-bottom:20px;}
+    .recommendation-text {background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;}
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){
+      .floating-images{display:none;}
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-images">
+    <div class="floating-img floating-img-1"></div>
+    <div class="floating-img floating-img-2"></div>
+    <div class="floating-img floating-img-3"></div>
+    <div class="floating-img floating-img-4"></div>
+  </div>
+  <div class="action-buttons">
+    <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
+    <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
+  </div>
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><span style="font-size:28px;">☁️</span> Meghalaya Tourism</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#ai-recommendations">AI Plan</a>
+        <a href="#attractions">Attractions</a>
+        <a href="index.html" class="back-btn"><span>←</span>Back to India</a>
+      </div>
+    </div>
+  </nav>
+  <section id="home" class="hero">
+    <div>
+      <h1>Meghalaya</h1>
+      <div class="subtitle">Abode of Clouds</div>
+      <p>Discover living root bridges, waterfalls, Asia's cleanest village, and crystal-clear rivers</p>
+      <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
+      <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
+    </div>
+  </section>
+  <section id="ai-recommendations" class="section">
+    <div class="ai-container">
+      <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
+      <p style="color:#666;margin-bottom:30px;">
+        Tell us your trip details and interests—get a custom Meghalaya itinerary!
+      </p>
+      <form id="preferences-form" class="ai-form">
+        <div class="form-group">
+          <label for="duration">Trip Duration</label>
+          <select id="duration" name="duration">
+            <option value="">Select…</option>
+            <option>1–2 days</option><option>3–5 days</option>
+            <option>1 week</option><option>2+ weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select…</option>
+            <option>Budget (₹1k–3k/day)</option>
+            <option>Moderate (₹3k–7k/day)</option>
+            <option>Luxury (₹7k+/day)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="style">Travel Style</label>
+          <select id="style" name="style">
+            <option value="">Select…</option>
+            <option>Solo</option><option>Couple</option><option>Family</option>
+            <option>Friends</option><option>Business</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Interests (multi-select)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="rootbridges"/>
+              <label>🌉 Living Root Bridges</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="waterfalls"/>
+              <label>💧 Waterfalls</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="caves"/>
+              <label>🕳️ Caves</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="trekking"/>
+              <label>🥾 Trekking</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="villages"/>
+              <label>🏘️ Villages & Culture</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="nature"/>
+              <label>🌿 Nature & Lakes</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Double Decker Bridge and Dawki…"></textarea>
+        </div>
+        <button type="submit" class="get-recommendations">
+          <span>✨</span>Get Recommendations
+        </button>
+      </form>
+      <div id="ai-results" class="ai-results">
+        <h3>🎯 Your Meghalaya Travel Plan</h3>
+        <div id="recommendation-content" class="recommendation-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="attractions" class="section">
+    <div class="section-title">
+      <h2>⭐ Top Attractions in Meghalaya</h2>
+      <p>Discover the soul of the Abode of Clouds</p>
+    </div>
+
+    <div class="category-header"><h3>🌉 Living Root Bridges</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌳 Double Decker Living Root Bridge</h4>
+        <p>Nongriat Village—UNESCO World Heritage, 180 years old, two-tier bridge, Ficus elastica roots, 3000 steps, trekking paradise, iconic, must-visit.</p>
+        <div class="tags">
+          <span class="tag">UNESCO</span>
+          <span class="tag">Must-Visit</span>
+          <span class="tag">Iconic</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Double Decker Living Root Bridge, Nongriat, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌿 Umshiang Double Decker Bridge</h4>
+        <p>Longest living root bridge—30m long, 2400ft high, 180 years old, challenging trek, adventurous, pristine, remote, nature marvel.</p>
+        <div class="tags"><span class="tag">Longest</span><span class="tag">Adventure</span><span class="tag">Challenging</span></div>
+        <button class="map-btn" onclick="openMap('Umshiang Double Decker Bridge, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🍃 Mawlynnong Root Bridge</h4>
+        <p>Asia's cleanest village—single-decker bridge, easy access, well-maintained, family-friendly, 25ft high, rubber tree roots, scenic.</p>
+        <div class="tags"><span class="tag">Easy Access</span><span class="tag">Clean Village</span><span class="tag">Family</span></div>
+        <button class="map-btn" onclick="openMap('Living Root Bridge, Mawlynnong, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Ritymmen Root Bridge</h4>
+        <p>Single-layer bridge—25m span, Wahthyllong village, less crowded, offbeat, natural beauty, traditional construction, peaceful trekking.</p>
+        <div class="tags"><span class="tag">Offbeat</span><span class="tag">Peaceful</span><span class="tag">Traditional</span></div>
+        <button class="map-btn" onclick="openMap('Ritymmen Root Bridge, Wahthyllong, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌴 Riwai Root Bridge</h4>
+        <p>West Jaintia Hills—traditional Khasi engineering, pristine location, bioengineering marvel, sustainable, eco-friendly, remote, adventure.</p>
+        <div class="tags"><span class="tag">Bioengineering</span><span class="tag">Remote</span><span class="tag">Eco-Friendly</span></div>
+        <button class="map-btn" onclick="openMap('Riwai Root Bridge, West Jaintia Hills, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌳 Umkar Root Bridge</h4>
+        <p>Hidden gem—near Nongthymmai, less explored, traditional construction, nature trail, photography, offbeat destination, tranquil.</p>
+        <div class="tags"><span class="tag">Hidden Gem</span><span class="tag">Photography</span><span class="tag">Tranquil</span></div>
+        <button class="map-btn" onclick="openMap('Umkar Root Bridge, Nongthymmai, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>💧 Majestic Waterfalls</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌊 Nohkalikai Falls</h4>
+        <p>Tallest plunge waterfall India—1115ft (340m), Cherrapunji, turquoise pool, legend of Likai, monsoon beauty, viewpoint, breathtaking, must-see.</p>
+        <div class="tags"><span class="tag">Tallest</span><span class="tag">Must-Visit</span><span class="tag">Iconic</span></div>
+        <button class="map-btn" onclick="openMap('Nohkalikai Falls, Cherrapunji, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Seven Sisters Falls</h4>
+        <p>Nohsngithiang Falls—7 segmented streams, 1035ft, Cherrapunji, panoramic views, monsoon spectacle, accessible viewpoint, photography paradise.</p>
+        <div class="tags"><span class="tag">Seven Streams</span><span class="tag">Scenic</span><span class="tag">Photography</span></div>
+        <button class="map-btn" onclick="openMap('Seven Sisters Falls, Cherrapunji, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💎 Krang Suri Falls</h4>
+        <p>Turquoise pool—West Jaintia Hills, crystal-clear water, swimming, picnic spot, 240ft cascade, accessible, family-friendly, offbeat beauty.</p>
+        <div class="tags"><span class="tag">Swimming</span><span class="tag">Crystal Clear</span><span class="tag">Family</span></div>
+        <button class="map-btn" onclick="openMap('Krang Suri Falls, Jowai, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌈 Elephant Falls</h4>
+        <p>Three-tier cascade—Shillong, 12km from city, accessible, steps to view, colonial name, Khasi name Ka Kshaid Lai Pateng Khohsiew, popular.</p>
+        <div class="tags"><span class="tag">Three-Tier</span><span class="tag">Accessible</span><span class="tag">Popular</span></div>
+        <button class="map-btn" onclick="openMap('Elephant Falls, Shillong, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💧 Wei Sawdong Falls</h4>
+        <p>Three-tiered beauty—near Mawlynnong, 190m total height, turquoise pools, trekking, swimming, pristine, photography, hidden gem.</p>
+        <div class="tags"><span class="tag">Three-Tiered</span><span class="tag">Hidden</span><span class="tag">Swimming</span></div>
+        <button class="map-btn" onclick="openMap('Wei Sawdong Falls, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌊 Langshiang Falls</h4>
+        <p>Hidden paradise—1106ft, Sangriang village, offbeat, trekking adventure, pristine nature, remote location, spectacular views, monsoon best.</p>
+        <div class="tags"><span class="tag">Hidden</span><span class="tag">Adventure</span><span class="tag">Remote</span></div>
+        <button class="map-btn" onclick="openMap('Langshiang Falls, Sangriang, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🕳️ Mysterious Caves</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🦇 Mawsmai Cave</h4>
+        <p>Limestone cave—Cherrapunji, well-lit, accessible, 150m length, stalactites & stalagmites, family-friendly, tourist-friendly, natural formations.</p>
+        <div class="tags"><span class="tag">Accessible</span><span class="tag">Lit</span><span class="tag">Family</span></div>
+        <button class="map-btn" onclick="openMap('Mawsmai Cave, Cherrapunji, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌑 Krem Liat Prah</h4>
+        <p>Longest cave India—30km+, Jaintia Hills, underground river, cave expedition, spelunking, adventure, pristine, scientific significance.</p>
+        <div class="tags"><span class="tag">Longest</span><span class="tag">Expedition</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Krem Liat Prah, Jaintia Hills, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🔦 Siju Cave</h4>
+        <p>Garden of Caves—3rd longest India, limestone formations, underground river, Dobakkol, bat colonies, spelunking, adventure tourism, pristine.</p>
+        <div class="tags"><span class="tag">Garden of Caves</span><span class="tag">Bats</span><span class="tag">Underground</span></div>
+        <button class="map-btn" onclick="openMap('Siju Cave, Garo Hills, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🗿 Arwah Cave</h4>
+        <p>Cherrapunji—fossils, limestone formations, narrow passages, natural skylight, spelunking, adventure, geological significance, pristine beauty.</p>
+        <div class="tags"><span class="tag">Fossils</span><span class="tag">Skylight</span><span class="tag">Geological</span></div>
+        <button class="map-btn" onclick="openMap('Arwah Cave, Cherrapunji, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌌 Krem Mawmluh</h4>
+        <p>4th longest cave India—7km, Mawsynram, stalactites, stalagmites, cave diving, spelunking, pristine formations, adventure enthusiasts.</p>
+        <div class="tags"><span class="tag">Long Cave</span><span class="tag">Diving</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Krem Mawmluh, Mawsynram, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦴 Krem Chympe</h4>
+        <p>Sandstone cave—6.3km, Cherrapunji, unique geology, cave exploration, adventure, pristine, scientific interest, offbeat destination.</p>
+        <div class="tags"><span class="tag">Sandstone</span><span class="tag">Unique</span><span class="tag">Exploration</span></div>
+        <button class="map-btn" onclick="openMap('Krem Chympe, Cherrapunji, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏘️ Villages & Cultural Sites</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌸 Mawlynnong Village</h4>
+        <p>Asia's cleanest village—God's Own Garden, bamboo dustbins, spotless, living root bridge, Sky View platform, Bangladesh views, eco-tourism, must-visit.</p>
+        <div class="tags"><span class="tag">Cleanest</span><span class="tag">Must-Visit</span><span class="tag">Eco-Tourism</span></div>
+        <button class="map-btn" onclick="openMap('Mawlynnong Village, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💎 Dawki (Umngot River)</h4>
+        <p>Crystal-clear water—transparent river, boating, India-Bangladesh border, Dawki bridge, water sports, photography paradise, stunning, must-see.</p>
+        <div class="tags"><span class="tag">Crystal River</span><span class="tag">Boating</span><span class="tag">Iconic</span></div>
+        <button class="map-btn" onclick="openMap('Dawki, Umngot River, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Mawphlang Sacred Forest</h4>
+        <p>Sacred grove—untouched for 1000+ years, Khasi beliefs, biodiversity, guided tours, orchids, medicinal plants, spiritual, ecological treasure.</p>
+        <div class="tags"><span class="tag">Sacred</span><span class="tag">1000+ Years</span><span class="tag">Biodiversity</span></div>
+        <button class="map-btn" onclick="openMap('Mawphlang Sacred Forest, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🗿 Nartiang Monoliths</h4>
+        <p>Megalithic site—Jaintia Hills, tallest monolith 26ft, ancient Jaintia Kingdom, historical significance, cultural heritage, archaeological, unique.</p>
+        <div class="tags"><span class="tag">Megalithic</span><span class="tag">Ancient</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Nartiang Monoliths, Jowai, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Kyllang Rock</h4>
+        <p>Granite dome—red granite, West Khasi Hills, trekking, panoramic views, sacred site, photography, unique geological formation, adventure.</p>
+        <div class="tags"><span class="tag">Granite Dome</span><span class="tag">Trekking</span><span class="tag">Sacred</span></div>
+        <button class="map-btn" onclick="openMap('Kyllang Rock, West Khasi Hills, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏡 Kongthong Whistling Village</h4>
+        <p>Musical village—unique tradition, tune-based names, no conventional names, cultural marvel, eco-tourism, traditional lifestyle, offbeat, fascinating.</p>
+        <div class="tags"><span class="tag">Whistling</span><span class="tag">Unique</span><span class="tag">Cultural</span></div>
+        <button class="map-btn" onclick="openMap('Kongthong Village, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏞️ Scenic Viewpoints & Canyons</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌄 Laitlum Canyons</h4>
+        <p>End of Hills—Scottish Highlands vibes, panoramic valleys, trekking, Smit village trail, photography paradise, breathtaking views, peaceful, must-visit.</p>
+        <div class="tags"><span class="tag">Canyons</span><span class="tag">Must-Visit</span><span class="tag">Trekking</span></div>
+        <button class="map-btn" onclick="openMap('Laitlum Canyons, Shillong, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛰️ Shillong Peak</h4>
+        <p>Highest point—6449ft, panoramic city views, IAF radar station, sunrise/sunset, trekking, weather station, sacred site, must-visit viewpoint.</p>
+        <div class="tags"><span class="tag">Highest</span><span class="tag">Panoramic</span><span class="tag">Viewpoint</span></div>
+        <button class="map-btn" onclick="openMap('Shillong Peak, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌅 Mawphlang Peak</h4>
+        <p>David Scott Trail—trekking, panoramic views, sacred forest nearby, adventure, nature trails, pristine beauty, offbeat destination, scenic.</p>
+        <div class="tags"><span class="tag">Peak</span><span class="tag">Trekking</span><span class="tag">Trail</span></div>
+        <button class="map-btn" onclick="openMap('Mawphlang Peak, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Living Root Bridge Viewpoint</h4>
+        <p>Tyrna—starting point for Double Decker trek, viewpoint, Umiam Canyon, valley views, trekking base, photography, adventure hub.</p>
+        <div class="tags"><span class="tag">Viewpoint</span><span class="tag">Trek Base</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Tyrna Viewpoint, Cherrapunji, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌄 Mawsynram Viewpoint</h4>
+        <p>Wettest place on Earth—rainfall records, misty views, Mawjymbuin Cave nearby, lush greenery, monsoon beauty, unique climate, nature.</p>
+        <div class="tags"><span class="tag">Wettest Place</span><span class="tag">Monsoon</span><span class="tag">Misty</span></div>
+        <button class="map-btn" onclick="openMap('Mawsynram, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Spread Eagle Falls Viewpoint</h4>
+        <p>Shillong—Happy Valley, panoramic waterfall views, accessible, photography, peaceful, natural beauty, nearby attractions, family-friendly.</p>
+        <div class="tags"><span class="tag">Waterfall View</span><span class="tag">Accessible</span><span class="tag">Photography</span></div>
+        <button class="map-btn" onclick="openMap('Spread Eagle Falls, Shillong, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏙️ Cities & Lakes</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌆 Shillong</h4>
+        <p>Scotland of East—capital city, Shillong Peak, Ward's Lake, Don Bosco Museum, Police Bazaar, music culture, clean city, pleasant climate.</p>
+        <div class="tags"><span class="tag">Capital</span><span class="tag">Scotland of East</span><span class="tag">Culture</span></div>
+        <button class="map-btn" onclick="openMap('Shillong, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Umiam Lake</h4>
+        <p>Barapani—man-made reservoir, 15km from Shillong, water sports, boating, kayaking, scenic beauty, Nehru Park, Lum Nehru Park, picnic spot.</p>
+        <div class="tags"><span class="tag">Lake</span><span class="tag">Water Sports</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Umiam Lake, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌧️ Cherrapunji (Sohra)</h4>
+        <p>Second wettest place—living root bridges, Nohkalikai Falls, Seven Sisters Falls, caves, Khasi heritage, monsoon beauty, trekking hub, iconic.</p>
+        <div class="tags"><span class="tag">Wettest</span><span class="tag">Must-Visit</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Cherrapunji, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Jowai</h4>
+        <p>Jaintia Hills—Nartiang Monoliths, Krang Suri Falls, Thadlaskein Lake, cultural heritage, offbeat, peaceful, traditional markets, scenic.</p>
+        <div class="tags"><span class="tag">Jaintia</span><span class="tag">Heritage</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Jowai, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌳 Tura</h4>
+        <p>Garo Hills—Tura Peak, Siju Cave, Balpakram National Park, Garo tribal culture, offbeat, natural beauty, adventure, cultural experiences.</p>
+        <div class="tags"><span class="tag">Garo Hills</span><span class="tag">Tribal</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Tura, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌺 Ward's Lake</h4>
+        <p>Shillong city—botanical gardens, boating, arched bridge, horse carriage rides, peaceful, family-friendly, colonial charm, photography.</p>
+        <div class="tags"><span class="tag">City Lake</span><span class="tag">Gardens</span><span class="tag">Family</span></div>
+        <button class="map-btn" onclick="openMap('Ward's Lake, Shillong, Meghalaya')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Loading…</h2>
+      <div class="image-scroller" id="image-scroller"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <script>
+    const GM_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
+    const GM_HOST = 'google-map-places.p.rapidapi.com';
+
+    document.addEventListener('DOMContentLoaded',() => {
+      document.getElementById('weather-btn')
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/Shillong+Meghalaya','_blank'));
+      document.getElementById('travel-planner-btn')
+        .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
+      document.getElementById('preferences-form')
+        .addEventListener('submit',handleForm);
+      setupModal();
+    });
+
+    async function handleForm(e){
+      e.preventDefault();
+      const fd=new FormData(e.target),
+            prefs={ duration:fd.get('duration'), budget:fd.get('budget'),
+                    style:fd.get('style'), additional:fd.get('additional')||'None',
+                    interests:[] };
+      document.querySelectorAll('input[name="interests"]:checked')
+        .forEach(ch=>prefs.interests.push(ch.value));
+      if(!prefs.duration||!prefs.budget||prefs.interests.length===0){
+        return alert('Select duration, budget & at least one interest!');
+      }
+      await getAI(prefs);
+    }
+
+    function formatAI(text){
+      text=text.trim().replace(/^["']|["']$/g,'');
+      text=text.replace(/\\n/g,'\n').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+      text=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      text=text.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g,'<em>$1</em>');
+      if(!text.includes('<p>'))text='<p>'+text+'</p>';
+      text=text.replace(/<p><\/p>/g,'').replace(/<p>\s*<br>/g,'<p>');
+      return text;
+    }
+
+    async function getAI(p){
+      const results = document.getElementById('ai-results'),
+            content = document.getElementById('recommendation-content');
+      results.style.display = 'block';
+      content.innerHTML = `
+        <div style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;">🤖</div>
+          <p>Generating your Meghalaya travel plan…</p>
+        </div>`;
+
+      const prompt = `You are a travel expert for Meghalaya, India. Given these preferences, craft a personalized itinerary:
+
+Duration: ${p.duration}
+Budget: ${p.budget}
+Style: ${p.style}
+Interests: ${p.interests.join(', ')}
+Additional: ${p.additional}
+
+Include:
+1. Top destinations in Meghalaya (Shillong, Cherrapunji, Mawlynnong, Dawki, Laitlum, etc.)
+2. Attractions per interest (root bridges, waterfalls, caves, villages, trekking)
+3. Sample day-wise itinerary
+4. Budget tips for accommodation and food
+5. Best seasons to visit
+6. Local experiences (Khasi culture, root bridges trek, Dawki boating, local cuisine)
+7. Transport suggestions
+
+Meghalaya is known as the Abode of Clouds with Double Decker Living Root Bridge (UNESCO), Nohkalikai Falls (tallest plunge waterfall), Mawlynnong (Asia's cleanest village), Dawki's crystal-clear Umngot River, Laitlum Canyons, limestone caves, Cherrapunji (wettest place), and rich Khasi-Jaintia-Garo tribal culture.
+
+Make it engaging, detailed, and practical. Format with clear sections.`;
+
+      try {
+        const resp = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBjTBW_cresSRlMWsb45NlOt06iVqlV4OQ",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [{ text: prompt }]
+                }
+              ]
+            })
+          }
+        );
+
+        if (!resp.ok) throw new Error("AI API error");
+
+        const data = await resp.json();
+        let ai = '';
+
+        if (
+          data &&
+          data.candidates &&
+          data.candidates[0] &&
+          data.candidates[0].content &&
+          data.candidates[0].content.parts &&
+          data.candidates[0].content.parts[0] &&
+          data.candidates[0].content.parts[0].text
+        ) {
+          ai = data.candidates[0].content.parts[0].text;
+        } else {
+          ai = 'Unable to generate response';
+        }
+
+        content.innerHTML = `
+          <div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">
+            ${formatAI(ai)}
+          </div>
+          <div style="text-align:center;margin-top:20px;">
+            <button onclick="window.print()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#138808;color:#fff;">🖨️ Print</button>
+            <button onclick="sharePlan()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#ff9933;color:#fff;">📤 Share</button>
+          </div>`;
+
+      } catch (err) {
+        console.error("AI Error:", err);
+        content.innerHTML = `<p style="color:red;text-align:center;">Failed to generate recommendations. Please check console for details.</p>`;
+      }
+    }
+
+    function sharePlan(){
+      const txt=document.getElementById('recommendation-content').innerText;
+      if(navigator.share) {
+        navigator.share({title:'Meghalaya Travel Plan',text:txt})
+          .catch(err=>console.log('Share failed',err));
+      } else {
+        navigator.clipboard.writeText(txt)
+          .then(()=>alert('Plan copied to clipboard!'))
+          .catch(()=>alert('Unable to copy'));
+      }
+    }
+
+    function setupModal(){
+      const modal=document.getElementById('mapModal'),
+            close=modal.querySelector('.close');
+      close.onclick=()=>modal.classList.remove('open');
+      window.onclick=e=>{ if(e.target===modal) modal.classList.remove('open'); };
+    }
+
+    async function openMap(loc){
+      const modal=document.getElementById('mapModal'),
+            title=modal.querySelector('#modal-title'),
+            scroller=modal.querySelector('#image-scroller'),
+            actions=modal.querySelector('#modal-actions');
+      
+      title.textContent=loc;
+      modal.classList.add('open');
+      
+      const enc=encodeURIComponent(loc);
+      
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;color:#888;">Loading images…</p>`;
+      
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>📸</span>View Photos</a>
+      `;
+
+      scroller.innerHTML=`
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+      `;
+
+      const url=`https://${GM_HOST}/maps/api/streetview?size=600x400&location=${enc}`;
+      try{
+        const res=await fetch(url,{method:'GET',headers:{
+          'x-rapidapi-key':GM_KEY,'x-rapidapi-host':GM_HOST
+        }});
+        if(res.ok) {
+          const blob=await res.blob(),
+                svURL=URL.createObjectURL(blob);
+          scroller.innerHTML = `
+            <img src="${svURL}" alt="Street view of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+          `;
+        }
+      }catch(e){
+        console.log('Street view not available for this location');
+      }
+    }
+  </script>
+</body>
+</html>
