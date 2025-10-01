@@ -24,7 +24,44 @@
       position: relative;
     }
 
-    /* Floating Background Images */
+    /* Premium 3D Texture Overlays */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,153,51,0.04) 2px, rgba(255,153,51,0.04) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(19,136,8,0.04) 2px, rgba(19,136,8,0.04) 4px),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,70,151,0.02) 10px, rgba(0,70,151,0.02) 20px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255,153,51,0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(19,136,8,0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(0,70,151,0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: morphBackground 20s ease-in-out infinite;
+    }
+
+    @keyframes morphBackground {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      50% { transform: scale(1.1) rotate(5deg); opacity: 0.8; }
+    }
+
+    /* Floating Background Images with 3D effect */
     .floating-images {
       position: fixed;
       top: 0;
@@ -34,15 +71,33 @@
       pointer-events: none;
       z-index: -1;
       overflow: hidden;
+      perspective: 1000px;
     }
 
     .floating-img {
       position: absolute;
       border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(255, 153, 51, 0.2);
-      opacity: 0.12;
-      filter: blur(1px);
+      box-shadow: 
+        0 20px 60px rgba(255, 153, 51, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+      opacity: 0.15;
+      filter: blur(0.5px);
       transition: all 0.3s ease;
+      border: 2px solid rgba(255, 153, 51, 0.2);
+      transform-style: preserve-3d;
+    }
+
+    .floating-img::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.1) 100%);
+      border-radius: 20px;
+      pointer-events: none;
     }
 
     .floating-img-1 {
@@ -50,7 +105,7 @@
       height: 180px;
       top: 8%;
       left: 3%;
-      background: linear-gradient(rgba(255,153,51,0.1), rgba(255,153,51,0.1)), url('https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
+      background: linear-gradient(rgba(255,153,51,0.15), rgba(255,153,51,0.05)), url('https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
       animation: float1 9s ease-in-out infinite;
     }
 
@@ -59,7 +114,7 @@
       height: 160px;
       top: 25%;
       right: 8%;
-      background: linear-gradient(rgba(19,136,8,0.1), rgba(19,136,8,0.1)), url('https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
+      background: linear-gradient(rgba(19,136,8,0.15), rgba(19,136,8,0.05)), url('https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
       animation: float2 11s ease-in-out infinite;
     }
 
@@ -68,7 +123,7 @@
       height: 190px;
       top: 55%;
       left: 5%;
-      background: linear-gradient(rgba(0,70,151,0.1), rgba(0,70,151,0.1)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
+      background: linear-gradient(rgba(0,70,151,0.15), rgba(0,70,151,0.05)), url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
       animation: float3 13s ease-in-out infinite;
     }
 
@@ -77,36 +132,39 @@
       height: 170px;
       top: 70%;
       right: 10%;
-      background: linear-gradient(rgba(255,153,51,0.1), rgba(255,153,51,0.1)), url('https://images.unsplash.com/photo-1477587458883-47145ed94245?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
+      background: linear-gradient(rgba(255,153,51,0.15), rgba(255,153,51,0.05)), url('https://images.unsplash.com/photo-1477587458883-47145ed94245?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80') center/cover;
       animation: float4 10s ease-in-out infinite;
     }
 
     @keyframes float1 {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-25px) rotate(1deg); }
+      0%, 100% { transform: translateY(0px) translateZ(0px) rotateY(0deg); }
+      50% { transform: translateY(-25px) translateZ(20px) rotateY(5deg); }
     }
 
     @keyframes float2 {
-      0%, 100% { transform: translateY(0px) translateX(0px); }
-      50% { transform: translateY(-20px) translateX(10px); }
+      0%, 100% { transform: translateY(0px) translateX(0px) translateZ(0px); }
+      50% { transform: translateY(-20px) translateX(10px) translateZ(30px); }
     }
 
     @keyframes float3 {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-30px) scale(1.02); }
+      0%, 100% { transform: translateY(0px) scale(1) translateZ(0px); }
+      50% { transform: translateY(-30px) scale(1.02) translateZ(25px); }
     }
 
     @keyframes float4 {
-      0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-      50% { transform: translateY(-22px) translateX(-8px) rotate(-1deg); }
+      0%, 100% { transform: translateY(0px) translateX(0px) rotateX(0deg); }
+      50% { transform: translateY(-22px) translateX(-8px) rotateX(5deg); }
     }
     
-    /* Navbar */
+    /* Navbar with 3D depth */
     .navbar {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       border-bottom: 3px solid #ff9933;
-      box-shadow: 0 5px 20px rgba(255, 153, 51, 0.2);
+      box-shadow: 
+        0 5px 20px rgba(255, 153, 51, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
       padding: 16px 40px;
       display: flex;
       justify-content: space-between;
@@ -129,6 +187,7 @@
       font-weight: 700;
       font-size: 20px;
       color: #138808;
+      text-shadow: 0 2px 4px rgba(19, 136, 8, 0.2);
     }
     
     .nav-button {
@@ -140,14 +199,18 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(255, 153, 51, 0.3);
+      box-shadow: 
+        0 4px 15px rgba(255, 153, 51, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
       text-decoration: none;
       display: inline-block;
+      transform-style: preserve-3d;
     }
     
     .nav-button:hover {
       background: linear-gradient(135deg, #e68a00, #0f6b06);
-      transform: translateY(-2px);
+      transform: translateY(-2px) translateZ(10px);
       box-shadow: 0 8px 25px rgba(255, 153, 51, 0.4);
     }
     
@@ -181,6 +244,7 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: gradientShift 3s ease-in-out infinite;
+      text-shadow: 0 4px 8px rgba(255, 153, 51, 0.1);
     }
     
     .hero-section p {
@@ -189,9 +253,10 @@
       margin-bottom: 30px;
       color: rgba(44, 62, 80, 0.8);
       font-weight: 500;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
     
-    /* Chat container */
+    /* Chat container with 3D depth */
     .chat-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -201,12 +266,16 @@
       backdrop-filter: blur(20px);
       overflow: hidden;
       animation: fadeIn 1.2s ease-out 0.3s both;
-      box-shadow: 0 25px 50px rgba(255, 153, 51, 0.2);
+      box-shadow: 
+        0 25px 50px rgba(255, 153, 51, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+      transform-style: preserve-3d;
     }
     
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateZ(-50px); }
+      to { opacity: 1; transform: translateZ(0); }
     }
     
     /* Chat header */
@@ -217,6 +286,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5);
     }
     
     .ai-status {
@@ -231,17 +301,19 @@
       background: #138808;
       border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(19, 136, 8, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
     }
     
     @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.7; }
-      100% { transform: scale(1); opacity: 1; }
+      0% { transform: scale(1); opacity: 1; box-shadow: 0 0 10px rgba(19, 136, 8, 0.5); }
+      50% { transform: scale(1.2); opacity: 0.7; box-shadow: 0 0 20px rgba(19, 136, 8, 0.8); }
+      100% { transform: scale(1); opacity: 1; box-shadow: 0 0 10px rgba(19, 136, 8, 0.5); }
     }
     
     .ai-status strong {
       color: #2c3e50;
       font-size: 1.1rem;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     
     .ai-status span {
@@ -257,7 +329,9 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      background: rgba(255, 255, 255, 0.3);
+      background: 
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255,153,51,0.02) 50px, rgba(255,153,51,0.02) 100px);
     }
     
     .chat-messages::-webkit-scrollbar {
@@ -267,11 +341,13 @@
     .chat-messages::-webkit-scrollbar-track {
       background: rgba(255, 153, 51, 0.1);
       border-radius: 4px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
     }
     
     .chat-messages::-webkit-scrollbar-thumb {
-      background: rgba(255, 153, 51, 0.5);
+      background: linear-gradient(180deg, rgba(255, 153, 51, 0.6), rgba(255, 153, 51, 0.4));
       border-radius: 4px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
     
     .message {
@@ -279,11 +355,12 @@
       gap: 15px;
       animation: slideInLeft 0.5s ease-out;
       max-width: 85%;
+      transform-style: preserve-3d;
     }
     
     @keyframes slideInLeft {
-      from { transform: translateX(-30px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      from { transform: translateX(-30px) translateZ(-20px); opacity: 0; }
+      to { transform: translateX(0) translateZ(0); opacity: 1; }
     }
     
     .user-message {
@@ -293,8 +370,8 @@
     }
     
     @keyframes slideInRight {
-      from { transform: translateX(30px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      from { transform: translateX(30px) translateZ(-20px); opacity: 0; }
+      to { transform: translateX(0) translateZ(0); opacity: 1; }
     }
     
     .message-avatar {
@@ -306,6 +383,9 @@
       justify-content: center;
       font-size: 1.2rem;
       flex-shrink: 0;
+      box-shadow: 
+        0 4px 10px rgba(255, 153, 51, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
     }
     
     .ai-avatar {
@@ -326,10 +406,15 @@
       transition: all 0.3s ease;
       line-height: 1.6;
       color: #2c3e50;
+      box-shadow: 
+        0 5px 15px rgba(255, 153, 51, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+      transform-style: preserve-3d;
     }
     
     .message-content:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px) translateZ(10px);
       box-shadow: 0 10px 25px rgba(255, 153, 51, 0.2);
       border-color: #ff9933;
     }
@@ -351,13 +436,15 @@
     .suggestions {
       padding: 20px 30px;
       border-top: 2px solid rgba(255, 153, 51, 0.3);
-      background: rgba(255, 255, 255, 0.5);
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.3));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
     }
     
     .suggestions > div:first-child {
       margin-bottom: 15px;
       color: #2c3e50;
       font-weight: 600;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
     
     .suggestion-chips {
@@ -381,12 +468,16 @@
       gap: 8px;
       color: #2c3e50;
       font-weight: 500;
+      box-shadow: 
+        0 2px 8px rgba(255, 153, 51, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      transform-style: preserve-3d;
     }
     
     .suggestion-chip:hover {
       background: rgba(255, 153, 51, 0.2);
       border-color: #ff9933;
-      transform: translateY(-2px) scale(1.02);
+      transform: translateY(-2px) scale(1.02) translateZ(5px);
       box-shadow: 0 5px 15px rgba(255, 153, 51, 0.3);
     }
     
@@ -400,6 +491,10 @@
       border: 2px solid rgba(255, 153, 51, 0.3);
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
+      box-shadow: 
+        0 4px 12px rgba(255, 153, 51, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
     }
     
     .chat-input:hover {
@@ -436,12 +531,16 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 5px 15px rgba(255, 153, 51, 0.3);
+      box-shadow: 
+        0 5px 15px rgba(255, 153, 51, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+      transform-style: preserve-3d;
     }
     
     .send-button:hover:not(:disabled) {
       background: linear-gradient(135deg, #e68a00, #0f6b06);
-      transform: scale(1.05);
+      transform: scale(1.05) translateZ(5px);
       box-shadow: 0 8px 20px rgba(255, 153, 51, 0.4);
     }
     
@@ -466,6 +565,7 @@
       border-radius: 50%;
       background: #ff9933;
       animation: typing 1.4s ease-in-out infinite both;
+      box-shadow: 0 2px 4px rgba(255, 153, 51, 0.3);
     }
     
     .dot:nth-child(1) { animation-delay: -0.32s; }
@@ -491,6 +591,7 @@
       border-radius: 18px;
       border: 2px solid rgba(220, 38, 38, 0.3);
       animation: shake 0.5s ease-in-out;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
     }
     
     @keyframes shake {
@@ -527,6 +628,7 @@
       margin: 15px 0 10px 0;
       font-size: 1.1rem;
       font-weight: 700;
+      text-shadow: 0 1px 2px rgba(255, 153, 51, 0.2);
     }
     
     .ai-response ul {
@@ -549,6 +651,7 @@
       color: #ff9933;
       font-weight: 600;
       border: 1px solid rgba(255, 153, 51, 0.3);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
     }
   </style>
 </head>
@@ -573,7 +676,7 @@
   <main class="container">
     <div class="hero-section">
       <h1>Your Personal AI Travel Assistant</h1>
-      <p>Powered by AI - Plan your perfect journey with intelligent recommendations</p>
+      <p>Powered by Google Gemini AI - Plan your perfect journey with intelligent recommendations</p>
     </div>
     
     <div class="chat-container">
@@ -645,9 +748,9 @@
     </div>
   </main>
   <script>
-    // RapidAPI ChatGPT Configuration
-    const RAPIDAPI_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
-    const API_URL = 'https://chatgpt-42.p.rapidapi.com/aitohuman';
+    // Google Gemini API Configuration
+    const GEMINI_API_KEY = 'AIzaSyBjTBW_cresSRlMWsb45NlOt06iVqlV4OQ';
+    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
     
     // DOM Elements
     const messagesContainer = document.getElementById('chatMessages');
@@ -667,20 +770,24 @@
     }, 1000);
     
     // Travel-focused system prompt
-    const SYSTEM_PROMPT = `You are an expert AI travel planner and advisor. Your role is to help users plan amazing trips by providing:
+    const SYSTEM_PROMPT = `You are an expert AI travel planner and advisor for India and worldwide destinations. Your role is to help users plan amazing trips by providing:
+
 1. DETAILED ITINERARIES: Day-by-day plans with specific activities, timings, and logistics
-2. BUDGET PLANNING: Accurate cost estimates for different travel styles (budget/mid-range/luxury)
+2. BUDGET PLANNING: Accurate cost estimates for different travel styles (budget/mid-range/luxury) in INR and USD
 3. DESTINATION INSIGHTS: Climate, culture, safety, visa requirements, best times to visit
 4. ACCOMMODATION: Specific hotel/hostel recommendations with pros/cons
 5. LOCAL EXPERIENCES: Hidden gems, authentic cultural activities, local cuisine
 6. PRACTICAL ADVICE: Transportation, packing, safety tips, money matters
+
 Always provide:
 - Specific, actionable recommendations
 - Multiple options for different budgets/preferences  
 - Pro tips and insider knowledge
 - Safety and cultural sensitivity advice
 - Seasonal considerations and weather impacts
-Format responses with clear headings, bullet points, and emojis for better readability. Be enthusiastic but practical.`;
+- Indian context when discussing India (festivals, regional differences, etc.)
+
+Format responses with clear headings, bullet points, and emojis for better readability. Be enthusiastic but practical. Keep responses comprehensive but concise.`;
     
     function addMessage(content, isUser = false, isError = false) {
       const messageDiv = document.createElement('div');
@@ -736,47 +843,47 @@ Format responses with clear headings, bullet points, and emojis for better reada
     }
     
     function formatAIResponse(content) {
-      // Handle both literal \n strings and actual newline characters
       let formatted = content
-        .replace(/\\n/g, '\n')  // Convert literal \n strings (like "\\n") to actual newlines
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Bold formatting **text**
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Italic formatting *text*
-        .replace(/###\s*(.*?)(?=\n|$)/g, '<h3>$1</h3>')  // H3 headings ### text
-        .replace(/##\s*(.*?)(?=\n|$)/g, '<h3>$1</h3>')   // H2 headings ## text as H3
-        .replace(/\n\s*\n/g, '</p><p>')  // Double newlines = new paragraph
-        .replace(/\n\s*[-•*]\s*/g, '<br>• ')  // Bullet points (-, •, *)
-        .replace(/\n\s*(\d+\.)\s*/g, '<br>$1 ')  // Numbered lists
-        .replace(/\n(?!<br>)/g, '<br>')  // Single newlines = line breaks (but not if already <br>)
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/###\s*(.*?)(?=\n|$)/g, '<h3>$1</h3>')
+        .replace(/##\s*(.*?)(?=\n|$)/g, '<h3>$1</h3>')
+        .replace(/\n\s*\n/g, '</p><p>')
+        .replace(/\n\s*[-•*]\s*/g, '<br>• ')
+        .replace(/\n\s*(\d+\.)\s*/g, '<br>$1 ')
+        .replace(/\n(?!<br>)/g, '<br>')
         .trim();
       
-      // Wrap in paragraph tags if not already wrapped in HTML tags
       if (!formatted.startsWith('<')) {
         formatted = '<p>' + formatted + '</p>';
       }
       
-      // Clean up paragraph structure
       formatted = formatted
-        .replace(/<p><\/p>/g, '')  // Remove empty paragraphs
-        .replace(/<p>(<h3>.*?<\/h3>)/g, '$1<p>')  // Move headings outside paragraphs
-        .replace(/(<\/h3>)<\/p>/g, '$1')  // Remove closing p tag after headings
-        .replace(/<p>(<br>)/g, '<p>')  // Remove br immediately after opening p
-        .replace(/(<br>)+<\/p>/g, '</p>')  // Remove trailing br before closing p
-        .replace(/<br><h3>/g, '<h3>');  // Remove br before headings
+        .replace(/<p><\/p>/g, '')
+        .replace(/<p>(<h3>.*?<\/h3>)/g, '$1<p>')
+        .replace(/(<\/h3>)<\/p>/g, '$1')
+        .replace(/<p>(<br>)/g, '<p>')
+        .replace(/(<br>)+<\/p>/g, '</p>')
+        .replace(/<br><h3>/g, '<h3>');
       
       return formatted;
     }
     
-    async function callChatGPTAPI(message) {
+    async function callGeminiAPI(message) {
       try {
-        const response = await fetch(API_URL, {
+        const fullPrompt = `${SYSTEM_PROMPT}\n\nUser: ${message}\n\nAssistant:`;
+        
+        const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
           method: 'POST',
           headers: {
-            'x-rapidapi-key': RAPIDAPI_KEY,
-            'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            text: `${SYSTEM_PROMPT}\n\nUser: ${message}`
+            contents: [{
+              parts: [{
+                text: fullPrompt
+              }]
+            }]
           })
         });
         
@@ -784,11 +891,18 @@ Format responses with clear headings, bullet points, and emojis for better reada
           throw new Error(`API Error: ${response.status}`);
         }
         
-        const result = await response.text();
-        return result;
+        const data = await response.json();
+        
+        if (data && data.candidates && data.candidates[0] && 
+            data.candidates[0].content && data.candidates[0].content.parts && 
+            data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text) {
+          return data.candidates[0].content.parts[0].text;
+        } else {
+          throw new Error('Invalid API response format');
+        }
         
       } catch (error) {
-        console.error('ChatGPT API Error:', error);
+        console.error('Gemini API Error:', error);
         throw error;
       }
     }
@@ -797,35 +911,26 @@ Format responses with clear headings, bullet points, and emojis for better reada
       const message = messageInput.value.trim();
       if (!message || isTyping) return;
       
-      // Add user message
       addMessage(message, true);
       conversationHistory.push({role: 'user', content: message});
       
-      // Clear input and update UI
       messageInput.value = '';
       isTyping = true;
       sendButton.disabled = true;
       sendText.textContent = 'Thinking...';
       
-      // Add typing indicator
       const typingIndicator = addTypingIndicator();
       
       try {
-        // Call ChatGPT API
-        const aiResponse = await callChatGPTAPI(message);
+        const aiResponse = await callGeminiAPI(message);
         
-        // Remove typing indicator
         messagesContainer.removeChild(typingIndicator);
-        
-        // Add AI response
         addMessage(aiResponse);
         conversationHistory.push({role: 'assistant', content: aiResponse});
         
       } catch (error) {
-        // Remove typing indicator
         messagesContainer.removeChild(typingIndicator);
         
-        // Show error message
         addMessage(
           `I apologize, but I'm having trouble connecting to my travel knowledge base right now. This could be due to:\n\n• Network connectivity issues\n• API rate limits\n• Temporary service unavailability\n\nPlease try again in a moment, or check your internet connection. I'm here to help plan your perfect trip once the connection is restored! 🌟`,
           false,
@@ -843,7 +948,6 @@ Format responses with clear headings, bullet points, and emojis for better reada
       sendMessage();
     }
     
-    // Event listeners
     sendButton.addEventListener('click', sendMessage);
     
     messageInput.addEventListener('keydown', (e) => {
@@ -857,13 +961,11 @@ Format responses with clear headings, bullet points, and emojis for better reada
       sendButton.disabled = !messageInput.value.trim() || isTyping;
     });
     
-    // Auto-resize input
     messageInput.addEventListener('input', function() {
       this.style.height = 'auto';
       this.style.height = Math.min(this.scrollHeight, 120) + 'px';
     });
     
-    // Focus input on load
     window.addEventListener('load', () => {
       messageInput.focus();
     });
