@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Uttarakhand Tourism – Land of Gods</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      color:#2c3e50;
+      background:
+        radial-gradient(circle at top left, rgba(255,153,51,0.3) 0%,transparent 50%),
+        radial-gradient(circle at top right, rgba(19,136,8,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom left, rgba(0,70,151,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255,153,51,0.3) 0%,transparent 50%),
+        linear-gradient(135deg,#f8f4e6,#fff8dc,#f0f8e8,#e6f3ff,#fff8dc);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+    .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
+    .floating-img {
+      position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
+      box-shadow:0 20px 60px rgba(255,153,51,0.2); transition:.3s;
+    }
+    .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
+    .floating-img-1 {
+      top:10%; left:5%; width:300px; height:200px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Badrinath_Temple_Uttarakhand.jpg/800px-Badrinath_Temple_Uttarakhand.jpg') center/cover;
+      animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    .floating-img-2 {
+      top:20%; right:10%; width:260px; height:180px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Rishikesh_Lakshman_Jhula.jpg/800px-Rishikesh_Lakshman_Jhula.jpg') center/cover;
+      animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
+    }
+    .floating-img-3 {
+      top:50%; left:8%; width:280px; height:190px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Nainital_Lake_Uttarakhand.jpg/800px-Nainital_Lake_Uttarakhand.jpg') center/cover;
+      animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
+    }
+    .floating-img-4 {
+      top:60%; right:5%; width:320px; height:210px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Valley_of_Flowers_Uttarakhand.jpg/800px-Valley_of_Flowers_Uttarakhand.jpg') center/cover;
+      animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
+    @keyframes float2 {0%,100%{transform:translate(0)}33%{transform:translate(10px,-20px)}66%{transform:translate(-5px,-10px)}}
+    @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
+    @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
+
+    .navbar {
+      position:fixed; top:0; width:100%; padding:15px 0;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
+      border-bottom:3px solid #ff9933; z-index:1000;
+    }
+    .nav-content { max-width:1200px; margin:0 auto; display:flex;justify-content:space-between;align-items:center;padding:0 20px; }
+    .logo { font-weight:700; font-size:24px; color:#138808; display:flex;align-items:center;gap:8px; }
+    .nav-links { display:flex; gap:25px; }
+    .nav-links a { text-decoration:none;color:#2c3e50;font-weight:500;transition:.3s; }
+    .nav-links a:hover { color:#ff9933; }
+    .back-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:10px 18px;border-radius:25px;font-size:14px;font-weight:600;
+      text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
+    }
+    .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .hero {
+      height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,153,51,0.1)0%,transparent 70%),
+        radial-gradient(circle at 80% 20%,rgba(19,136,8,0.1)0%,transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(0,70,151,0.1)0%,transparent 50%);
+      position:relative;z-index:1;
+    }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,6rem);font-weight:900;
+      background:linear-gradient(135deg,#ff9933,#138808,#004797);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 3s ease-in-out infinite;margin-bottom:0.5rem;
+    }
+    .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
+    .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
+    .cta-button {display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff9933,#138808);color:#fff;padding:14px 28px;border-radius:50px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 5px;}
+    .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .action-buttons {position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;}
+    .action-btn {background:linear-gradient(135deg,#ff9933,#138808);color:#fff; padding:12px 18px;border:none;border-radius:25px;cursor:pointer; font-weight:600;display:flex;align-items:center;gap:6px; box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;}
+    .action-btn:hover{transform:translateY(-2px) scale(1.05);}
+    .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+    .section-title h2 {font-size:2.5rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
+    .category-header {text-align:center;margin:40px 0 20px;position:relative;}
+    .category-header h3 { font-size:2rem;font-weight:600;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .category-header::after {content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;}
+    .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
+    .card { background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;transition:all .3s;}
+    .card:hover {transform:translateY(-8px) scale(1.02);}
+    .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+    .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
+    .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+    .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
+    .map-btn { background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+      border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
+      display:flex;align-items:center;gap:6px;transition:.3s;}
+    .map-btn:hover{transform:scale(1.05);}
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
+      justify-content:center;align-items:center;}
+    .modal.open{display:flex;}
+    .modal-content {background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;}
+    .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
+    .image-scroller {display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;}
+    .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
+    .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
+    .ai-container {
+      background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
+      box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
+    }
+    .ai-title { font-size:2.5rem;font-weight:700;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+    }
+    .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
+    .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
+    .form-group select,.form-group textarea {width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);}
+    .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
+    .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .checkbox-item {display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;}
+    .checkbox-item:hover {background:rgba(255,153,51,0.2);}
+    .get-recommendations {background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;}
+    .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
+    .ai-results h3 {font-size:2rem;font-weight:700;
+      background:linear-gradient(135deg,#138808,#ff9933);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;margin-bottom:20px;}
+    .recommendation-text {background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;}
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){
+      .floating-images{display:none;}
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-images">
+    <div class="floating-img floating-img-1"></div>
+    <div class="floating-img floating-img-2"></div>
+    <div class="floating-img floating-img-3"></div>
+    <div class="floating-img floating-img-4"></div>
+  </div>
+  <div class="action-buttons">
+    <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
+    <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
+  </div>
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><span style="font-size:28px;">🏔️</span> Uttarakhand Tourism</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#ai-recommendations">AI Plan</a>
+        <a href="#attractions">Attractions</a>
+        <a href="index.html" class="back-btn"><span>←</span>Back to India</a>
+      </div>
+    </div>
+  </nav>
+  <section id="home" class="hero">
+    <div>
+      <h1>Uttarakhand</h1>
+      <div class="subtitle">Land of Gods (Devbhumi)</div>
+      <p>Discover Char Dham, Rishikesh yoga capital, Nainital lakes, Jim Corbett tigers, and Himalayan beauty</p>
+      <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
+      <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
+    </div>
+  </section>
+  <section id="ai-recommendations" class="section">
+    <div class="ai-container">
+      <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
+      <p style="color:#666;margin-bottom:30px;">
+        Tell us your trip details and interests—get a custom Uttarakhand itinerary!
+      </p>
+      <form id="preferences-form" class="ai-form">
+        <div class="form-group">
+          <label for="duration">Trip Duration</label>
+          <select id="duration" name="duration">
+            <option value="">Select…</option>
+            <option>1–2 days</option><option>3–5 days</option>
+            <option>1 week</option><option>2+ weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select…</option>
+            <option>Budget (₹1k–3k/day)</option>
+            <option>Moderate (₹3k–7k/day)</option>
+            <option>Luxury (₹7k+/day)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="style">Travel Style</label>
+          <select id="style" name="style">
+            <option value="">Select…</option>
+            <option>Solo</option><option>Couple</option><option>Family</option>
+            <option>Friends</option><option>Business</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Interests (multi-select)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="spiritual"/>
+              <label>🙏 Spiritual & Char Dham</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="hills"/>
+              <label>🏔️ Hill Stations</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="adventure"/>
+              <label>🧗 Adventure Sports</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="wildlife"/>
+              <label>🐅 Wildlife & Nature</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="yoga"/>
+              <label>🧘 Yoga & Wellness</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="trekking"/>
+              <label>🥾 Trekking & Hiking</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Badrinath and Rishikesh…"></textarea>
+        </div>
+        <button type="submit" class="get-recommendations">
+          <span>✨</span>Get Recommendations
+        </button>
+      </form>
+      <div id="ai-results" class="ai-results">
+        <h3>🎯 Your Uttarakhand Travel Plan</h3>
+        <div id="recommendation-content" class="recommendation-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="attractions" class="section">
+    <div class="section-title">
+      <h2>⭐ Top Attractions in Uttarakhand</h2>
+      <p>Discover the Land of Gods</p>
+    </div>
+
+    <div class="category-header"><h3>🙏 Char Dham Pilgrimage</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🛕 Badrinath Temple</h4>
+        <p>10,170ft—one of Char Dham, Lord Vishnu, Alaknanda River, Neelkanth Peak backdrop, May-October open, pilgrimage center, must-visit, sacred, architectural beauty, spiritual power.</p>
+        <div class="tags">
+          <span class="tag">Char Dham</span>
+          <span class="tag">Must-Visit</span>
+          <span class="tag">10,170ft</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Badrinath Temple, Chamoli, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Kedarnath Temple</h4>
+        <p>11,755ft—one of 12 Jyotirlingas, Char Dham, Lord Shiva, Mandakini River, trek/helicopter access, 2013 floods rebuilt, sacred, pilgrimage center, must-visit, breathtaking.</p>
+        <div class="tags"><span class="tag">Jyotirlinga</span><span class="tag">11,755ft</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Kedarnath Temple, Rudraprayag, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌊 Gangotri Temple</h4>
+        <p>10,200ft—Char Dham, Goddess Ganga origin, Bhagirathi River source, Gangotri Glacier, pilgrimage center, sacred bath, trekking base, spiritual, must-visit, pristine.</p>
+        <div class="tags"><span class="tag">Char Dham</span><span class="tag">Ganga Origin</span><span class="tag">10,200ft</span></div>
+        <button class="map-btn" onclick="openMap('Gangotri Temple, Uttarkashi, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🙏 Yamunotri Temple</h4>
+        <p>10,800ft—Char Dham, Goddess Yamuna origin, Yamunotri Glacier, Surya Kund hot springs, trek from Janki Chatti, pilgrimage center, sacred, pristine, spiritual.</p>
+        <div class="tags"><span class="tag">Char Dham</span><span class="tag">Yamuna Origin</span><span class="tag">10,800ft</span></div>
+        <button class="map-btn" onclick="openMap('Yamunotri Temple, Uttarkashi, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🙏 Hemkund Sahib</h4>
+        <p>15,200ft—highest Sikh shrine, glacial lake, Valley of Flowers nearby, Guru Gobind Singh meditation site, sacred, pilgrimage center, trekking, breathtaking, seasonal opening.</p>
+        <div class="tags"><span class="tag">Highest Sikh</span><span class="tag">15,200ft</span><span class="tag">Glacial Lake</span></div>
+        <button class="map-btn" onclick="openMap('Hemkund Sahib, Chamoli, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🕉️ Tungnath Temple</h4>
+        <p>12,073ft—highest Shiva temple world, Panch Kedar, Lord Shiva, Chopta base, trekking paradise, Chandrashila Peak nearby, scenic beauty, must-visit, pristine.</p>
+        <div class="tags"><span class="tag">Highest Temple</span><span class="tag">12,073ft</span><span class="tag">Panch Kedar</span></div>
+        <button class="map-btn" onclick="openMap('Tungnath Temple, Rudraprayag, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🧘 Yoga & Spiritual Centers</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🕉️ Rishikesh</h4>
+        <p>Yoga Capital World—Beatles Ashram, Lakshman-Ram Jhula, Ganga Aarti, river rafting, bungee jumping, International Yoga Festival, spiritual retreats, adventure hub, must-visit.</p>
+        <div class="tags"><span class="tag">Yoga Capital</span><span class="tag">Must-Visit</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Rishikesh, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🙏 Haridwar</h4>
+        <p>Gateway to Gods—Har Ki Pauri Ganga Aarti, Kumbh Mela site, Mansa Devi-Chandi Devi temples, pilgrimage center, spiritual atmosphere, cable car rides, must-visit, sacred.</p>
+        <div class="tags"><span class="tag">Kumbh Mela</span><span class="tag">Ganga Aarti</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Haridwar, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🙏 Parmarth Niketan</h4>
+        <p>Rishikesh—largest ashram, 1000 rooms, Ganga Aarti organizer, yoga classes, spiritual programs, International Yoga Festival, peaceful atmosphere, accessible, authentic.</p>
+        <div class="tags"><span class="tag">Largest Ashram</span><span class="tag">Ganga Aarti</span><span class="tag">Yoga</span></div>
+        <button class="map-btn" onclick="openMap('Parmarth Niketan, Rishikesh, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🧘 Beatles Ashram</h4>
+        <p>Maharishi Mahesh Yogi—Beatles 1968 visit, abandoned now, graffiti art, meditation halls, Rishikesh, historical significance, offbeat, photography paradise, peaceful.</p>
+        <div class="tags"><span class="tag">Beatles</span><span class="tag">1968</span><span class="tag">Graffiti</span></div>
+        <button class="map-btn" onclick="openMap('Beatles Ashram, Rishikesh, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🙏 Neelkanth Mahadev</h4>
+        <p>Rishikesh 32km—Lord Shiva temple, poison drinking legend, 1675m height, trekking, scenic beauty, pilgrimage destination, peaceful, spiritual atmosphere, must-visit.</p>
+        <div class="tags"><span class="tag">Shiva Temple</span><span class="tag">1675m</span><span class="tag">Trekking</span></div>
+        <button class="map-btn" onclick="openMap('Neelkanth Mahadev Temple, Rishikesh, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🕉️ Kainchi Dham</h4>
+        <p>Neem Karoli Baba Ashram—1964, Mark Zuckerberg-Steve Jobs visited, spiritual significance, Nainital nearby, peaceful atmosphere, pilgrimage center, blessings, accessible.</p>
+        <div class="tags"><span class="tag">Neem Karoli</span><span class="tag">Tech Pilgrimage</span><span class="tag">1964</span></div>
+        <button class="map-btn" onclick="openMap('Kainchi Dham, Nainital, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏔️ Hill Stations</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌊 Nainital</h4>
+        <p>Lake District—Naini Lake eye-shaped, 1938m, Snow View Point, Naina Devi Temple, boating, Mall Road shopping, colonial charm, honeymoon destination, must-visit, scenic.</p>
+        <div class="tags"><span class="tag">Lake District</span><span class="tag">Must-Visit</span><span class="tag">1938m</span></div>
+        <button class="map-btn" onclick="openMap('Nainital, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Mussoorie</h4>
+        <p>Queen of Hills—2005m, Mall Road, Kempty Falls, Gun Hill cable car, colonial architecture, Lal Tibba viewpoint, romantic destination, honeymoon spot, must-visit, accessible.</p>
+        <div class="tags"><span class="tag">Queen</span><span class="tag">2005m</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Mussoorie, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛷️ Auli</h4>
+        <p>Skiing paradise—2500-3050m, snow-covered slopes, Nanda Devi views, cable car Asia's longest, winter sports, panoramic beauty, adventure destination, must-visit, pristine.</p>
+        <div class="tags"><span class="tag">Skiing</span><span class="tag">Must-Visit</span><span class="tag">3050m</span></div>
+        <button class="map-btn" onclick="openMap('Auli, Chamoli, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Chopta</h4>
+        <p>Mini Switzerland—2680m, Tungnath-Chandrashila trek base, meadows scenic, camping paradise, trekking hub, pristine beauty, offbeat destination, peaceful, nature escape.</p>
+        <div class="tags"><span class="tag">Mini Switzerland</span><span class="tag">2680m</span><span class="tag">Trekking</span></div>
+        <button class="map-btn" onclick="openMap('Chopta, Rudraprayag, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌄 Ranikhet</h4>
+        <p>Queen's Land—1869m, Chaubatia orchards, golf course, Jhula Devi Temple, British cantonment, peaceful retreat, pine forests, scenic beauty, offbeat, accessible.</p>
+        <div class="tags"><span class="tag">Queen's Land</span><span class="tag">1869m</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('Ranikhet, Almora, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Lansdowne</h4>
+        <p>2118m—British cantonment, Bhulla Lake, Tip N Top viewpoint, oak-pine forests, peaceful retreat, offbeat destination, clean environment, family-friendly, nature escape.</p>
+        <div class="tags"><span class="tag">Cantonment</span><span class="tag">2118m</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Lansdowne, Pauri Garhwal, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🐅 Wildlife & National Parks</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🐯 Jim Corbett National Park</h4>
+        <p>India's oldest—1936, Bengal tigers, 520 sq km, Ramganga River, jeep-elephant safari, 500+ bird species, Dhikala zone, biodiversity hotspot, must-visit, pristine forests.</p>
+        <div class="tags"><span class="tag">Oldest</span><span class="tag">Must-Visit</span><span class="tag">520 sq km</span></div>
+        <button class="map-btn" onclick="openMap('Jim Corbett National Park, Nainital, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🐘 Rajaji National Park</h4>
+        <p>820 sq km—elephants famous, tigers, leopards, Ganga-Yamuna-Kho rivers, Haridwar-Rishikesh nearby, safari, biodiversity, accessible, conservation success, pristine.</p>
+        <div class="tags"><span class="tag">Elephants</span><span class="tag">820 sq km</span><span class="tag">Accessible</span></div>
+        <button class="map-btn" onclick="openMap('Rajaji National Park, Haridwar, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌺 Valley of Flowers</h4>
+        <p>UNESCO—3658m, 300+ alpine flowers, endangered species, July-September bloom, trekking paradise, Hemkund Sahib nearby, pristine beauty, must-visit, breathtaking, unique.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">300+ Flowers</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Valley of Flowers, Chamoli, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Nanda Devi Biosphere</h4>
+        <p>UNESCO—630 sq km, Nanda Devi 7816m second highest India, snow leopards, Himalayan tahr, restricted entry, pristine wilderness, conservation success, biodiversity hotspot.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">630 sq km</span><span class="tag">Restricted</span></div>
+        <button class="map-btn" onclick="openMap('Nanda Devi Biosphere Reserve, Chamoli, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦌 Binsar Wildlife Sanctuary</h4>
+        <p>Almora—47 sq km, leopards, Himalayan black bear, oak forests, 200+ bird species, Zero Point panoramic views, trekking, peaceful, offbeat, nature escape.</p>
+        <div class="tags"><span class="tag">47 sq km</span><span class="tag">Leopards</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Binsar Wildlife Sanctuary, Almora, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🐾 Govind Wildlife Sanctuary</h4>
+        <p>Uttarkashi—953 sq km, snow leopards, Himalayan brown bear, bharal, pristine forests, Har Ki Dun valley, trekking paradise, offbeat, conservation, biodiversity.</p>
+        <div class="tags"><span class="tag">953 sq km</span><span class="tag">Snow Leopards</span><span class="tag">Pristine</span></div>
+        <button class="map-btn" onclick="openMap('Govind Wildlife Sanctuary, Uttarkashi, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🧗 Adventure & Trekking</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🪂 Rishikesh Adventure</h4>
+        <p>Adventure capital—river rafting world-class, bungee jumping India's highest 83m, flying fox, camping, cliff jumping, kayaking, paragliding, rock climbing, must-experience, thrilling.</p>
+        <div class="tags"><span class="tag">Rafting</span><span class="tag">Bungee 83m</span><span class="tag">Must-Try</span></div>
+        <button class="map-btn" onclick="openMap('Rishikesh Adventure Sports, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛰️ Roopkund Trek</h4>
+        <p>Mystery Lake—5029m, skeleton lake, ancient human remains, challenging trek, Bedni Bugyal meadows, 8-9 days, adventure seekers, pristine beauty, must-do, mysterious.</p>
+        <div class="tags"><span class="tag">Mystery Lake</span><span class="tag">5029m</span><span class="tag">Challenging</span></div>
+        <button class="map-btn" onclick="openMap('Roopkund Trek, Chamoli, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Har Ki Dun Trek</h4>
+        <p>Valley of Gods—3566m, cradle of civilization, Hanuman's birth place legend, 7-8 days, moderate trek, pristine valley, scenic beauty, alpine meadows, family-friendly.</p>
+        <div class="tags"><span class="tag">Valley Gods</span><span class="tag">3566m</span><span class="tag">Moderate</span></div>
+        <button class="map-btn" onclick="openMap('Har Ki Dun, Uttarkashi, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛷️ Auli Skiing</h4>
+        <p>Winter sports—December-March, ski slopes 3km, training center, equipment rental, cable car, snow activities, competitions, beginners-experts, must-try, adventure paradise.</p>
+        <div class="tags"><span class="tag">Skiing</span><span class="tag">3km Slopes</span><span class="tag">Winter</span></div>
+        <button class="map-btn" onclick="openMap('Auli Ski Resort, Chamoli, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🥾 Kedarkantha Trek</h4>
+        <p>Winter favorite—3800m, December-April best, 6 days, snow-covered trails, summit views 360°, beginner-friendly, camping, pristine beauty, popular, accessible.</p>
+        <div class="tags"><span class="tag">Winter Trek</span><span class="tag">3800m</span><span class="tag">Beginner</span></div>
+        <button class="map-btn" onclick="openMap('Kedarkantha Trek, Uttarkashi, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Nag Tibba Trek</h4>
+        <p>Weekend trek—3022m, 2 days, Mussoorie nearby, Nag Devta temple, snow winter, beginner-friendly, accessible from Dehradun, scenic views, popular, easy.</p>
+        <div class="tags"><span class="tag">Weekend</span><span class="tag">3022m</span><span class="tag">Beginner</span></div>
+        <button class="map-btn" onclick="openMap('Nag Tibba Trek, Tehri Garhwal, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏙️ Cities & Cultural Centers</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌳 Dehradun</h4>
+        <p>Capital—Robber's Cave, Sahastradhara springs, Forest Research Institute, Mindrolling Monastery, education hub, gateway Mussoorie-Rishikesh, accessible, modern amenities, vibrant.</p>
+        <div class="tags"><span class="tag">Capital</span><span class="tag">Gateway</span><span class="tag">Accessible</span></div>
+        <button class="map-btn" onclick="openMap('Dehradun, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Almora</h4>
+        <p>Cultural capital—1638m, Kumaon heritage, Nanda Devi Temple, Bright End Corner, Kasar Devi ashrams, handicrafts famous, peaceful town, scenic beauty, offbeat.</p>
+        <div class="tags"><span class="tag">Cultural</span><span class="tag">1638m</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Almora, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌄 Kausani</h4>
+        <p>Switzerland of India—1890m, Himalayan panorama 300km, Anasakti Ashram Gandhi stayed, tea gardens, sunrise views, peaceful retreat, scenic beauty, offbeat, must-visit.</p>
+        <div class="tags"><span class="tag">Switzerland</span><span class="tag">1890m</span><span class="tag">Panorama</span></div>
+        <button class="map-btn" onclick="openMap('Kausani, Bageshwar, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Pithoragarh</h4>
+        <p>Little Kashmir—1514m, Pithoragarh Fort, Askot Sanctuary, Panchachuli peaks views, gateway Nepal-Tibet, offbeat destination, scenic beauty, adventure base, pristine.</p>
+        <div class="tags"><span class="tag">Little Kashmir</span><span class="tag">1514m</span><span class="tag">Gateway</span></div>
+        <button class="map-btn" onclick="openMap('Pithoragarh, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Pauri Garhwal</h4>
+        <p>1814m—Kandoliya Temple, Khirsu village, Himalayan views, peaceful district HQ, offbeat destination, nature beauty, accessible, trekking base, scenic surroundings.</p>
+        <div class="tags"><span class="tag">District HQ</span><span class="tag">1814m</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Pauri, Pauri Garhwal, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Champawat</h4>
+        <p>Ancient capital—Baleshwar Temple group 10th-12th century, Chand dynasty capital, historical significance, offbeat heritage, peaceful town, archaeological importance, cultural.</p>
+        <div class="tags"><span class="tag">Ancient Capital</span><span class="tag">10th Century</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Champawat, Uttarakhand')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Loading…</h2>
+      <div class="image-scroller" id="image-scroller"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <script>
+    const GM_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
+    const GM_HOST = 'google-map-places.p.rapidapi.com';
+
+    document.addEventListener('DOMContentLoaded',() => {
+      document.getElementById('weather-btn')
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/Dehradun+Uttarakhand','_blank'));
+      document.getElementById('travel-planner-btn')
+        .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
+      document.getElementById('preferences-form')
+        .addEventListener('submit',handleForm);
+      setupModal();
+    });
+
+    async function handleForm(e){
+      e.preventDefault();
+      const fd=new FormData(e.target),
+            prefs={ duration:fd.get('duration'), budget:fd.get('budget'),
+                    style:fd.get('style'), additional:fd.get('additional')||'None',
+                    interests:[] };
+      document.querySelectorAll('input[name="interests"]:checked')
+        .forEach(ch=>prefs.interests.push(ch.value));
+      if(!prefs.duration||!prefs.budget||prefs.interests.length===0){
+        return alert('Select duration, budget & at least one interest!');
+      }
+      await getAI(prefs);
+    }
+
+    function formatAI(text){
+      text=text.trim().replace(/^["']|["']$/g,'');
+      text=text.replace(/\\n/g,'\n').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+      text=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      text=text.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g,'<em>$1</em>');
+      if(!text.includes('<p>'))text='<p>'+text+'</p>';
+      text=text.replace(/<p><\/p>/g,'').replace(/<p>\s*<br>/g,'<p>');
+      return text;
+    }
+
+    async function getAI(p){
+      const results = document.getElementById('ai-results'),
+            content = document.getElementById('recommendation-content');
+      results.style.display = 'block';
+      content.innerHTML = `
+        <div style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;">🤖</div>
+          <p>Generating your Uttarakhand travel plan…</p>
+        </div>`;
+
+      const prompt = `You are a travel expert for Uttarakhand, India. Given these preferences, craft a personalized itinerary:
+
+Duration: ${p.duration}
+Budget: ${p.budget}
+Style: ${p.style}
+Interests: ${p.interests.join(', ')}
+Additional: ${p.additional}
+
+Include:
+1. Top destinations in Uttarakhand (Badrinath, Kedarnath, Rishikesh, Nainital, Mussoorie, Jim Corbett, Auli, etc.)
+2. Attractions per interest (spiritual/Char Dham, hill stations, adventure, wildlife, yoga, trekking)
+3. Sample day-wise itinerary
+4. Budget tips for accommodation and food
+5. Best seasons to visit
+6. Local experiences (Char Dham yatra, river rafting, bungee jumping, skiing, yoga retreats, Ganga Aarti, trekking, wildlife safari)
+7. Transport suggestions and permit requirements
+
+Uttarakhand is known as Devbhumi (Land of Gods) with Char Dham (Badrinath, Kedarnath, Gangotri, Yamunotri), Rishikesh (Yoga Capital, adventure sports, highest bungee 83m), Haridwar (Kumbh Mela, Ganga Aarti), Nainital (Lake District), Mussoorie (Queen of Hills), Jim Corbett (India's oldest national park 1936), Valley of Flowers (UNESCO), Auli (skiing paradise), and pristine Himalayan beauty.
+
+Make it engaging, detailed, and practical. Format with clear sections. Mention adventure activities and spiritual experiences.`;
+
+      try {
+        const resp = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBjTBW_cresSRlMWsb45NlOt06iVqlV4OQ",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [{ text: prompt }]
+                }
+              ]
+            })
+          }
+        );
+
+        if (!resp.ok) throw new Error("AI API error");
+
+        const data = await resp.json();
+        let ai = '';
+
+        if (
+          data &&
+          data.candidates &&
+          data.candidates[0] &&
+          data.candidates[0].content &&
+          data.candidates[0].content.parts &&
+          data.candidates[0].content.parts[0] &&
+          data.candidates[0].content.parts[0].text
+        ) {
+          ai = data.candidates[0].content.parts[0].text;
+        } else {
+          ai = 'Unable to generate response';
+        }
+
+        content.innerHTML = `
+          <div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">
+            ${formatAI(ai)}
+          </div>
+          <div style="text-align:center;margin-top:20px;">
+            <button onclick="window.print()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#138808;color:#fff;">🖨️ Print</button>
+            <button onclick="sharePlan()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#ff9933;color:#fff;">📤 Share</button>
+          </div>`;
+
+      } catch (err) {
+        console.error("AI Error:", err);
+        content.innerHTML = `<p style="color:red;text-align:center;">Failed to generate recommendations. Please check console for details.</p>`;
+      }
+    }
+
+    function sharePlan(){
+      const txt=document.getElementById('recommendation-content').innerText;
+      if(navigator.share) {
+        navigator.share({title:'Uttarakhand Travel Plan',text:txt})
+          .catch(err=>console.log('Share failed',err));
+      } else {
+        navigator.clipboard.writeText(txt)
+          .then(()=>alert('Plan copied to clipboard!'))
+          .catch(()=>alert('Unable to copy'));
+      }
+    }
+
+    function setupModal(){
+      const modal=document.getElementById('mapModal'),
+            close=modal.querySelector('.close');
+      close.onclick=()=>modal.classList.remove('open');
+      window.onclick=e=>{ if(e.target===modal) modal.classList.remove('open'); };
+    }
+
+    async function openMap(loc){
+      const modal=document.getElementById('mapModal'),
+            title=modal.querySelector('#modal-title'),
+            scroller=modal.querySelector('#image-scroller'),
+            actions=modal.querySelector('#modal-actions');
+      
+      title.textContent=loc;
+      modal.classList.add('open');
+      
+      const enc=encodeURIComponent(loc);
+      
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;color:#888;">Loading images…</p>`;
+      
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>📸</span>View Photos</a>
+      `;
+
+      scroller.innerHTML=`
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+      `;
+
+      const url=`https://${GM_HOST}/maps/api/streetview?size=600x400&location=${enc}`;
+      try{
+        const res=await fetch(url,{method:'GET',headers:{
+          'x-rapidapi-key':GM_KEY,'x-rapidapi-host':GM_HOST
+        }});
+        if(res.ok) {
+          const blob=await res.blob(),
+                svURL=URL.createObjectURL(blob);
+          scroller.innerHTML = `
+            <img src="${svURL}" alt="Street view of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+          `;
+        }
+      }catch(e){
+        console.log('Street view not available for this location');
+      }
+    }
+  </script>
+</body>
+</html>
