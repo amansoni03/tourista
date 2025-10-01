@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mizoram Tourism – Land of Blue Mountains</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      color:#2c3e50;
+      background:
+        radial-gradient(circle at top left, rgba(255,153,51,0.3) 0%,transparent 50%),
+        radial-gradient(circle at top right, rgba(19,136,8,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom left, rgba(0,70,151,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255,153,51,0.3) 0%,transparent 50%),
+        linear-gradient(135deg,#f8f4e6,#fff8dc,#f0f8e8,#e6f3ff,#fff8dc);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+    .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
+    .floating-img {
+      position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
+      box-shadow:0 20px 60px rgba(255,153,51,0.2); transition:.3s;
+    }
+    .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
+    .floating-img-1 {
+      top:10%; left:5%; width:300px; height:200px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Phawngpui_Blue_Mountain_Mizoram.jpg/800px-Phawngpui_Blue_Mountain_Mizoram.jpg') center/cover;
+      animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    .floating-img-2 {
+      top:20%; right:10%; width:260px; height:180px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Vantawng_Falls_Mizoram.jpg/800px-Vantawng_Falls_Mizoram.jpg') center/cover;
+      animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
+    }
+    .floating-img-3 {
+      top:50%; left:8%; width:280px; height:190px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Aizawl_City_View.jpg/800px-Aizawl_City_View.jpg') center/cover;
+      animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
+    }
+    .floating-img-4 {
+      top:60%; right:5%; width:320px; height:210px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Champhai_Mizoram_Valley.jpg/800px-Champhai_Mizoram_Valley.jpg') center/cover;
+      animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
+    @keyframes float2 {0%,100%{transform:translate(0)}33%{transform:translate(10px,-20px)}66%{transform:translate(-5px,-10px)}}
+    @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
+    @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
+
+    .navbar {
+      position:fixed; top:0; width:100%; padding:15px 0;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
+      border-bottom:3px solid #ff9933; z-index:1000;
+    }
+    .nav-content { max-width:1200px; margin:0 auto; display:flex;justify-content:space-between;align-items:center;padding:0 20px; }
+    .logo { font-weight:700; font-size:24px; color:#138808; display:flex;align-items:center;gap:8px; }
+    .nav-links { display:flex; gap:25px; }
+    .nav-links a { text-decoration:none;color:#2c3e50;font-weight:500;transition:.3s; }
+    .nav-links a:hover { color:#ff9933; }
+    .back-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:10px 18px;border-radius:25px;font-size:14px;font-weight:600;
+      text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
+    }
+    .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .hero {
+      height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,153,51,0.1)0%,transparent 70%),
+        radial-gradient(circle at 80% 20%,rgba(19,136,8,0.1)0%,transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(0,70,151,0.1)0%,transparent 50%);
+      position:relative;z-index:1;
+    }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,6rem);font-weight:900;
+      background:linear-gradient(135deg,#ff9933,#138808,#004797);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 3s ease-in-out infinite;margin-bottom:0.5rem;
+    }
+    .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
+    .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
+    .cta-button {display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff9933,#138808);color:#fff;padding:14px 28px;border-radius:50px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 5px;}
+    .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .action-buttons {position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;}
+    .action-btn {background:linear-gradient(135deg,#ff9933,#138808);color:#fff; padding:12px 18px;border:none;border-radius:25px;cursor:pointer; font-weight:600;display:flex;align-items:center;gap:6px; box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;}
+    .action-btn:hover{transform:translateY(-2px) scale(1.05);}
+    .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+    .section-title h2 {font-size:2.5rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
+    .category-header {text-align:center;margin:40px 0 20px;position:relative;}
+    .category-header h3 { font-size:2rem;font-weight:600;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .category-header::after {content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;}
+    .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
+    .card { background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;transition:all .3s;}
+    .card:hover {transform:translateY(-8px) scale(1.02);}
+    .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+    .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
+    .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+    .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
+    .map-btn { background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+      border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
+      display:flex;align-items:center;gap:6px;transition:.3s;}
+    .map-btn:hover{transform:scale(1.05);}
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
+      justify-content:center;align-items:center;}
+    .modal.open{display:flex;}
+    .modal-content {background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;}
+    .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
+    .image-scroller {display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;}
+    .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
+    .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
+    .ai-container {
+      background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
+      box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
+    }
+    .ai-title { font-size:2.5rem;font-weight:700;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+    }
+    .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
+    .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
+    .form-group select,.form-group textarea {width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);}
+    .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
+    .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .checkbox-item {display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;}
+    .checkbox-item:hover {background:rgba(255,153,51,0.2);}
+    .get-recommendations {background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;}
+    .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
+    .ai-results h3 {font-size:2rem;font-weight:700;
+      background:linear-gradient(135deg,#138808,#ff9933);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;margin-bottom:20px;}
+    .recommendation-text {background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;}
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){
+      .floating-images{display:none;}
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-images">
+    <div class="floating-img floating-img-1"></div>
+    <div class="floating-img floating-img-2"></div>
+    <div class="floating-img floating-img-3"></div>
+    <div class="floating-img floating-img-4"></div>
+  </div>
+  <div class="action-buttons">
+    <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
+    <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
+  </div>
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><span style="font-size:28px;">🏔️</span> Mizoram Tourism</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#ai-recommendations">AI Plan</a>
+        <a href="#attractions">Attractions</a>
+        <a href="index.html" class="back-btn"><span>←</span>Back to India</a>
+      </div>
+    </div>
+  </nav>
+  <section id="home" class="hero">
+    <div>
+      <h1>Mizoram</h1>
+      <div class="subtitle">Land of Blue Mountains</div>
+      <p>Discover Phawngpui Peak, Vantawng Falls, wildlife sanctuaries, and rich Mizo culture</p>
+      <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
+      <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
+    </div>
+  </section>
+  <section id="ai-recommendations" class="section">
+    <div class="ai-container">
+      <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
+      <p style="color:#666;margin-bottom:30px;">
+        Tell us your trip details and interests—get a custom Mizoram itinerary!
+      </p>
+      <form id="preferences-form" class="ai-form">
+        <div class="form-group">
+          <label for="duration">Trip Duration</label>
+          <select id="duration" name="duration">
+            <option value="">Select…</option>
+            <option>1–2 days</option><option>3–5 days</option>
+            <option>1 week</option><option>2+ weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select…</option>
+            <option>Budget (₹1k–3k/day)</option>
+            <option>Moderate (₹3k–7k/day)</option>
+            <option>Luxury (₹7k+/day)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="style">Travel Style</label>
+          <select id="style" name="style">
+            <option value="">Select…</option>
+            <option>Solo</option><option>Couple</option><option>Family</option>
+            <option>Friends</option><option>Business</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Interests (multi-select)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="mountains"/>
+              <label>🏔️ Mountains & Peaks</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="wildlife"/>
+              <label>🐯 Wildlife</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="waterfalls"/>
+              <label>💧 Waterfalls</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="culture"/>
+              <label>🎭 Culture & Villages</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="trekking"/>
+              <label>🥾 Trekking</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="nature"/>
+              <label>🌿 Nature & Lakes</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Phawngpui Blue Mountain and Champhai…"></textarea>
+        </div>
+        <button type="submit" class="get-recommendations">
+          <span>✨</span>Get Recommendations
+        </button>
+      </form>
+      <div id="ai-results" class="ai-results">
+        <h3>🎯 Your Mizoram Travel Plan</h3>
+        <div id="recommendation-content" class="recommendation-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="attractions" class="section">
+    <div class="section-title">
+      <h2>⭐ Top Attractions in Mizoram</h2>
+      <p>Discover the soul of the Land of Blue Mountains</p>
+    </div>
+
+    <div class="category-header"><h3>🏔️ Mountains & Peaks</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>⛰️ Phawngpui Blue Mountain</h4>
+        <p>Highest peak—2157m, Blue Mountain National Park, Myanmar border, orchids, rhododendrons, trekking paradise, sacred site, breathtaking views, must-visit.</p>
+        <div class="tags">
+          <span class="tag">Highest</span>
+          <span class="tag">Must-Visit</span>
+          <span class="tag">National Park</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Phawngpui Blue Mountain, Lawngtlai, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌄 Reiek Tlang</h4>
+        <p>1465m peak—29km from Aizawl, panoramic city views, Reiek Heritage Village, trekking, Mizo traditional huts, adventure tourism, photography paradise.</p>
+        <div class="tags"><span class="tag">Trekking</span><span class="tag">Views</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Reiek Tlang, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Durtlang Hills</h4>
+        <p>North Aizawl—panoramic views, sunset point, peaceful, accessible, photography, city overlook, trekking trails, popular viewpoint, serene.</p>
+        <div class="tags"><span class="tag">Viewpoint</span><span class="tag">Sunset</span><span class="tag">Accessible</span></div>
+        <button class="map-btn" onclick="openMap('Durtlang Hills, Aizawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Hmuifang Tlang</h4>
+        <p>50km from Aizawl—eco-tourism, adventure activities, camping, trekking, paragliding, scenic beauty, resort, family destination, peaceful.</p>
+        <div class="tags"><span class="tag">Eco-Tourism</span><span class="tag">Adventure</span><span class="tag">Camping</span></div>
+        <button class="map-btn" onclick="openMap('Hmuifang, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🗻 Lengteng Wildlife Peak</h4>
+        <p>Second highest—Champhai district, wildlife sanctuary, alpine forests, trekking, rare birds, pristine nature, offbeat destination, adventure.</p>
+        <div class="tags"><span class="tag">Second Highest</span><span class="tag">Wildlife</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Lengteng Peak, Champhai, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Thenzawl Peak</h4>
+        <p>Serchhip district—scenic views, handloom center, trekking, peaceful, traditional village, pottery, cultural significance, offbeat beauty.</p>
+        <div class="tags"><span class="tag">Handloom</span><span class="tag">Culture</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Thenzawl, Serchhip, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🐯 Wildlife Sanctuaries</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🐅 Dampa Tiger Reserve</h4>
+        <p>Largest sanctuary—500 sq km, Bengal tigers, elephants, clouded leopards, hoolock gibbons, 150+ bird species, biodiversity hotspot, must-visit.</p>
+        <div class="tags"><span class="tag">Tiger Reserve</span><span class="tag">Largest</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Dampa Tiger Reserve, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦅 Ngengpui Wildlife Sanctuary</h4>
+        <p>110 sq km—clouded leopards, elephants, tigers, Mrs. Hume's pheasant, Blyth's tragopan, rare birds, biodiversity, pristine forests, adventure.</p>
+        <div class="tags"><span class="tag">Rare Birds</span><span class="tag">Biodiversity</span><span class="tag">Leopards</span></div>
+        <button class="map-btn" onclick="openMap('Ngengpui Wildlife Sanctuary, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌳 Lengteng Wildlife Sanctuary</h4>
+        <p>Protected area—Champhai, alpine forests, rare bird species, grey peacocks, oriental pied hornbill, conservation, pristine, offbeat destination.</p>
+        <div class="tags"><span class="tag">Alpine</span><span class="tag">Conservation</span><span class="tag">Birds</span></div>
+        <button class="map-btn" onclick="openMap('Lengteng Wildlife Sanctuary, Champhai, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦌 Pualreng Wildlife Sanctuary</h4>
+        <p>50 sq km—mammals, birds, pristine forests, trekking, wildlife spotting, conservation area, offbeat, adventure, nature lovers paradise.</p>
+        <div class="tags"><span class="tag">Mammals</span><span class="tag">Conservation</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Pualreng Wildlife Sanctuary, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🐻 Tawi Wildlife Sanctuary</h4>
+        <p>Central Mizoram—diverse wildlife, birds, mammals, forest trails, conservation, pristine ecosystem, trekking, photography, nature escape.</p>
+        <div class="tags"><span class="tag">Diverse</span><span class="tag">Trails</span><span class="tag">Nature</span></div>
+        <button class="map-btn" onclick="openMap('Tawi Wildlife Sanctuary, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Thorangtlang Wildlife Sanctuary</h4>
+        <p>100 sq km—Lunglei district, wildlife protection, forest cover, mammals, birds, conservation efforts, offbeat, pristine nature, adventure.</p>
+        <div class="tags"><span class="tag">Protection</span><span class="tag">Forest</span><span class="tag">Wildlife</span></div>
+        <button class="map-btn" onclick="openMap('Thorangtlang Wildlife Sanctuary, Lunglei, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>💧 Waterfalls</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌊 Vantawng Falls</h4>
+        <p>Highest in Mizoram—750ft (229m), 13th highest India, Vanva River, Thenzawl, 137km from Aizawl, scenic beauty, trekking, photography, must-visit.</p>
+        <div class="tags"><span class="tag">Highest</span><span class="tag">Must-Visit</span><span class="tag">750ft</span></div>
+        <button class="map-btn" onclick="openMap('Vantawng Falls, Thenzawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💦 Tuirihiau Falls</h4>
+        <p>Near Aizawl—accessible, picnic spot, swimming, natural pool, family-friendly, scenic beauty, peaceful, popular destination, weekend getaway.</p>
+        <div class="tags"><span class="tag">Swimming</span><span class="tag">Family</span><span class="tag">Accessible</span></div>
+        <button class="map-btn" onclick="openMap('Tuirihiau Falls, Aizawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌈 Khawhpawp Falls</h4>
+        <p>20km from Aizawl—stepped cascade, natural beauty, trekking, photography, peaceful environment, offbeat, pristine, nature lovers paradise.</p>
+        <div class="tags"><span class="tag">Stepped</span><span class="tag">Photography</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('Khawhpawp Falls, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💧 Tuirial Falls</h4>
+        <p>Serchhip district—scenic cascade, natural beauty, trekking trails, photography, offbeat destination, peaceful, pristine surroundings, adventure.</p>
+        <div class="tags"><span class="tag">Cascade</span><span class="tag">Trekking</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Tuirial Falls, Serchhip, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌊 Tam Dil Falls</h4>
+        <p>Near Tamdil Lake—scenic beauty, waterfall and lake combo, picnic spot, boating, natural surroundings, family-friendly, popular, accessible.</p>
+        <div class="tags"><span class="tag">Lake Combo</span><span class="tag">Boating</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Tam Dil Falls, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💦 Zawlbuk Falls</h4>
+        <p>Remote location—pristine beauty, offbeat adventure, trekking, natural pool, photography, peaceful, untouched nature, explorer's paradise.</p>
+        <div class="tags"><span class="tag">Remote</span><span class="tag">Pristine</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Zawlbuk Falls, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏛️ Cultural & Heritage Sites</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>⛪ Solomon's Temple</h4>
+        <p>Asia's unique—modelled after Jerusalem Temple, Christian monument, 20 years construction, architecture marvel, spiritual significance, must-visit, iconic.</p>
+        <div class="tags"><span class="tag">Unique</span><span class="tag">Must-Visit</span><span class="tag">Christian</span></div>
+        <button class="map-btn" onclick="openMap('Solomon's Temple, Aizawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Mizoram State Museum</h4>
+        <p>Aizawl—ethnographic museum, Mizo heritage, traditional attire, handicrafts, musical instruments, artifacts, educational, cultural insights, must-visit.</p>
+        <div class="tags"><span class="tag">Museum</span><span class="tag">Heritage</span><span class="tag">Culture</span></div>
+        <button class="map-btn" onclick="openMap('Mizoram State Museum, Aizawl')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏘️ Falkawn Village</h4>
+        <p>Living museum—22km from Aizawl, traditional Mizo life, authentic houses, agricultural practices, cultural demonstrations, heritage, experience, offbeat.</p>
+        <div class="tags"><span class="tag">Living Museum</span><span class="tag">Traditional</span><span class="tag">Authentic</span></div>
+        <button class="map-btn" onclick="openMap('Falkawn Village, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏡 Reiek Heritage Village</h4>
+        <p>Reiek Tlang base—traditional Mizo huts, cultural village, folk dances, handicrafts, authentic lifestyle, trekking base, photography, cultural immersion.</p>
+        <div class="tags"><span class="tag">Heritage</span><span class="tag">Folk Dances</span><span class="tag">Authentic</span></div>
+        <button class="map-btn" onclick="openMap('Reiek Heritage Village, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛪ Salvation Army Temple</h4>
+        <p>Aizawl landmark—historic church, colonial architecture, Christian heritage, peaceful, spiritual significance, photography, accessible, iconic.</p>
+        <div class="tags"><span class="tag">Historic</span><span class="tag">Church</span><span class="tag">Colonial</span></div>
+        <button class="map-btn" onclick="openMap('Salvation Army Temple, Aizawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Luangmual Handicrafts Centre</h4>
+        <p>Aizawl—bamboo crafts, handloom, traditional Mizo products, handicrafts shopping, cultural center, artisan workshops, authentic souvenirs, experience.</p>
+        <div class="tags"><span class="tag">Handicrafts</span><span class="tag">Shopping</span><span class="tag">Bamboo</span></div>
+        <button class="map-btn" onclick="openMap('Luangmual Handicrafts Centre, Aizawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🌳 Lakes & Nature Spots</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏞️ Tamdil Lake</h4>
+        <p>Natural lake—85km from Aizawl, boating, water sports, resorts, scenic beauty, surrounded by hills, picnic spot, popular, family-friendly, peaceful.</p>
+        <div class="tags"><span class="tag">Boating</span><span class="tag">Popular</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Tamdil Lake, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌺 KV Paradise</h4>
+        <p>Aizawl—botanical garden, exotic plants, orchids, flowers, peaceful walks, photography, family spot, accessible, well-maintained, nature escape.</p>
+        <div class="tags"><span class="tag">Garden</span><span class="tag">Orchids</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('KV Paradise, Aizawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌳 Palak Dil</h4>
+        <p>Largest natural lake—Saiha district, 30 hectares, pristine beauty, wildlife, boating, fishing, remote location, offbeat, adventure, scenic.</p>
+        <div class="tags"><span class="tag">Largest</span><span class="tag">Offbeat</span><span class="tag">Pristine</span></div>
+        <button class="map-btn" onclick="openMap('Palak Dil Lake, Saiha, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦜 Aizawl Zoological Park</h4>
+        <p>25 hectares—diverse animal species, birds, conservation, educational, family destination, accessible, well-maintained, nature walks, photography.</p>
+        <div class="tags"><span class="tag">Zoo</span><span class="tag">Family</span><span class="tag">Conservation</span></div>
+        <button class="map-btn" onclick="openMap('Aizawl Zoological Park, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌸 Muthi Park</h4>
+        <p>Aizawl city—children's park, playground, gardens, family spot, peaceful, accessible, well-maintained, weekend destination, relaxation.</p>
+        <div class="tags"><span class="tag">City Park</span><span class="tag">Family</span><span class="tag">Accessible</span></div>
+        <button class="map-btn" onclick="openMap('Muthi Park, Aizawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌺 Dil Pui Village</h4>
+        <p>85km from Aizawl—scenic village, Tamdil Lake nearby, traditional lifestyle, peaceful, offbeat, nature surroundings, cultural experiences, trekking.</p>
+        <div class="tags"><span class="tag">Village</span><span class="tag">Scenic</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Dil Pui Village, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏙️ Cities & Towns</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌆 Aizawl</h4>
+        <p>State capital—1132m altitude, scenic ridges, Solomon's Temple, museums, clean city, disciplined traffic, Mizo culture, gateway, modern amenities.</p>
+        <div class="tags"><span class="tag">Capital</span><span class="tag">Clean</span><span class="tag">Gateway</span></div>
+        <button class="map-btn" onclick="openMap('Aizawl, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌾 Champhai</h4>
+        <p>Rice Bowl—Myanmar border, emerald paddy fields, scenic beauty, trekking base, Murlen National Park nearby, trade center, peaceful, offbeat.</p>
+        <div class="tags"><span class="tag">Rice Bowl</span><span class="tag">Border</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Champhai, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Lunglei</h4>
+        <p>Second largest—bridge town, scenic beauty, Khawnglung Wildlife Sanctuary, traditional culture, peaceful, offbeat destination, nature, trekking.</p>
+        <div class="tags"><span class="tag">Second Largest</span><span class="tag">Bridge Town</span><span class="tag">Culture</span></div>
+        <button class="map-btn" onclick="openMap('Lunglei, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Serchhip</h4>
+        <p>Central Mizoram—Vantawng Falls, Thenzawl, scenic district, peaceful, traditional villages, cultural significance, offbeat, nature beauty.</p>
+        <div class="tags"><span class="tag">Central</span><span class="tag">Waterfalls</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('Serchhip, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Kolasib</h4>
+        <p>Gateway to Mizoram—Assam border, scenic town, Dampa Tiger Reserve access, trade center, peaceful, cultural mix, accessible, nature.</p>
+        <div class="tags"><span class="tag">Gateway</span><span class="tag">Border</span><span class="tag">Access</span></div>
+        <button class="map-btn" onclick="openMap('Kolasib, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌳 Lawngtlai</h4>
+        <p>Southern district—Phawngpui base, Myanmar border, tribal culture, remote, adventure, offbeat destination, pristine nature, trekking hub.</p>
+        <div class="tags"><span class="tag">Phawngpui Base</span><span class="tag">Remote</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Lawngtlai, Mizoram')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Loading…</h2>
+      <div class="image-scroller" id="image-scroller"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <script>
+    const GM_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
+    const GM_HOST = 'google-map-places.p.rapidapi.com';
+
+    document.addEventListener('DOMContentLoaded',() => {
+      document.getElementById('weather-btn')
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/Aizawl+Mizoram','_blank'));
+      document.getElementById('travel-planner-btn')
+        .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
+      document.getElementById('preferences-form')
+        .addEventListener('submit',handleForm);
+      setupModal();
+    });
+
+    async function handleForm(e){
+      e.preventDefault();
+      const fd=new FormData(e.target),
+            prefs={ duration:fd.get('duration'), budget:fd.get('budget'),
+                    style:fd.get('style'), additional:fd.get('additional')||'None',
+                    interests:[] };
+      document.querySelectorAll('input[name="interests"]:checked')
+        .forEach(ch=>prefs.interests.push(ch.value));
+      if(!prefs.duration||!prefs.budget||prefs.interests.length===0){
+        return alert('Select duration, budget & at least one interest!');
+      }
+      await getAI(prefs);
+    }
+
+    function formatAI(text){
+      text=text.trim().replace(/^["']|["']$/g,'');
+      text=text.replace(/\\n/g,'\n').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+      text=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      text=text.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g,'<em>$1</em>');
+      if(!text.includes('<p>'))text='<p>'+text+'</p>';
+      text=text.replace(/<p><\/p>/g,'').replace(/<p>\s*<br>/g,'<p>');
+      return text;
+    }
+
+    async function getAI(p){
+      const results = document.getElementById('ai-results'),
+            content = document.getElementById('recommendation-content');
+      results.style.display = 'block';
+      content.innerHTML = `
+        <div style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;">🤖</div>
+          <p>Generating your Mizoram travel plan…</p>
+        </div>`;
+
+      const prompt = `You are a travel expert for Mizoram, India. Given these preferences, craft a personalized itinerary:
+
+Duration: ${p.duration}
+Budget: ${p.budget}
+Style: ${p.style}
+Interests: ${p.interests.join(', ')}
+Additional: ${p.additional}
+
+Include:
+1. Top destinations in Mizoram (Aizawl, Phawngpui, Champhai, Reiek, Tamdil, etc.)
+2. Attractions per interest (mountains, wildlife, waterfalls, culture, trekking)
+3. Sample day-wise itinerary
+4. Budget tips for accommodation and food
+5. Best seasons to visit
+6. Local experiences (Mizo culture, traditional villages, bamboo dance, local cuisine)
+7. Transport suggestions
+
+Mizoram is known as the Land of Blue Mountains with Phawngpui Peak (2157m highest), Vantawng Falls (750ft highest waterfall), Dampa Tiger Reserve (largest sanctuary), Solomon's Temple (unique Christian monument), Champhai (Rice Bowl), Tamdil Lake, rich Mizo tribal culture, and pristine natural beauty.
+
+Make it engaging, detailed, and practical. Format with clear sections.`;
+
+      try {
+        const resp = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBjTBW_cresSRlMWsb45NlOt06iVqlV4OQ",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [{ text: prompt }]
+                }
+              ]
+            })
+          }
+        );
+
+        if (!resp.ok) throw new Error("AI API error");
+
+        const data = await resp.json();
+        let ai = '';
+
+        if (
+          data &&
+          data.candidates &&
+          data.candidates[0] &&
+          data.candidates[0].content &&
+          data.candidates[0].content.parts &&
+          data.candidates[0].content.parts[0] &&
+          data.candidates[0].content.parts[0].text
+        ) {
+          ai = data.candidates[0].content.parts[0].text;
+        } else {
+          ai = 'Unable to generate response';
+        }
+
+        content.innerHTML = `
+          <div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">
+            ${formatAI(ai)}
+          </div>
+          <div style="text-align:center;margin-top:20px;">
+            <button onclick="window.print()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#138808;color:#fff;">🖨️ Print</button>
+            <button onclick="sharePlan()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#ff9933;color:#fff;">📤 Share</button>
+          </div>`;
+
+      } catch (err) {
+        console.error("AI Error:", err);
+        content.innerHTML = `<p style="color:red;text-align:center;">Failed to generate recommendations. Please check console for details.</p>`;
+      }
+    }
+
+    function sharePlan(){
+      const txt=document.getElementById('recommendation-content').innerText;
+      if(navigator.share) {
+        navigator.share({title:'Mizoram Travel Plan',text:txt})
+          .catch(err=>console.log('Share failed',err));
+      } else {
+        navigator.clipboard.writeText(txt)
+          .then(()=>alert('Plan copied to clipboard!'))
+          .catch(()=>alert('Unable to copy'));
+      }
+    }
+
+    function setupModal(){
+      const modal=document.getElementById('mapModal'),
+            close=modal.querySelector('.close');
+      close.onclick=()=>modal.classList.remove('open');
+      window.onclick=e=>{ if(e.target===modal) modal.classList.remove('open'); };
+    }
+
+    async function openMap(loc){
+      const modal=document.getElementById('mapModal'),
+            title=modal.querySelector('#modal-title'),
+            scroller=modal.querySelector('#image-scroller'),
+            actions=modal.querySelector('#modal-actions');
+      
+      title.textContent=loc;
+      modal.classList.add('open');
+      
+      const enc=encodeURIComponent(loc);
+      
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;color:#888;">Loading images…</p>`;
+      
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>📸</span>View Photos</a>
+      `;
+
+      scroller.innerHTML=`
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+      `;
+
+      const url=`https://${GM_HOST}/maps/api/streetview?size=600x400&location=${enc}`;
+      try{
+        const res=await fetch(url,{method:'GET',headers:{
+          'x-rapidapi-key':GM_KEY,'x-rapidapi-host':GM_HOST
+        }});
+        if(res.ok) {
+          const blob=await res.blob(),
+                svURL=URL.createObjectURL(blob);
+          scroller.innerHTML = `
+            <img src="${svURL}" alt="Street view of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+          `;
+        }
+      }catch(e){
+        console.log('Street view not available for this location');
+      }
+    }
+  </script>
+</body>
+</html>
