@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>West Bengal Tourism – Land of Culture</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      color:#2c3e50;
+      background:
+        radial-gradient(circle at top left, rgba(255,153,51,0.3) 0%,transparent 50%),
+        radial-gradient(circle at top right, rgba(19,136,8,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom left, rgba(0,70,151,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255,153,51,0.3) 0%,transparent 50%),
+        linear-gradient(135deg,#f8f4e6,#fff8dc,#f0f8e8,#e6f3ff,#fff8dc);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+    .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
+    .floating-img {
+      position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
+      box-shadow:0 20px 60px rgba(255,153,51,0.2); transition:.3s;
+    }
+    .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
+    .floating-img-1 {
+      top:10%; left:5%; width:300px; height:200px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Victoria_Memorial_Kolkata_Panorama.jpg/800px-Victoria_Memorial_Kolkata_Panorama.jpg') center/cover;
+      animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    .floating-img-2 {
+      top:20%; right:10%; width:260px; height:180px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Darjeeling_Tea_Gardens.jpg/800px-Darjeeling_Tea_Gardens.jpg') center/cover;
+      animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
+    }
+    .floating-img-3 {
+      top:50%; left:8%; width:280px; height:190px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Royal_Bengal_Tiger_Sundarbans.jpg/800px-Royal_Bengal_Tiger_Sundarbans.jpg') center/cover;
+      animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
+    }
+    .floating-img-4 {
+      top:60%; right:5%; width:320px; height:210px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Howrah_Bridge_Kolkata.jpg/800px-Howrah_Bridge_Kolkata.jpg') center/cover;
+      animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
+    @keyframes float2 {0%,100%{transform:translate(0)}33%{transform:translate(10px,-20px)}66%{transform:translate(-5px,-10px)}}
+    @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
+    @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
+
+    .navbar {
+      position:fixed; top:0; width:100%; padding:15px 0;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
+      border-bottom:3px solid #ff9933; z-index:1000;
+    }
+    .nav-content { max-width:1200px; margin:0 auto; display:flex;justify-content:space-between;align-items:center;padding:0 20px; }
+    .logo { font-weight:700; font-size:24px; color:#138808; display:flex;align-items:center;gap:8px; }
+    .nav-links { display:flex; gap:25px; }
+    .nav-links a { text-decoration:none;color:#2c3e50;font-weight:500;transition:.3s; }
+    .nav-links a:hover { color:#ff9933; }
+    .back-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:10px 18px;border-radius:25px;font-size:14px;font-weight:600;
+      text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
+    }
+    .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .hero {
+      height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,153,51,0.1)0%,transparent 70%),
+        radial-gradient(circle at 80% 20%,rgba(19,136,8,0.1)0%,transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(0,70,151,0.1)0%,transparent 50%);
+      position:relative;z-index:1;
+    }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,6rem);font-weight:900;
+      background:linear-gradient(135deg,#ff9933,#138808,#004797);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 3s ease-in-out infinite;margin-bottom:0.5rem;
+    }
+    .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
+    .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
+    .cta-button {display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff9933,#138808);color:#fff;padding:14px 28px;border-radius:50px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 5px;}
+    .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .action-buttons {position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;}
+    .action-btn {background:linear-gradient(135deg,#ff9933,#138808);color:#fff; padding:12px 18px;border:none;border-radius:25px;cursor:pointer; font-weight:600;display:flex;align-items:center;gap:6px; box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;}
+    .action-btn:hover{transform:translateY(-2px) scale(1.05);}
+    .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+    .section-title h2 {font-size:2.5rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
+    .category-header {text-align:center;margin:40px 0 20px;position:relative;}
+    .category-header h3 { font-size:2rem;font-weight:600;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .category-header::after {content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;}
+    .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
+    .card { background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;transition:all .3s;}
+    .card:hover {transform:translateY(-8px) scale(1.02);}
+    .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+    .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
+    .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+    .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
+    .map-btn { background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+      border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
+      display:flex;align-items:center;gap:6px;transition:.3s;}
+    .map-btn:hover{transform:scale(1.05);}
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
+      justify-content:center;align-items:center;}
+    .modal.open{display:flex;}
+    .modal-content {background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;}
+    .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
+    .image-scroller {display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;}
+    .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
+    .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
+    .ai-container {
+      background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
+      box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
+    }
+    .ai-title { font-size:2.5rem;font-weight:700;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+    }
+    .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
+    .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
+    .form-group select,.form-group textarea {width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);}
+    .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
+    .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .checkbox-item {display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;}
+    .checkbox-item:hover {background:rgba(255,153,51,0.2);}
+    .get-recommendations {background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;}
+    .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
+    .ai-results h3 {font-size:2rem;font-weight:700;
+      background:linear-gradient(135deg,#138808,#ff9933);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;margin-bottom:20px;}
+    .recommendation-text {background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;}
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){
+      .floating-images{display:none;}
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-images">
+    <div class="floating-img floating-img-1"></div>
+    <div class="floating-img floating-img-2"></div>
+    <div class="floating-img floating-img-3"></div>
+    <div class="floating-img floating-img-4"></div>
+  </div>
+  <div class="action-buttons">
+    <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
+    <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
+  </div>
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><span style="font-size:28px;">🎭</span> West Bengal Tourism</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#ai-recommendations">AI Plan</a>
+        <a href="#attractions">Attractions</a>
+        <a href="index.html" class="back-btn"><span>←</span>Back to India</a>
+      </div>
+    </div>
+  </nav>
+  <section id="home" class="hero">
+    <div>
+      <h1>West Bengal</h1>
+      <div class="subtitle">Land of Culture</div>
+      <p>Discover Victoria Memorial, Darjeeling tea gardens, Sundarbans tigers, Howrah Bridge, and Bengali heritage</p>
+      <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
+      <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
+    </div>
+  </section>
+  <section id="ai-recommendations" class="section">
+    <div class="ai-container">
+      <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
+      <p style="color:#666;margin-bottom:30px;">
+        Tell us your trip details and interests—get a custom West Bengal itinerary!
+      </p>
+      <form id="preferences-form" class="ai-form">
+        <div class="form-group">
+          <label for="duration">Trip Duration</label>
+          <select id="duration" name="duration">
+            <option value="">Select…</option>
+            <option>1–2 days</option><option>3–5 days</option>
+            <option>1 week</option><option>2+ weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select…</option>
+            <option>Budget (₹1k–3k/day)</option>
+            <option>Moderate (₹3k–7k/day)</option>
+            <option>Luxury (₹7k+/day)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="style">Travel Style</label>
+          <select id="style" name="style">
+            <option value="">Select…</option>
+            <option>Solo</option><option>Couple</option><option>Family</option>
+            <option>Friends</option><option>Business</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Interests (multi-select)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="heritage"/>
+              <label>🏛️ Heritage & Culture</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="hills"/>
+              <label>🏔️ Hill Stations & Tea Gardens</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="wildlife"/>
+              <label>🐅 Wildlife & Sundarbans</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="beaches"/>
+              <label>🏖️ Beaches & Coastline</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="temples"/>
+              <label>🛕 Temples & Spirituality</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="cuisine"/>
+              <label>🍽️ Bengali Cuisine & Culture</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Victoria Memorial and Darjeeling…"></textarea>
+        </div>
+        <button type="submit" class="get-recommendations">
+          <span>✨</span>Get Recommendations
+        </button>
+      </form>
+      <div id="ai-results" class="ai-results">
+        <h3>🎯 Your West Bengal Travel Plan</h3>
+        <div id="recommendation-content" class="recommendation-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="attractions" class="section">
+    <div class="section-title">
+      <h2>⭐ Top Attractions in West Bengal</h2>
+      <p>Discover the Land of Culture</p>
+    </div>
+
+    <div class="category-header"><h3>🏛️ Colonial Heritage & Monuments</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>👑 Victoria Memorial</h4>
+        <p>Kolkata icon—1921, Queen Victoria tribute, Lord Curzon conceived, white Makrana marble, Indo-Saracenic architecture, museum 25 galleries, 64 acres gardens, must-visit, breathtaking, illuminated nights.</p>
+        <div class="tags">
+          <span class="tag">Must-Visit</span>
+          <span class="tag">1921</span>
+          <span class="tag">Iconic</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Victoria Memorial, Kolkata, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌉 Howrah Bridge</h4>
+        <p>Rabindra Setu—1943, 705m span, suspended bridge no nuts-bolts, Hooghly River, 150,000 vehicles daily, engineering marvel, iconic landmark, must-see, night illumination, Kolkata symbol.</p>
+        <div class="tags"><span class="tag">1943</span><span class="tag">Engineering Marvel</span><span class="tag">Iconic</span></div>
+        <button class="map-btn" onclick="openMap('Howrah Bridge, Kolkata, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Indian Museum</h4>
+        <p>Oldest museum India—1814, largest multipurpose, 35 galleries, Egyptian mummies, Ashoka Pillar replica, Buddhist artifacts, natural history, art collections, must-visit, educational.</p>
+        <div class="tags"><span class="tag">Oldest 1814</span><span class="tag">Largest</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Indian Museum, Kolkata, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>⛪ St. Paul's Cathedral</h4>
+        <p>Kolkata—1847, Anglican cathedral, Indo-Gothic architecture, stained glass windows, Gothic Revival, peaceful atmosphere, heritage site, colonial charm, accessible, beautiful.</p>
+        <div class="tags"><span class="tag">1847</span><span class="tag">Gothic</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('St Paul Cathedral, Kolkata, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏰 Hazarduari Palace</h4>
+        <p>Murshidabad—1837, Thousand Doors palace, Nawab Nazim residence, 114 actual doors, museum now, Italian architecture, Duncan McLeod designed, must-visit, historical significance.</p>
+        <div class="tags"><span class="tag">1000 Doors</span><span class="tag">1837</span><span class="tag">Palace</span></div>
+        <button class="map-btn" onclick="openMap('Hazarduari Palace, Murshidabad, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Writers' Building</h4>
+        <p>Kolkata—1777, East India Company clerks, red brick colonial, government secretariat historical, Dalhousie Square, architectural beauty, heritage significance, iconic structure.</p>
+        <div class="tags"><span class="tag">1777</span><span class="tag">Colonial</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Writers Building, Kolkata, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏔️ Darjeeling & Hill Stations</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>☕ Darjeeling</h4>
+        <p>Queen of Hills—2042m, Kanchenjunga views, tea capital world, toy train UNESCO Heritage, Tiger Hill sunrise, tea gardens scenic, must-visit, colonial charm, breathtaking, romantic.</p>
+        <div class="tags"><span class="tag">Queen</span><span class="tag">UNESCO Train</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Darjeeling, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🚂 Darjeeling Himalayan Railway</h4>
+        <p>Toy Train—UNESCO 1999, 1881 operational, 88km route, steam locomotive, Batasia Loop, Ghoom station highest, heritage ride, must-experience, scenic journey, nostalgic.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">1881</span><span class="tag">Must-Experience</span></div>
+        <button class="map-btn" onclick="openMap('Darjeeling Himalayan Railway, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌄 Tiger Hill</h4>
+        <p>Darjeeling—2590m, sunrise viewpoint famous, Kanchenjunga golden, Everest visible clear days, 11km town, must-visit, breathtaking views, early morning trip, popular.</p>
+        <div class="tags"><span class="tag">2590m</span><span class="tag">Sunrise</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Tiger Hill, Darjeeling, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Kalimpong</h4>
+        <p>1250m—Buddhist monasteries, flower nurseries orchids, Durpin Dargah, Deolo Hill, cheese famous, colonial charm, peaceful retreat, scenic beauty, offbeat, accessible.</p>
+        <div class="tags"><span class="tag">1250m</span><span class="tag">Orchids</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('Kalimpong, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Mirik</h4>
+        <p>1767m—Sumendu Lake, orange orchards, tea gardens, Bokar Monastery, peaceful environment, honeymoon destination, accessible, scenic beauty, offbeat gem, family-friendly.</p>
+        <div class="tags"><span class="tag">1767m</span><span class="tag">Lake</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('Mirik, Darjeeling, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Sandakphu</h4>
+        <p>Highest Bengal—3636m, trekking paradise, Sleeping Buddha view, four highest peaks visible, 6-day trek, adventure destination, pristine beauty, must-trek, breathtaking panorama.</p>
+        <div class="tags"><span class="tag">Highest 3636m</span><span class="tag">Trekking</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Sandakphu, Darjeeling, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🐅 Wildlife & Nature</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🐯 Sundarbans National Park</h4>
+        <p>UNESCO—largest mangrove forest world, Royal Bengal Tigers 96 estimated, 2585 sq km, river cruises, biodiversity hotspot, crocodiles, spotted deer, must-visit, pristine, unique ecosystem.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">Must-Visit</span><span class="tag">Tigers</span></div>
+        <button class="map-btn" onclick="openMap('Sundarbans National Park, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦏 Jaldapara National Park</h4>
+        <p>216 sq km—one-horned rhinoceros, elephants, tigers, Torsa River, safari elephant-jeep, grasslands forests, biodiversity, accessible, family destination, conservation success.</p>
+        <div class="tags"><span class="tag">Rhinos</span><span class="tag">216 sq km</span><span class="tag">Safari</span></div>
+        <button class="map-btn" onclick="openMap('Jaldapara National Park, Alipurduar, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🐘 Gorumara National Park</h4>
+        <p>80 sq km—Indian bison, elephants, one-horned rhino, leopards, Dooars region, safari, tea gardens surroundings, accessible, biodiversity, family-friendly, pristine.</p>
+        <div class="tags"><span class="tag">Bison</span><span class="tag">80 sq km</span><span class="tag">Accessible</span></div>
+        <button class="map-btn" onclick="openMap('Gorumara National Park, Jalpaiguri, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌳 Singalila National Park</h4>
+        <p>78 sq km—red pandas, Himalayan black bear, Sandakphu-Phalut trek, rhododendron forests, 2100-3636m altitude, pristine beauty, biodiversity hotspot, trekking paradise, offbeat.</p>
+        <div class="tags"><span class="tag">Red Pandas</span><span class="tag">78 sq km</span><span class="tag">Trekking</span></div>
+        <button class="map-btn" onclick="openMap('Singalila National Park, Darjeeling, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦅 Neora Valley National Park</h4>
+        <p>159 sq km—red pandas, clouded leopards, pristine virgin forests, unexplored wilderness, biodiversity hotspot, restricted entry, conservation success, offbeat, pristine beauty.</p>
+        <div class="tags"><span class="tag">159 sq km</span><span class="tag">Virgin Forests</span><span class="tag">Pristine</span></div>
+        <button class="map-btn" onclick="openMap('Neora Valley National Park, Kalimpong, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦜 Buxa Tiger Reserve</h4>
+        <p>760 sq km—tigers, elephants, leopards, Buxa Fort historical, Bhutan border, diverse ecosystem, trekking, offbeat destination, pristine forests, biodiversity.</p>
+        <div class="tags"><span class="tag">760 sq km</span><span class="tag">Tigers</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Buxa Tiger Reserve, Alipurduar, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🛕 Temples & Spiritual Sites</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🙏 Dakshineswar Kali Temple</h4>
+        <p>1855—Rani Rashmoni built, Ramakrishna Paramhansa associated, Hooghly River banks, nine-spired structure, pilgrimage center, spiritual significance, must-visit, accessible Kolkata, peaceful.</p>
+        <div class="tags"><span class="tag">1855</span><span class="tag">Must-Visit</span><span class="tag">Ramakrishna</span></div>
+        <button class="map-btn" onclick="openMap('Dakshineswar Kali Temple, Kolkata, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🕉️ Kalighat Temple</h4>
+        <p>51 Shakti Peethas—Kali worship, ancient temple, pilgrimage center, Mother Teresa nearby, Bengali culture integral, spiritual power, must-visit, accessible, authentic atmosphere.</p>
+        <div class="tags"><span class="tag">Shakti Peetha</span><span class="tag">Ancient</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Kalighat Temple, Kolkata, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🛕 Belur Math</h4>
+        <p>1938—Ramakrishna Mission headquarters, Swami Vivekananda founded, Hooghly River, architectural synthesis Hindu-Christian-Islamic, spiritual center, peaceful atmosphere, must-visit, serene.</p>
+        <div class="tags"><span class="tag">1938</span><span class="tag">Ramakrishna</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Belur Math, Howrah, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Tarakeswar Temple</h4>
+        <p>Hooghly—Lord Shiva Taraknath, ancient pilgrimage, Shivratri famous, healing powers belief, thousands pilgrims, Bengali tradition, spiritual significance, accessible, vibrant festivals.</p>
+        <div class="tags"><span class="tag">Shiva</span><span class="tag">Ancient</span><span class="tag">Pilgrimage</span></div>
+        <button class="map-btn" onclick="openMap('Tarakeswar Temple, Hooghly, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🙏 Tarapith Temple</h4>
+        <p>Tantric center—Goddess Tara, 51 Shakti Peethas, Bamakhepa saint, cremation ground nearby, tantric rituals, spiritual power, pilgrimage destination, unique atmosphere, authentic.</p>
+        <div class="tags"><span class="tag">Tantric</span><span class="tag">Shakti Peetha</span><span class="tag">Unique</span></div>
+        <button class="map-btn" onclick="openMap('Tarapith Temple, Birbhum, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Bishnupur Terracotta Temples</h4>
+        <p>17th-18th century—terracotta art famous, Malla dynasty, Rasmancha-Jor Bangla-Shyam Rai temples, intricate carvings, architectural heritage, UNESCO tentative, must-visit, unique.</p>
+        <div class="tags"><span class="tag">Terracotta</span><span class="tag">17th Century</span><span class="tag">UNESCO Tentative</span></div>
+        <button class="map-btn" onclick="openMap('Bishnupur Temples, Bankura, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏖️ Beaches & Coastal Towns</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌊 Digha Beach</h4>
+        <p>Most popular—7km beach, shallow waters, family-friendly, Digha-Mandarmani-Shankarpur circuit, accessible Kolkata, casuarina trees, sunrise-sunset views, affordable, vibrant, crowded weekends.</p>
+        <div class="tags"><span class="tag">Most Popular</span><span class="tag">7km</span><span class="tag">Family</span></div>
+        <button class="map-btn" onclick="openMap('Digha Beach, Purba Medinipur, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏖️ Mandarmani Beach</h4>
+        <p>Longest drivable beach India—13km red crab beach, shallow waters, water sports, resorts, peaceful than Digha, family destination, accessible, clean, scenic sunset.</p>
+        <div class="tags"><span class="tag">Longest Drivable</span><span class="tag">13km</span><span class="tag">Clean</span></div>
+        <button class="map-btn" onclick="openMap('Mandarmani Beach, Purba Medinipur, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌅 Shankarpur Beach</h4>
+        <p>Offbeat destination—pristine beauty, less crowded, red crabs, fishing village, peaceful atmosphere, accessible Digha nearby, budget-friendly, scenic, nature escape, tranquil.</p>
+        <div class="tags"><span class="tag">Offbeat</span><span class="tag">Pristine</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('Shankarpur Beach, Purba Medinipur, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏝️ Bakkhali Beach</h4>
+        <p>South 24 Parganas—serene beach, Henry's Island nearby, Jambu Dwip, Fraser Ganj, peaceful environment, mangrove forests, offbeat, pristine beauty, family destination.</p>
+        <div class="tags"><span class="tag">Serene</span><span class="tag">Islands</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Bakkhali Beach, South 24 Parganas, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌊 Tajpur Beach</h4>
+        <p>Hidden gem—pristine beach, less commercialized, casuarina groves, red crabs, peaceful retreat, offbeat destination, accessible, budget-friendly, nature lovers, tranquil atmosphere.</p>
+        <div class="tags"><span class="tag">Hidden Gem</span><span class="tag">Pristine</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Tajpur Beach, Purba Medinipur, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏖️ Talsari Beach</h4>
+        <p>Bengal-Odisha border—red crabs famous, Subarnarekha River estuary, pristine beach, fishing village, offbeat destination, peaceful, nature beauty, scenic, tranquil.</p>
+        <div class="tags"><span class="tag">Border Beach</span><span class="tag">Red Crabs</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Talsari Beach, Purba Medinipur, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏙️ Cultural & Heritage Cities</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🎭 Kolkata</h4>
+        <p>City of Joy—capital, Victoria Memorial, Howrah Bridge, cultural capital India, literature-art-cinema hub, Durga Puja grand, Bengali cuisine, intellectual legacy, must-visit, vibrant, cosmopolitan.</p>
+        <div class="tags"><span class="tag">Capital</span><span class="tag">Cultural Hub</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Kolkata, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>📚 Santiniketan</h4>
+        <p>Tagore's abode—Visva-Bharati University, Rabindranath Tagore founded 1901, Poush Mela, cultural heritage, artistic atmosphere, educational philosophy unique, must-visit, peaceful, intellectual legacy.</p>
+        <div class="tags"><span class="tag">Tagore</span><span class="tag">1901</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Santiniketan, Birbhum, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>👑 Murshidabad</h4>
+        <p>Nawab capital—Hazarduari Palace, Nizamat Imambara, Katra Mosque, historical significance, British colonial history, Plassey nearby, cultural heritage, must-visit, architectural beauty.</p>
+        <div class="tags"><span class="tag">Nawab Capital</span><span class="tag">Heritage</span><span class="tag">Historic</span></div>
+        <button class="map-btn" onclick="openMap('Murshidabad, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Siliguri</h4>
+        <p>Gateway Northeast—Mahananda Wildlife Sanctuary, tea gardens, commercial hub, base Darjeeling-Sikkim-Bhutan, accessible, vibrant markets, modern amenities, strategic location.</p>
+        <div class="tags"><span class="tag">Gateway</span><span class="tag">Commercial</span><span class="tag">Strategic</span></div>
+        <button class="map-btn" onclick="openMap('Siliguri, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Cooch Behar</h4>
+        <p>Royal heritage—Cooch Behar Palace, Madan Mohan Temple, Koch dynasty capital, planned city, architectural beauty, historical significance, offbeat, peaceful, heritage destination.</p>
+        <div class="tags"><span class="tag">Royal</span><span class="tag">Palace</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Cooch Behar, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🕌 Malda</h4>
+        <p>Mango city—Gour-Pandua ruins, Firoz Minar, Dakhil Darwaza, Adina Mosque largest India medieval, historical significance, archaeological treasures, offbeat, heritage site.</p>
+        <div class="tags"><span class="tag">Mango City</span><span class="tag">Ruins</span><span class="tag">Archaeological</span></div>
+        <button class="map-btn" onclick="openMap('Malda, West Bengal')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Loading…</h2>
+      <div class="image-scroller" id="image-scroller"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <script>
+    const GM_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
+    const GM_HOST = 'google-map-places.p.rapidapi.com';
+
+    document.addEventListener('DOMContentLoaded',() => {
+      document.getElementById('weather-btn')
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/Kolkata+West+Bengal','_blank'));
+      document.getElementById('travel-planner-btn')
+        .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
+      document.getElementById('preferences-form')
+        .addEventListener('submit',handleForm);
+      setupModal();
+    });
+
+    async function handleForm(e){
+      e.preventDefault();
+      const fd=new FormData(e.target),
+            prefs={ duration:fd.get('duration'), budget:fd.get('budget'),
+                    style:fd.get('style'), additional:fd.get('additional')||'None',
+                    interests:[] };
+      document.querySelectorAll('input[name="interests"]:checked')
+        .forEach(ch=>prefs.interests.push(ch.value));
+      if(!prefs.duration||!prefs.budget||prefs.interests.length===0){
+        return alert('Select duration, budget & at least one interest!');
+      }
+      await getAI(prefs);
+    }
+
+    function formatAI(text){
+      text=text.trim().replace(/^["']|["']$/g,'');
+      text=text.replace(/\\n/g,'\n').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+      text=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      text=text.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g,'<em>$1</em>');
+      if(!text.includes('<p>'))text='<p>'+text+'</p>';
+      text=text.replace(/<p><\/p>/g,'').replace(/<p>\s*<br>/g,'<p>');
+      return text;
+    }
+
+    async function getAI(p){
+      const results = document.getElementById('ai-results'),
+            content = document.getElementById('recommendation-content');
+      results.style.display = 'block';
+      content.innerHTML = `
+        <div style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;">🤖</div>
+          <p>Generating your West Bengal travel plan…</p>
+        </div>`;
+
+      const prompt = `You are a travel expert for West Bengal, India. Given these preferences, craft a personalized itinerary:
+
+Duration: ${p.duration}
+Budget: ${p.budget}
+Style: ${p.style}
+Interests: ${p.interests.join(', ')}
+Additional: ${p.additional}
+
+Include:
+1. Top destinations in West Bengal (Kolkata, Darjeeling, Sundarbans, Digha, Mandarmani, Santiniketan, etc.)
+2. Attractions per interest (heritage, hill stations, wildlife, beaches, temples, cuisine)
+3. Sample day-wise itinerary
+4. Budget tips for accommodation and food
+5. Best seasons to visit
+6. Local experiences (Durga Puja, toy train ride, tiger safari, tea garden tours, Bengali cuisine, Tagore heritage, colonial architecture)
+7. Transport suggestions
+
+West Bengal is known as the Land of Culture with Kolkata (City of Joy, Victoria Memorial 1921, Howrah Bridge 1943, cultural capital), Darjeeling (Queen of Hills, UNESCO toy train 1881, tea gardens, Kanchenjunga views), Sundarbans (UNESCO, largest mangrove, Royal Bengal Tigers 96), Indian Museum (oldest 1814), Dakshineswar Temple, beaches (Digha, Mandarmani longest drivable 13km), and rich Bengali heritage.
+
+Make it engaging, detailed, and practical. Format with clear sections. Mention cultural experiences and local cuisine.`;
+
+      try {
+        const resp = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBjTBW_cresSRlMWsb45NlOt06iVqlV4OQ",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [{ text: prompt }]
+                }
+              ]
+            })
+          }
+        );
+
+        if (!resp.ok) throw new Error("AI API error");
+
+        const data = await resp.json();
+        let ai = '';
+
+        if (
+          data &&
+          data.candidates &&
+          data.candidates[0] &&
+          data.candidates[0].content &&
+          data.candidates[0].content.parts &&
+          data.candidates[0].content.parts[0] &&
+          data.candidates[0].content.parts[0].text
+        ) {
+          ai = data.candidates[0].content.parts[0].text;
+        } else {
+          ai = 'Unable to generate response';
+        }
+
+        content.innerHTML = `
+          <div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">
+            ${formatAI(ai)}
+          </div>
+          <div style="text-align:center;margin-top:20px;">
+            <button onclick="window.print()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#138808;color:#fff;">🖨️ Print</button>
+            <button onclick="sharePlan()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#ff9933;color:#fff;">📤 Share</button>
+          </div>`;
+
+      } catch (err) {
+        console.error("AI Error:", err);
+        content.innerHTML = `<p style="color:red;text-align:center;">Failed to generate recommendations. Please check console for details.</p>`;
+      }
+    }
+
+    function sharePlan(){
+      const txt=document.getElementById('recommendation-content').innerText;
+      if(navigator.share) {
+        navigator.share({title:'West Bengal Travel Plan',text:txt})
+          .catch(err=>console.log('Share failed',err));
+      } else {
+        navigator.clipboard.writeText(txt)
+          .then(()=>alert('Plan copied to clipboard!'))
+          .catch(()=>alert('Unable to copy'));
+      }
+    }
+
+    function setupModal(){
+      const modal=document.getElementById('mapModal'),
+            close=modal.querySelector('.close');
+      close.onclick=()=>modal.classList.remove('open');
+      window.onclick=e=>{ if(e.target===modal) modal.classList.remove('open'); };
+    }
+
+    async function openMap(loc){
+      const modal=document.getElementById('mapModal'),
+            title=modal.querySelector('#modal-title'),
+            scroller=modal.querySelector('#image-scroller'),
+            actions=modal.querySelector('#modal-actions');
+      
+      title.textContent=loc;
+      modal.classList.add('open');
+      
+      const enc=encodeURIComponent(loc);
+      
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;color:#888;">Loading images…</p>`;
+      
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>📸</span>View Photos</a>
+      `;
+
+      scroller.innerHTML=`
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+      `;
+
+      const url=`https://${GM_HOST}/maps/api/streetview?size=600x400&location=${enc}`;
+      try{
+        const res=await fetch(url,{method:'GET',headers:{
+          'x-rapidapi-key':GM_KEY,'x-rapidapi-host':GM_HOST
+        }});
+        if(res.ok) {
+          const blob=await res.blob(),
+                svURL=URL.createObjectURL(blob);
+          scroller.innerHTML = `
+            <img src="${svURL}" alt="Street view of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+          `;
+        }
+      }catch(e){
+        console.log('Street view not available for this location');
+      }
+    }
+  </script>
+</body>
+</html>
