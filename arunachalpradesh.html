@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +20,6 @@
       background-attachment:fixed;
       overflow-x:hidden;
     }
-
-    /* Floating Images */
     .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
     .floating-img {
       position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
@@ -29,22 +28,22 @@
     .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
     .floating-img-1 {
       top:10%; left:5%; width:300px; height:200px;
-      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Tawang_Monastery.jpg/800px-Tawang_Monastery.jpg') center/cover;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Tawang_Monastery_Arunachal.jpg/800px-Tawang_Monastery_Arunachal.jpg') center/cover;
       animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
     }
     .floating-img-2 {
       top:20%; right:10%; width:260px; height:180px;
-      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Namdapha_National_Park%2C_Arunachal_Pradesh.jpg/800px-Namdapha_National_Park%2C_Arunachal_Pradesh.jpg') center/cover;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Sela_Pass_Arunachal.jpg/800px-Sela_Pass_Arunachal.jpg') center/cover;
       animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
     }
     .floating-img-3 {
       top:50%; left:8%; width:280px; height:190px;
-      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Chang_Lung_Sherpa_Temple_in_Arunachal_Pradesh.jpg/800px-Chang_Lung_Sherpa_Temple_in_Arunachal_Pradesh.jpg') center/cover;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Ziro_Valley_Arunachal.jpg/800px-Ziro_Valley_Arunachal.jpg') center/cover;
       animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
     }
     .floating-img-4 {
       top:60%; right:5%; width:320px; height:210px;
-      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Himalayan_Ornithology_Center%2C_Hamla%2C_Arunachal_Pradesh.jpg/800px-Himalayan_Ornithology_Center%2C_Hamla%2C_Arunachal_Pradesh.jpg') center/cover;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Namdapha_National_Park.jpg/800px-Namdapha_National_Park.jpg') center/cover;
       animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
     }
     @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
@@ -52,7 +51,6 @@
     @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
     @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
 
-    /* Navbar */
     .navbar {
       position:fixed; top:0; width:100%; padding:15px 0;
       background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
@@ -69,8 +67,6 @@
       text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
     }
     .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
-
-    /* Hero */
     .hero {
       height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
       background:
@@ -87,128 +83,74 @@
     }
     .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
     .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
-    .cta-button {
-      display:inline-flex;align-items:center;gap:8px;
-      background:linear-gradient(135deg,#ff9933,#138808);
-      color:#fff;padding:14px 28px;border-radius:50px;
-      font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);
-      transition:.3s;margin:0 5px;
-    }
+    .cta-button {display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff9933,#138808);color:#fff;padding:14px 28px;border-radius:50px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 5px;}
     .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
-
-    /* Action Buttons */
-    .action-buttons {
-      position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;
-    }
-    .action-btn {
-      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
-      padding:12px 18px;border:none;border-radius:25px;cursor:pointer;
-      font-weight:600;display:flex;align-items:center;gap:6px;
-      box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;
-    }
+    .action-buttons {position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;}
+    .action-btn {background:linear-gradient(135deg,#ff9933,#138808);color:#fff; padding:12px 18px;border:none;border-radius:25px;cursor:pointer; font-weight:600;display:flex;align-items:center;gap:6px; box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;}
     .action-btn:hover{transform:translateY(-2px) scale(1.05);}
-
-    /* Sections */
     .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
-    .section-title h2 {
-      font-size:2.5rem;font-weight:700;margin-bottom:10px;
+    .section-title h2 {font-size:2.5rem;font-weight:700;margin-bottom:10px;
       background:linear-gradient(135deg,#ff9933,#138808);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
     .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
     .category-header {text-align:center;margin:40px 0 20px;position:relative;}
-    .category-header h3 {
-      font-size:2rem;font-weight:600;
+    .category-header h3 { font-size:2rem;font-weight:600;
       background:linear-gradient(135deg,#ff9933,#138808);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
-    .category-header::after {
-      content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
-      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;
-    }
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .category-header::after {content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;}
     .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
-
-    .card {
-      background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;
-      transition:all .3s;
-    }
+    .card { background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;transition:all .3s;}
     .card:hover {transform:translateY(-8px) scale(1.02);}
     .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
     .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
     .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
     .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
-    .map-btn {
-      background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+    .map-btn { background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
       border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
-      display:flex;align-items:center;gap:6px;transition:.3s;
-    }
+      display:flex;align-items:center;gap:6px;transition:.3s;}
     .map-btn:hover{transform:scale(1.05);}
-
-    /* Modal */
-    .modal {
-      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;
       background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
-      justify-content:center;align-items:center;
-    }
+      justify-content:center;align-items:center;}
     .modal.open{display:flex;}
-    .modal-content {
-      background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
-      overflow-y:auto;position:relative;padding:20px;
-    }
+    .modal-content {background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;}
     .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
-    .image-scroller {
-      display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;
-    }
+    .image-scroller {display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;}
     .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
     .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
-
-    /* AI Form */
     .ai-container {
       background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
       border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
       box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
     }
-    .ai-title {
-      font-size:2.5rem;font-weight:700;
+    .ai-title { font-size:2.5rem;font-weight:700;
       background:linear-gradient(135deg,#ff9933,#138808);
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;
       margin-bottom:20px;
     }
     .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
     .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
-    .form-group select,.form-group textarea {
-      width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;
-      font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);
-    }
+    .form-group select,.form-group textarea {width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);}
     .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
     .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
-    .checkbox-item {
-      display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
-      border-radius:8px;transition:.3s;
-    }
+    .checkbox-item {display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;}
     .checkbox-item:hover {background:rgba(255,153,51,0.2);}
-    .get-recommendations {
-      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+    .get-recommendations {background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
       padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
-      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;
-    }
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;}
     .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
-
     .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
       border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
-    .ai-results h3 {
-      font-size:2rem;font-weight:700;
+    .ai-results h3 {font-size:2rem;font-weight:700;
       background:linear-gradient(135deg,#138808,#ff9933);
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      text-align:center;margin-bottom:20px;
-    }
-    .recommendation-text {
-      background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
-      border-radius:15px;line-height:1.8;color:#2c3e50;
-    }
-
-    /* Animations */
+      text-align:center;margin-bottom:20px;}
+    .recommendation-text {background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;}
     @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     @media(max-width:768px){
       .floating-images{display:none;}
@@ -217,24 +159,19 @@
   </style>
 </head>
 <body>
-  <!-- Floating BG -->
   <div class="floating-images">
     <div class="floating-img floating-img-1"></div>
     <div class="floating-img floating-img-2"></div>
     <div class="floating-img floating-img-3"></div>
     <div class="floating-img floating-img-4"></div>
   </div>
-
-  <!-- Action Buttons -->
   <div class="action-buttons">
     <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
     <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
   </div>
-
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-content">
-      <div class="logo"><span style="font-size:28px;">🏔️</span> AP Tourism</div>
+      <div class="logo"><span style="font-size:28px;">🏔️</span> Arunachal Pradesh Tourism</div>
       <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#ai-recommendations">AI Plan</a>
@@ -243,24 +180,20 @@
       </div>
     </div>
   </nav>
-
-  <!-- Hero -->
   <section id="home" class="hero">
     <div>
       <h1>Arunachal Pradesh</h1>
       <div class="subtitle">Land of Dawn-Lit Mountains</div>
-      <p>Discover ancient monasteries, pristine forests, and Himalayan beauty</p>
+      <p>Discover Tawang Monastery, Ziro Valley, Sela Pass, pristine landscapes, and tribal cultures</p>
       <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
       <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
     </div>
   </section>
-
-  <!-- AI Planner -->
   <section id="ai-recommendations" class="section">
     <div class="ai-container">
       <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
       <p style="color:#666;margin-bottom:30px;">
-        Tell us your trip details and interests—get a custom AP itinerary!
+        Tell us your trip details and interests—get a custom Arunachal Pradesh itinerary!
       </p>
       <form id="preferences-form" class="ai-form">
         <div class="form-group">
@@ -292,233 +225,385 @@
           <label>Interests (multi-select)</label>
           <div class="checkbox-group">
             <div class="checkbox-item">
-              <input type="checkbox" name="interests" value="religious"/>
-              <label>⛪ Religious Sites</label>
+              <input type="checkbox" name="interests" value="monasteries"/>
+              <label>🛕 Monasteries & Spirituality</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" name="interests" value="nature"/>
-              <label>🌳 Nature & Wildlife</label>
+              <input type="checkbox" name="interests" value="mountains"/>
+              <label>🏔️ Mountains & Passes</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" name="interests" value="culture"/>
-              <label>🎭 Culture & Tribes</label>
+              <input type="checkbox" name="interests" value="tribal"/>
+              <label>🎭 Tribal Culture</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" name="interests" value="adventure"/>
-              <label>🧗 Adventure</label>
+              <input type="checkbox" name="interests" value="wildlife"/>
+              <label>🐅 Wildlife & Nature</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" name="interests" value="birds"/>
-              <label>🐦 Birdwatching</label>
+              <input type="checkbox" name="interests" value="trekking"/>
+              <label>🥾 Trekking & Adventure</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" name="interests" value="peace"/>
-              <label>🧘 Peaceful Retreat</label>
+              <input type="checkbox" name="interests" value="valleys"/>
+              <label>🌄 Valleys & Landscapes</label>
             </div>
           </div>
         </div>
         <div class="form-group">
           <label for="notes">Additional notes</label>
-          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want Tawang monastery visit…"></textarea>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Tawang Monastery and Ziro Valley…"></textarea>
         </div>
         <button type="submit" class="get-recommendations">
           <span>✨</span>Get Recommendations
         </button>
       </form>
-
       <div id="ai-results" class="ai-results">
-        <h3>🎯 Your AP Travel Plan</h3>
+        <h3>🎯 Your Arunachal Pradesh Travel Plan</h3>
         <div id="recommendation-content" class="recommendation-text"></div>
       </div>
     </div>
   </section>
 
-  <!-- Attractions -->
   <section id="attractions" class="section">
     <div class="section-title">
       <h2>⭐ Top Attractions in Arunachal Pradesh</h2>
-      <p>Discover the soul of the Eastern Himalayas</p>
+      <p>Discover the Land of Dawn-Lit Mountains</p>
     </div>
 
-    <!-- Religious -->
-    <div class="category-header"><h3>⛩️ Sacred & Spiritual Sites</h3></div>
+    <div class="category-header"><h3>🛕 Buddhist Monasteries</h3></div>
     <div class="grid">
       <div class="card">
-        <h4>🕉️ Tawang Monastery</h4>
-        <p>The second-largest monastery in Asia, perched high in the Himalayas—home to the Dalai Lama’s teachings.</p>
+        <h4>🙏 Tawang Monastery</h4>
+        <p>Largest India—2nd largest world after Potala Palace, 10,000ft altitude, 1680-81 founded, Gelug school, library treasures, 65 buildings, must-visit, iconic, spiritual.</p>
         <div class="tags">
-          <span class="tag">Buddhist</span>
-          <span class="tag">Himalayas</span>
+          <span class="tag">Largest India</span>
           <span class="tag">Must-Visit</span>
+          <span class="tag">10,000ft</span>
         </div>
-        <button class="map-btn" onclick="openMap('Tawang Monastery, Arunachal Pradesh')">
-          <span>📍</span>View on Map
-        </button>
-      </div>
-
-      <div class="card">
-        <h4>🕊️ Dirang Monastery</h4>
-        <p>An ancient Gelugpa monastery nestled in the mountains, known for its peaceful ambiance.</p>
-        <div class="tags">
-          <span class="tag">Monastery</span><span class="tag">Peaceful</span><span class="tag">History</span>
-        </div>
-        <button class="map-btn" onclick="openMap('Dirang Monastery, Arunachal Pradesh')">
-          <span>📍</span>View on Map
-        </button>
-      </div>
-
-      <div class="card">
-        <h4>🛕 Zemithang Monastery</h4>
-        <p>Located in the scenic valley of Zemithang—known for its annual festival and stunning views.</p>
-        <div class="tags">
-          <span class="tag">Festival</span><span class="tag">Valley</span><span class="tag">Culture</span>
-        </div>
-        <button class="map-btn" onclick="openMap('Zemithang Monastery, Arunachal Pradesh')">
-          <span>📍</span>View on Map
-        </button>
-      </div>
-    </div>
-
-    <!-- Nature & Wildlife -->
-    <div class="category-header"><h3>🌲 Nature & Wildlife Parks</h3></div>
-    <div class="grid">
-      <div class="card">
-        <h4>🐅 Namdapha National Park</h4>
-        <p>One of India’s largest national parks—home to tigers, elephants, rhinos, and rare birds like the hornbill.</p>
-        <div class="tags"><span class="tag">Wildlife</span><span class="tag">Tiger</span><span class="tag">Jungle</span></div>
-        <button class="map-btn" onclick="openMap('Namdapha National Park, Arunachal Pradesh')">
+        <button class="map-btn" onclick="openMap('Tawang Monastery, Tawang, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
       <div class="card">
-        <h4>🦉 Dibang Valley</h4>
-        <p>Remote and untouched—perfect for birdwatchers and adventure seekers seeking solitude.</p>
-        <div class="tags"><span class="tag">Birds</span><span class="tag">Adventure</span><span class="tag">Offbeat</span></div>
-        <button class="map-btn" onclick="openMap('Dibang Valley, Arunachal Pradesh')">
+        <h4>🕉️ Bomdila Monastery</h4>
+        <p>Upper & Lower Gompa—8000ft, scenic views, Himalayan backdrop, Tibetan architecture, prayer wheels, peaceful, cultural center, Bomdila town, accessible.</p>
+        <div class="tags"><span class="tag">8000ft</span><span class="tag">Twin Gompas</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Bomdila Monastery, Bomdila, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
       <div class="card">
-        <h4>🏞️ Sela Pass</h4>
-        <p>At 13,700 ft—the highest motorable pass in India—offers panoramic views of snow-capped peaks.</p>
-        <div class="tags"><span class="tag">Pass</span><span class="tag">Snow</span><span class="tag">Scenic</span></div>
-        <button class="map-btn" onclick="openMap('Sela Pass, Arunachal Pradesh')">
+        <h4>☸️ Urgelling Monastery</h4>
+        <p>Birthplace 6th Dalai Lama—Tawang, historic significance, spiritual importance, 15th century, peaceful, sacred site, architecture, pilgrimage destination, must-see.</p>
+        <div class="tags"><span class="tag">6th Dalai Lama</span><span class="tag">15th Century</span><span class="tag">Sacred</span></div>
+        <button class="map-btn" onclick="openMap('Urgelling Monastery, Tawang, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ Dirang Monastery</h4>
+        <p>Kalachakra—500 years old, hot springs nearby, scenic beauty, traditional architecture, peaceful, Dirang Valley, cultural importance, serene atmosphere.</p>
+        <div class="tags"><span class="tag">500 Years</span><span class="tag">Hot Springs</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Dirang Monastery, Dirang, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🛕 Itanagar Gompa</h4>
+        <p>Buddhist center—capital city, modern monastery, Dalai Lama consecrated, panoramic city views, spiritual hub, colorful architecture, accessible, peaceful.</p>
+        <div class="tags"><span class="tag">Capital</span><span class="tag">Modern</span><span class="tag">City Views</span></div>
+        <button class="map-btn" onclick="openMap('Itanagar Gompa, Itanagar, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>☸️ Gontse Rabgyaling Monastery</h4>
+        <p>Bomdila—Nyingma sect, colorful murals, prayer wheels, Tibetan Buddhist art, spiritual atmosphere, hilltop location, panoramic views, peaceful retreat.</p>
+        <div class="tags"><span class="tag">Nyingma</span><span class="tag">Colorful</span><span class="tag">Hilltop</span></div>
+        <button class="map-btn" onclick="openMap('Gontse Rabgyaling Monastery, Bomdila, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
     </div>
 
-    <!-- Culture & Tribes -->
-    <div class="category-header"><h3>👥 Culture & Tribal Heritage</h3></div>
+    <div class="category-header"><h3>🏔️ Mountain Passes & Peaks</h3></div>
     <div class="grid">
       <div class="card">
-        <h4>🎨 Nyishi Tribe Villages</h4>
-        <p>Traditional houses, colorful attire, and vibrant festivals—experience authentic tribal life.</p>
-        <div class="tags"><span class="tag">Tribes</span><span class="tag">Festivals</span><span class="tag">Culture</span></div>
-        <button class="map-btn" onclick="openMap('Nyishi Village, Arunachal Pradesh')">
+        <h4>❄️ Sela Pass</h4>
+        <p>13,700ft—Tawang route, Paradise Lake, snow-covered, stunning views, prayer flags, Indo-China War memorial, scenic beauty, photography paradise, must-visit, breathtaking.</p>
+        <div class="tags"><span class="tag">13,700ft</span><span class="tag">Must-Visit</span><span class="tag">Breathtaking</span></div>
+        <button class="map-btn" onclick="openMap('Sela Pass, Tawang, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
       <div class="card">
-        <h4>🎵 Monpa Culture</h4>
-        <p>Known for their unique music, dance, and traditional architecture in the Tawang region.</p>
-        <div class="tags"><span class="tag">Music</span><span class="tag">Art</span><span class="tag">Architecture</span></div>
-        <button class="map-btn" onclick="openMap('Monpa Culture, Tawang')">
+        <h4>🏔️ Bumla Pass</h4>
+        <p>15,200ft—Indo-China border, permits required, military presence, Madhuri Lake nearby, snow-covered, adventure destination, strategic location, scenic, offbeat.</p>
+        <div class="tags"><span class="tag">15,200ft</span><span class="tag">Border</span><span class="tag">Permit</span></div>
+        <button class="map-btn" onclick="openMap('Bumla Pass, Tawang, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
       <div class="card">
-        <h4>🎪 Losar Festival</h4>
-        <p>The Tibetan New Year celebrated with masked dances, rituals, and community feasts.</p>
-        <div class="tags"><span class="tag">Festival</span><span class="tag">Dance</span><span class="tag">Ritual</span></div>
-        <button class="map-btn" onclick="openMap('Losar Festival, Arunachal Pradesh')">
+        <h4>⛰️ Gorichen Peak</h4>
+        <p>22,500ft—highest Arunachal, Tawang district, trekking paradise, mountaineering, snow-capped, pristine beauty, adventure destination, sacred mountain, challenging.</p>
+        <div class="tags"><span class="tag">Highest</span><span class="tag">22,500ft</span><span class="tag">Trekking</span></div>
+        <button class="map-btn" onclick="openMap('Gorichen Peak, Tawang, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Kangto Peak</h4>
+        <p>22,000ft—second highest, West Kameng, mountaineering, trekking, pristine wilderness, adventure, offbeat, challenging climb, scenic beauty, remote.</p>
+        <div class="tags"><span class="tag">22,000ft</span><span class="tag">Second Highest</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Kangto Peak, West Kameng, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>❄️ Jung Falls</h4>
+        <p>Near Bomdila—cascading waterfall, scenic beauty, trekking trails, peaceful environment, nature escape, photography spot, accessible, family-friendly, pristine.</p>
+        <div class="tags"><span class="tag">Waterfall</span><span class="tag">Trekking</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Jung Falls, Bomdila, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💧 Nuranang Falls</h4>
+        <p>330ft—Bong Bong Falls, Tawang route, hydroelectric station, scenic beauty, Jang town, photography paradise, tourist attraction, pristine, powerful cascade.</p>
+        <div class="tags"><span class="tag">330ft</span><span class="tag">Popular</span><span class="tag">Powerful</span></div>
+        <button class="map-btn" onclick="openMap('Nuranang Falls, Tawang, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
     </div>
 
-    <!-- Adventure & Birds -->
-    <div class="category-header"><h3>🦅 Adventure & Birdwatching</h3></div>
+    <div class="category-header"><h3>🌄 Scenic Valleys</h3></div>
     <div class="grid">
       <div class="card">
-        <h4>🔭 Himalayan Ornithology Centre</h4>
-        <p>Research center for bird species—ideal for ornithologists and nature lovers.</p>
-        <div class="tags"><span class="tag">Birds</span><span class="tag">Science</span><span class="tag">Study</span></div>
-        <button class="map-btn" onclick="openMap('Himalayan Ornithology Centre, Arunachal Pradesh')">
+        <h4>🌾 Ziro Valley</h4>
+        <p>UNESCO tentative—Apatani tribe, rice fields, pine hills, Ziro Music Festival, traditional villages, unique culture, homestays, offbeat, must-visit, peaceful paradise.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">Must-Visit</span><span class="tag">Music Festival</span></div>
+        <button class="map-btn" onclick="openMap('Ziro Valley, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
       <div class="card">
-        <h4>⛰️ Kameng River Rafting</h4>
-        <p>Thrilling rafting experience through the deep gorges of the Kameng River.</p>
-        <div class="tags"><span class="tag">Rafting</span><span class="tag">Adventure</span><span class="tag">River</span></div>
-        <button class="map-btn" onclick="openMap('Kameng River, Arunachal Pradesh')">
+        <h4>🏞️ Mechuka Valley</h4>
+        <p>Hidden paradise—Shi-Yomi district, Siyom River, 6000ft, monasteries, tribal villages, offbeat destination, pristine nature, trekking, adventure, remote beauty.</p>
+        <div class="tags"><span class="tag">Hidden</span><span class="tag">Pristine</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Mechuka Valley, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
       <div class="card">
-        <h4>🚶‍♂️ Trekking in Siang Valley</h4>
-        <p>Trails through dense forests, waterfalls, and villages—offering peace and breathtaking views.</p>
-        <div class="tags"><span class="tag">Trekking</span><span class="tag">Nature</span><span class="tag">Peace</span></div>
-        <button class="map-btn" onclick="openMap('Siang Valley, Arunachal Pradesh')">
+        <h4>🌲 Dirang Valley</h4>
+        <p>West Kameng—hot springs, apple orchards, dzong (fort), sheep breeding farm, monasteries, scenic beauty, peaceful, accessible, nature escape, family destination.</p>
+        <div class="tags"><span class="tag">Hot Springs</span><span class="tag">Apple Orchards</span><span class="tag">Peaceful</span></div>
+        <button class="map-btn" onclick="openMap('Dirang Valley, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Sangti Valley</h4>
+        <p>Dirang—black-necked cranes, November-March, pristine beauty, birdwatching, camping, scenic landscapes, offbeat, nature lovers paradise, peaceful retreat.</p>
+        <div class="tags"><span class="tag">Black-Necked Cranes</span><span class="tag">Birdwatching</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Sangti Valley, Dirang, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌄 Anini Valley</h4>
+        <p>Dibang Valley—remote paradise, highest inhabited village area, scenic beauty, tribal villages, pristine nature, adventure, offbeat, trekking, unexplored.</p>
+        <div class="tags"><span class="tag">Remote</span><span class="tag">Highest</span><span class="tag">Unexplored</span></div>
+        <button class="map-btn" onclick="openMap('Anini, Dibang Valley, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Talle Valley</h4>
+        <p>Near Ziro—wildlife sanctuary, pine forests, bamboo groves, trekking, camping, offbeat, pristine nature, scenic beauty, peaceful, adventure destination.</p>
+        <div class="tags"><span class="tag">Wildlife</span><span class="tag">Trekking</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Talle Valley Wildlife Sanctuary, Ziro, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
     </div>
 
-    <!-- Cities -->
-    <div class="category-header"><h3>🏙️ Major Towns & Cities</h3></div>
+    <div class="category-header"><h3>🐅 Wildlife & Nature</h3></div>
     <div class="grid">
       <div class="card">
-        <h4>🏙️ Itanagar</h4>
-        <p>Capital city—gateway to Arunachal Pradesh with museums, markets, and government offices.</p>
-        <div class="tags"><span class="tag">Capital</span><span class="tag">Urban</span><span class="tag">Museums</span></div>
+        <h4>🐯 Namdapha National Park</h4>
+        <p>Third largest India—1985 sq km, tigers, leopards, red pandas, snow leopards, hornbills, 4 big cats, biodiversity hotspot, trekking, pristine, must-visit.</p>
+        <div class="tags"><span class="tag">Third Largest</span><span class="tag">4 Big Cats</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Namdapha National Park, Changlang, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦜 Eaglenest Wildlife Sanctuary</h4>
+        <p>Birdwatcher paradise—600+ bird species, biodiversity hotspot, red pandas, rare birds, trekking, Bomdila district, pristine forests, conservation, offbeat.</p>
+        <div class="tags"><span class="tag">600+ Birds</span><span class="tag">Biodiversity</span><span class="tag">Red Pandas</span></div>
+        <button class="map-btn" onclick="openMap('Eaglenest Wildlife Sanctuary, West Kameng, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌳 Mouling National Park</h4>
+        <p>Upper Siang—787 sq km, tigers, leopards, red pandas, hoolock gibbons, Siang River, pristine forests, trekking, adventure, offbeat, biodiversity.</p>
+        <div class="tags"><span class="tag">Red Pandas</span><span class="tag">Gibbons</span><span class="tag">Pristine</span></div>
+        <button class="map-btn" onclick="openMap('Mouling National Park, Upper Siang, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦌 Mehao Wildlife Sanctuary</h4>
+        <p>Roing—diverse wildlife, Mehao Lake, trekking trails, tigers, leopards, red pandas, scenic beauty, adventure, offbeat destination, peaceful, pristine.</p>
+        <div class="tags"><span class="tag">Mehao Lake</span><span class="tag">Trekking</span><span class="tag">Diverse</span></div>
+        <button class="map-btn" onclick="openMap('Mehao Wildlife Sanctuary, Roing, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌺 Sessa Orchid Sanctuary</h4>
+        <p>Bhalukpong—220 orchid species, subtropical forests, biodiversity, nature trails, birdwatching, scenic beauty, conservation, peaceful, offbeat, nature lovers.</p>
+        <div class="tags"><span class="tag">220 Orchids</span><span class="tag">Conservation</span><span class="tag">Scenic</span></div>
+        <button class="map-btn" onclick="openMap('Sessa Orchid Sanctuary, Bhalukpong, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🐘 Pakhui Wildlife Sanctuary</h4>
+        <p>Pakke—tigers, hornbills, elephants, Bhalukpong near, river rafting, trekking, biodiversity, pristine forests, accessible, adventure, conservation success.</p>
+        <div class="tags"><span class="tag">Tigers</span><span class="tag">Hornbills</span><span class="tag">Accessible</span></div>
+        <button class="map-btn" onclick="openMap('Pakhui Wildlife Sanctuary, Pakke, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🎭 Tribal Culture & Villages</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏘️ Apatani Tribal Villages</h4>
+        <p>Ziro Valley—unique culture, facial tattoos, nose plugs (older generation), wet rice cultivation, sustainable living, homestays, authentic experience, must-visit, UNESCO.</p>
+        <div class="tags"><span class="tag">Unique Culture</span><span class="tag">UNESCO</span><span class="tag">Homestays</span></div>
+        <button class="map-btn" onclick="openMap('Apatani Villages, Ziro Valley, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎭 Monpa Tribe</h4>
+        <p>Tawang & West Kameng—Buddhist culture, traditional masks, handicrafts, yak wool products, Monpa festivals, unique lifestyle, cultural immersion, authentic.</p>
+        <div class="tags"><span class="tag">Buddhist</span><span class="tag">Handicrafts</span><span class="tag">Festivals</span></div>
+        <button class="map-btn" onclick="openMap('Monpa Villages, Tawang, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏡 Adi Tribe Villages</h4>
+        <p>Siang region—bamboo houses, shifting cultivation, Solung Festival, rice beer tradition, authentic tribal life, homestays, cultural diversity, offbeat.</p>
+        <div class="tags"><span class="tag">Bamboo Houses</span><span class="tag">Solung Festival</span><span class="tag">Authentic</span></div>
+        <button class="map-btn" onclick="openMap('Adi Tribal Villages, Siang, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎪 Nyishi Tribe</h4>
+        <p>Largest tribe—hornbill headgear, colorful attire, Itanagar region, traditional practices, cultural festivals, authentic experiences, vibrant culture, unique.</p>
+        <div class="tags"><span class="tag">Largest Tribe</span><span class="tag">Hornbill</span><span class="tag">Vibrant</span></div>
+        <button class="map-btn" onclick="openMap('Nyishi Villages, Itanagar, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏘️ Mishmi Tribe</h4>
+        <p>Eastern Arunachal—Mishmi Hills, traditional lifestyle, handicrafts, unique culture, remote villages, offbeat, authentic tribal experiences, pristine areas.</p>
+        <div class="tags"><span class="tag">Remote</span><span class="tag">Unique</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Mishmi Villages, Eastern Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🎭 Tribal Museum</h4>
+        <p>Itanagar—26 tribes artifacts, traditional costumes, ornaments, weapons, cultural heritage, educational, handicrafts displays, must-visit, comprehensive.</p>
+        <div class="tags"><span class="tag">26 Tribes</span><span class="tag">Museum</span><span class="tag">Educational</span></div>
+        <button class="map-btn" onclick="openMap('Jawaharlal Nehru State Museum, Itanagar, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏙️ Cities & Towns</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏛️ Itanagar</h4>
+        <p>State capital—Itanagar Fort, Ganga Lake, tribal museum, modern city, gateway, Nyishi tribe, Buddhist gompa, accessible, administrative center, base camp.</p>
+        <div class="tags"><span class="tag">Capital</span><span class="tag">Gateway</span><span class="tag">Modern</span></div>
         <button class="map-btn" onclick="openMap('Itanagar, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
       <div class="card">
-        <h4>🏘️ Tezpur</h4>
-        <p>Border town with Assam—known for its temples, riverside views, and cultural exchange.</p>
-        <div class="tags"><span class="tag">Border</span><span class="tag">Temple</span><span class="tag">River</span></div>
-        <button class="map-btn" onclick="openMap('Tezpur, Arunachal Pradesh')">
+        <h4>🙏 Tawang</h4>
+        <p>Buddhist heaven—10,000ft, largest monastery, Sela Pass, Bumla Pass, spiritual center, scenic beauty, Indo-China border, must-visit, iconic destination.</p>
+        <div class="tags"><span class="tag">Buddhist</span><span class="tag">10,000ft</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Tawang, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
       <div class="card">
-        <h4>🏰 Pasighat</h4>
-        <p>Gateway to the eastern part of Arunachal—rich in history and tribal culture.</p>
-        <div class="tags"><span class="tag">Tribes</span><span class="tag">History</span><span class="tag">Gateway</span></div>
+        <h4>🏔️ Bomdila</h4>
+        <p>Gateway Tawang—8000ft, monasteries, apple orchards, craft center, scenic views, Himalayan panorama, peaceful town, accessible, cultural hub, base camp.</p>
+        <div class="tags"><span class="tag">Gateway</span><span class="tag">8000ft</span><span class="tag">Monasteries</span></div>
+        <button class="map-btn" onclick="openMap('Bomdila, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌾 Ziro</h4>
+        <p>UNESCO nominee—Apatani headquarters, music festival, rice fields, pine hills, offbeat destination, cultural immersion, peaceful, must-visit, unique.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">Music Festival</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Ziro, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Pasighat</h4>
+        <p>Oldest town—Siang River, gateway Eastern Arunachal, rafting, hanging bridges, Daying Ering Wildlife, adventure hub, accessible, riverside beauty.</p>
+        <div class="tags"><span class="tag">Oldest Town</span><span class="tag">Rafting</span><span class="tag">Gateway</span></div>
         <button class="map-btn" onclick="openMap('Pasighat, Arunachal Pradesh')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌲 Bhalukpong</h4>
+        <p>Entry point—Assam border, Pakhui Wildlife, river rafting, trekking, angling, accessible, adventure activities, nature escape, gateway, base camp.</p>
+        <div class="tags"><span class="tag">Entry Point</span><span class="tag">Rafting</span><span class="tag">Adventure</span></div>
+        <button class="map-btn" onclick="openMap('Bhalukpong, Arunachal Pradesh')">
           <span>📍</span>View on Map
         </button>
       </div>
     </div>
   </section>
 
-  <!-- Map + Photos Modal -->
   <div id="mapModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2 id="modal-title">Loading…</h2>
-      <div class="image-scroller" id="image-scroller">
-        <!-- Dynamically filled with images -->
-      </div>
-      <div class="modal-actions" id="modal-actions">
-        <!-- Buttons inserted here -->
-      </div>
+      <div class="image-scroller" id="image-scroller"></div>
+      <div class="modal-actions" id="modal-actions"></div>
     </div>
   </div>
 
   <script>
     const GM_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
     const GM_HOST = 'google-map-places.p.rapidapi.com';
-    const GPT_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
-    const GPT_HOST = 'chatgpt-42.p.rapidapi.com';
 
     document.addEventListener('DOMContentLoaded',() => {
       document.getElementById('weather-btn')
-        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/APXX0001:1:AP','_blank'));
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/Itanagar+Arunachal+Pradesh','_blank'));
       document.getElementById('travel-planner-btn')
         .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
       document.getElementById('preferences-form')
@@ -551,16 +636,16 @@
     }
 
     async function getAI(p){
-      const results=document.getElementById('ai-results'),
-            content=document.getElementById('recommendation-content');
-      results.style.display='block';
-      content.innerHTML=`
+      const results = document.getElementById('ai-results'),
+            content = document.getElementById('recommendation-content');
+      results.style.display = 'block';
+      content.innerHTML = `
         <div style="text-align:center;padding:20px;">
           <div style="font-size:2rem;">🤖</div>
-          <p>Generating your AP travel plan…</p>
+          <p>Generating your Arunachal Pradesh travel plan…</p>
         </div>`;
-      const prompt = `
-You are a travel expert for Arunachal Pradesh, India. Given these preferences, craft a personalized itinerary:
+
+      const prompt = `You are a travel expert for Arunachal Pradesh, India. Given these preferences, craft a personalized itinerary:
 
 Duration: ${p.duration}
 Budget: ${p.budget}
@@ -569,45 +654,82 @@ Interests: ${p.interests.join(', ')}
 Additional: ${p.additional}
 
 Include:
-1. Top destinations in Arunachal Pradesh
-2. Attractions per interest
+1. Top destinations in Arunachal Pradesh (Tawang, Ziro Valley, Bomdila, Dirang, Itanagar, etc.)
+2. Attractions per interest (monasteries, mountains, tribal culture, wildlife, trekking, valleys)
 3. Sample day-wise itinerary
-4. Budget tips
-5. Best seasons
-6. Local food & experiences
-7. Transport suggestions
+4. Budget tips for accommodation and food
+5. Best seasons to visit
+6. Local experiences (monastery visits, Apatani tribal villages, Ziro Music Festival, trekking, homestays, local cuisine)
+7. Transport suggestions and permit requirements
 
-Make it engaging, detailed, and practical.`;
+Arunachal Pradesh is known as the Land of Dawn-Lit Mountains with Tawang Monastery (largest in India, 2nd largest world), Sela Pass (13,700ft), Ziro Valley (UNESCO nominee, Apatani tribe), Namdapha National Park (4 big cats), Bumla Pass (Indo-China border), pristine valleys, 26 tribal communities, Buddhist monasteries, and untouched natural beauty.
+
+Make it engaging, detailed, and practical. Format with clear sections.`;
+
       try {
-        const resp = await fetch('https://'+GPT_HOST+'/aitohuman',{
-          method:'POST',headers:{
-            'x-rapidapi-key':GPT_KEY,'x-rapidapi-host':GPT_HOST,'Content-Type':'application/json'
-          },
-          body:JSON.stringify({ text:prompt })
-        });
-        if(!resp.ok) throw 'AI error';
-        const data=await resp.json();
-        let ai = Array.isArray(data.result)?data.result[0]:(data.result||data);
-        content.innerHTML=`
+        const resp = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBjTBW_cresSRlMWsb45NlOt06iVqlV4OQ",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [{ text: prompt }]
+                }
+              ]
+            })
+          }
+        );
+
+        if (!resp.ok) throw new Error("AI API error");
+
+        const data = await resp.json();
+        let ai = '';
+
+        if (
+          data &&
+          data.candidates &&
+          data.candidates[0] &&
+          data.candidates[0].content &&
+          data.candidates[0].content.parts &&
+          data.candidates[0].content.parts[0] &&
+          data.candidates[0].content.parts[0].text
+        ) {
+          ai = data.candidates[0].content.parts[0].text;
+        } else {
+          ai = 'Unable to generate response';
+        }
+
+        content.innerHTML = `
           <div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">
             ${formatAI(ai)}
           </div>
           <div style="text-align:center;margin-top:20px;">
-            <button onclick="window.print()" style="margin:5px;padding:10px 20px;">🖨️ Print</button>
-            <button onclick="sharePlan()" style="margin:5px;padding:10px 20px;">📤 Share</button>
+            <button onclick="window.print()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#138808;color:#fff;">🖨️ Print</button>
+            <button onclick="sharePlan()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#ff9933;color:#fff;">📤 Share</button>
           </div>`;
-      } catch(err){
-        content.innerHTML=`<p style="color:red;text-align:center;">Failed to generate. Please try again.</p>`;
+
+      } catch (err) {
+        console.error("AI Error:", err);
+        content.innerHTML = `<p style="color:red;text-align:center;">Failed to generate recommendations. Please check console for details.</p>`;
       }
     }
 
     function sharePlan(){
       const txt=document.getElementById('recommendation-content').innerText;
-      if(navigator.share) navigator.share({title:'AP Travel Plan',text:txt});
-      else navigator.clipboard.writeText(txt).then(()=>alert('Copied to clipboard'));
+      if(navigator.share) {
+        navigator.share({title:'Arunachal Pradesh Travel Plan',text:txt})
+          .catch(err=>console.log('Share failed',err));
+      } else {
+        navigator.clipboard.writeText(txt)
+          .then(()=>alert('Plan copied to clipboard!'))
+          .catch(()=>alert('Unable to copy'));
+      }
     }
 
-    /* Modal & Maps */
     function setupModal(){
       const modal=document.getElementById('mapModal'),
             close=modal.querySelector('.close');
@@ -620,37 +742,41 @@ Make it engaging, detailed, and practical.`;
             title=modal.querySelector('#modal-title'),
             scroller=modal.querySelector('#image-scroller'),
             actions=modal.querySelector('#modal-actions');
+      
       title.textContent=loc;
-      scroller.innerHTML=`<p style="padding:50px;text-align:center;">Loading images…</p>`;
-      actions.innerHTML='';
       modal.classList.add('open');
+      
+      const enc=encodeURIComponent(loc);
+      
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;color:#888;">Loading images…</p>`;
+      
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>📸</span>View Photos</a>
+      `;
 
-      // 1) Street view
-      const enc=encodeURIComponent(loc),
-            url=`https://${GM_HOST}/maps/api/streetview?size=600x400&location=${enc}`;
+      scroller.innerHTML=`
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+      `;
+
+      const url=`https://${GM_HOST}/maps/api/streetview?size=600x400&location=${enc}`;
       try{
         const res=await fetch(url,{method:'GET',headers:{
           'x-rapidapi-key':GM_KEY,'x-rapidapi-host':GM_HOST
         }});
-        if(!res.ok) throw 'no streetview';
-        const blob=await res.blob(),
-              svURL=URL.createObjectURL(blob);
-        // Build scroller with 2 images
-        scroller.innerHTML=`
-          <img src="${svURL}" alt="Streetview of ${loc}"/>
-          <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&key=${GM_KEY}" alt="Map snapshot"/>
-        `;
+        if(res.ok) {
+          const blob=await res.blob(),
+                svURL=URL.createObjectURL(blob);
+          scroller.innerHTML = `
+            <img src="${svURL}" alt="Street view of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+          `;
+        }
       }catch(e){
-        scroller.innerHTML=`<p style="color:red;padding:30px;text-align:center;">Unable to load street view</p>`;
+        console.log('Street view not available for this location');
       }
-
-      // Buttons
-      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
-            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
-      actions.innerHTML=`
-        <a href="${mapLink}" target="_blank" class="map-btn"><span>🗺️</span>View Map</a>
-        <a href="${photoLink}" target="_blank" class="map-btn"><span>📸</span>View Photos</a>
-      `;
     }
   </script>
 </body>
