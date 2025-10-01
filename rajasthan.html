@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rajasthan Tourism – Land of Kings</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      color:#2c3e50;
+      background:
+        radial-gradient(circle at top left, rgba(255,153,51,0.3) 0%,transparent 50%),
+        radial-gradient(circle at top right, rgba(19,136,8,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom left, rgba(0,70,151,0.3) 0%,transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255,153,51,0.3) 0%,transparent 50%),
+        linear-gradient(135deg,#f8f4e6,#fff8dc,#f0f8e8,#e6f3ff,#fff8dc);
+      background-attachment:fixed;
+      overflow-x:hidden;
+    }
+    .floating-images { position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none; }
+    .floating-img {
+      position:absolute; border-radius:20px; opacity:0.15; filter:blur(1px);
+      box-shadow:0 20px 60px rgba(255,153,51,0.2); transition:.3s;
+    }
+    .floating-img:hover { opacity:0.3; filter:blur(0); transform:scale(1.05); }
+    .floating-img-1 {
+      top:10%; left:5%; width:300px; height:200px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Hawa_Mahal_Jaipur.jpg/800px-Hawa_Mahal_Jaipur.jpg') center/cover;
+      animation:float1 8s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    .floating-img-2 {
+      top:20%; right:10%; width:260px; height:180px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Mehrangarh_Fort_Jodhpur.jpg/800px-Mehrangarh_Fort_Jodhpur.jpg') center/cover;
+      animation:float2 10s ease-in-out infinite; border:2px solid rgba(19,136,8,0.2);
+    }
+    .floating-img-3 {
+      top:50%; left:8%; width:280px; height:190px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Lake_Palace_Udaipur.jpg/800px-Lake_Palace_Udaipur.jpg') center/cover;
+      animation:float3 12s ease-in-out infinite; border:2px solid rgba(0,70,151,0.2);
+    }
+    .floating-img-4 {
+      top:60%; right:5%; width:320px; height:210px;
+      background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Jaisalmer_Fort_Golden_City.jpg/800px-Jaisalmer_Fort_Golden_City.jpg') center/cover;
+      animation:float4 9s ease-in-out infinite; border:2px solid rgba(255,153,51,0.2);
+    }
+    @keyframes float1 {0%,100%{transform:translateY(0)}25%{transform:translateY(-15px)}50%{transform:translateY(-30px)}75%{transform:translateY(-15px)}}
+    @keyframes float2 {0%,100%{transform:translate(0)}33%{transform:translate(10px,-20px)}66%{transform:translate(-5px,-10px)}}
+    @keyframes float3 {0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-25px) scale(1.02)}}
+    @keyframes float4 {0%,100%{transform:translate(0)}25%{transform:translate(-8px,-18px)}50%{transform:translate(0,-35px)}75%{transform:translate(8px,-18px)}}
+
+    .navbar {
+      position:fixed; top:0; width:100%; padding:15px 0;
+      background:rgba(255,255,255,0.95); backdrop-filter:blur(20px);
+      border-bottom:3px solid #ff9933; z-index:1000;
+    }
+    .nav-content { max-width:1200px; margin:0 auto; display:flex;justify-content:space-between;align-items:center;padding:0 20px; }
+    .logo { font-weight:700; font-size:24px; color:#138808; display:flex;align-items:center;gap:8px; }
+    .nav-links { display:flex; gap:25px; }
+    .nav-links a { text-decoration:none;color:#2c3e50;font-weight:500;transition:.3s; }
+    .nav-links a:hover { color:#ff9933; }
+    .back-btn {
+      background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:10px 18px;border-radius:25px;font-size:14px;font-weight:600;
+      text-decoration:none;display:flex;align-items:center;gap:6px;box-shadow:0 5px 15px rgba(255,153,51,0.3);
+    }
+    .back-btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .hero {
+      height:100vh; display:flex;align-items:center;justify-content:center;text-align:center;
+      background:
+        radial-gradient(circle at center,rgba(255,153,51,0.1)0%,transparent 70%),
+        radial-gradient(circle at 80% 20%,rgba(19,136,8,0.1)0%,transparent 50%),
+        radial-gradient(circle at 20% 80%,rgba(0,70,151,0.1)0%,transparent 50%);
+      position:relative;z-index:1;
+    }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,6rem);font-weight:900;
+      background:linear-gradient(135deg,#ff9933,#138808,#004797);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      animation:gradientShift 3s ease-in-out infinite;margin-bottom:0.5rem;
+    }
+    .hero .subtitle {font-size:1.3rem;color:rgba(44,62,80,0.8);margin-bottom:1rem;font-weight:500;}
+    .hero p {font-size:1.2rem;color:rgba(44,62,80,0.7);margin-bottom:2rem;}
+    .cta-button {display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff9933,#138808);color:#fff;padding:14px 28px;border-radius:50px;font-weight:600;text-decoration:none;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 5px;}
+    .cta-button:hover{transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .action-buttons {position:fixed;right:30px;bottom:30px;display:flex;flex-direction:column;gap:15px;z-index:1000;}
+    .action-btn {background:linear-gradient(135deg,#ff9933,#138808);color:#fff; padding:12px 18px;border:none;border-radius:25px;cursor:pointer; font-weight:600;display:flex;align-items:center;gap:6px; box-shadow:0 8px 25px rgba(255,153,51,0.4);transition:.3s;}
+    .action-btn:hover{transform:translateY(-2px) scale(1.05);}
+    .section {max-width:1200px;margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+    .section-title h2 {font-size:2.5rem;font-weight:700;margin-bottom:10px;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .section-title p {color:rgba(44,62,80,0.7);font-size:1.1rem;}
+    .category-header {text-align:center;margin:40px 0 20px;position:relative;}
+    .category-header h3 { font-size:2rem;font-weight:600;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .category-header::after {content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+      width:80px;height:3px;background:linear-gradient(135deg,#ff9933,#138808);border-radius:2px;}
+    .grid {display:grid;gap:25px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:40px;}
+    .card { background:rgba(255,255,255,0.9);border-radius:20px;padding:25px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.1);position:relative;overflow:hidden;transition:all .3s;}
+    .card:hover {transform:translateY(-8px) scale(1.02);}
+    .card h4 {font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;font-weight:700;}
+    .card p {font-size:1rem;line-height:1.6;margin-bottom:12px;color:rgba(44,62,80,0.8);}
+    .tags {display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+    .tag {background:rgba(255,153,51,0.2);padding:6px 12px;border-radius:15px;font-size:0.85rem;font-weight:600;color:#e68a00;}
+    .map-btn { background:linear-gradient(135deg,#004797,#0066cc);color:#fff;
+      border:none;padding:10px 16px;border-radius:20px;cursor:pointer;font-weight:600;
+      display:flex;align-items:center;gap:6px;transition:.3s;}
+    .map-btn:hover{transform:scale(1.05);}
+    .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);z-index:2000;
+      justify-content:center;align-items:center;}
+    .modal.open{display:flex;}
+    .modal-content {background:#fff;border-radius:15px;max-width:800px;width:90%;max-height:85vh;
+      overflow-y:auto;position:relative;padding:20px;}
+    .close {position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:#555;}
+    .image-scroller {display:flex;overflow-x:auto;gap:10px;scroll-padding:10px;margin-bottom:15px;}
+    .image-scroller img {flex:0 0 auto;border-radius:10px;width:100%;max-width:100%;max-height:300px;object-fit:cover;}
+    .modal-actions {display:flex;gap:10px;justify-content:center;margin-top:15px;}
+    .ai-container {
+      background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(255,153,51,0.4);border-radius:30px;padding:40px;
+      box-shadow:0 25px 50px rgba(255,153,51,0.2);text-align:center;margin-bottom:60px;
+    }
+    .ai-title { font-size:2.5rem;font-weight:700;
+      background:linear-gradient(135deg,#ff9933,#138808);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+    }
+    .ai-form {max-width:600px;margin:0 auto;display:grid;gap:20px;text-align:left;}
+    .form-group label {font-weight:600;display:block;margin-bottom:6px;color:#2c3e50;}
+    .form-group select,.form-group textarea {width:100%;padding:14px;border:2px solid rgba(255,153,51,0.3);border-radius:12px;font-size:16px;transition:.3s;background:rgba(255,255,255,0.9);}
+    .form-group select:focus,.form-group textarea:focus {outline:none;border-color:#ff9933;box-shadow:0 0 15px rgba(255,153,51,0.2);}
+    .checkbox-group {display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;}
+    .checkbox-item {display:flex;align-items:center;gap:8px;padding:8px;background:rgba(255,153,51,0.1);
+      border-radius:8px;transition:.3s;}
+    .checkbox-item:hover {background:rgba(255,153,51,0.2);}
+    .get-recommendations {background:linear-gradient(135deg,#ff9933,#138808);color:#fff;
+      padding:16px 34px;border:none;border-radius:30px;font-weight:700;font-size:18px;
+      cursor:pointer;box-shadow:0 10px 30px rgba(255,153,51,0.3);transition:.3s;margin:0 auto;}
+    .get-recommendations:hover {transform:translateY(-3px);background:linear-gradient(135deg,#e68a00,#0f6b06);}
+    .ai-results {display:none;margin-top:40px;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);
+      border:3px solid rgba(19,136,8,0.4);border-radius:30px;padding:40px;box-shadow:0 25px 50px rgba(19,136,8,0.2);}
+    .ai-results h3 {font-size:2rem;font-weight:700;
+      background:linear-gradient(135deg,#138808,#ff9933);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      text-align:center;margin-bottom:20px;}
+    .recommendation-text {background:rgba(19,136,8,0.05);padding:20px;border-left:5px solid #138808;
+      border-radius:15px;line-height:1.8;color:#2c3e50;}
+    @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+    @media(max-width:768px){
+      .floating-images{display:none;}
+      .grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-images">
+    <div class="floating-img floating-img-1"></div>
+    <div class="floating-img floating-img-2"></div>
+    <div class="floating-img floating-img-3"></div>
+    <div class="floating-img floating-img-4"></div>
+  </div>
+  <div class="action-buttons">
+    <button class="action-btn" id="weather-btn"><span>🌤️</span> Weather</button>
+    <button class="action-btn" id="travel-planner-btn"><span>🗺️</span> Trip Planner</button>
+  </div>
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo"><span style="font-size:28px;">👑</span> Rajasthan Tourism</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#ai-recommendations">AI Plan</a>
+        <a href="#attractions">Attractions</a>
+        <a href="index.html" class="back-btn"><span>←</span>Back to India</a>
+      </div>
+    </div>
+  </nav>
+  <section id="home" class="hero">
+    <div>
+      <h1>Rajasthan</h1>
+      <div class="subtitle">Land of Kings</div>
+      <p>Discover majestic forts, grand palaces, golden deserts, royal heritage, and vibrant culture</p>
+      <a href="#ai-recommendations" class="cta-button"><span>🤖</span>AI Recommendations</a>
+      <a href="#attractions" class="cta-button"><span>✨</span>Explore Attractions</a>
+    </div>
+  </section>
+  <section id="ai-recommendations" class="section">
+    <div class="ai-container">
+      <h2 class="ai-title">🤖 AI-Powered Travel Plan</h2>
+      <p style="color:#666;margin-bottom:30px;">
+        Tell us your trip details and interests—get a custom Rajasthan itinerary!
+      </p>
+      <form id="preferences-form" class="ai-form">
+        <div class="form-group">
+          <label for="duration">Trip Duration</label>
+          <select id="duration" name="duration">
+            <option value="">Select…</option>
+            <option>1–2 days</option><option>3–5 days</option>
+            <option>1 week</option><option>2+ weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select…</option>
+            <option>Budget (₹1k–3k/day)</option>
+            <option>Moderate (₹3k–7k/day)</option>
+            <option>Luxury (₹7k+/day)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="style">Travel Style</label>
+          <select id="style" name="style">
+            <option value="">Select…</option>
+            <option>Solo</option><option>Couple</option><option>Family</option>
+            <option>Friends</option><option>Business</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Interests (multi-select)</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="forts"/>
+              <label>🏰 Forts & Palaces</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="desert"/>
+              <label>🏜️ Desert Safari</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="wildlife"/>
+              <label>🐅 Wildlife</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="culture"/>
+              <label>🎭 Culture & Heritage</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="lakes"/>
+              <label>🌊 Lakes & Palaces</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" name="interests" value="shopping"/>
+              <label>🛍️ Shopping & Food</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="additional" rows="2" placeholder="E.g. want to visit Jaipur, Udaipur and desert safari in Jaisalmer…"></textarea>
+        </div>
+        <button type="submit" class="get-recommendations">
+          <span>✨</span>Get Recommendations
+        </button>
+      </form>
+      <div id="ai-results" class="ai-results">
+        <h3>🎯 Your Rajasthan Travel Plan</h3>
+        <div id="recommendation-content" class="recommendation-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="attractions" class="section">
+    <div class="section-title">
+      <h2>⭐ Top Attractions in Rajasthan</h2>
+      <p>Discover the soul of the Land of Kings</p>
+    </div>
+
+    <div class="category-header"><h3>🏰 Majestic Forts</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🏰 Amber Fort</h4>
+        <p>Jaipur—Rajput grandeur, mirror work Sheesh Mahal, elephant rides, light-sound show, hilltop fortress, stunning architecture, must-visit, UNESCO World Heritage.</p>
+        <div class="tags">
+          <span class="tag">UNESCO</span>
+          <span class="tag">Must-Visit</span>
+          <span class="tag">Elephant Rides</span>
+        </div>
+        <button class="map-btn" onclick="openMap('Amber Fort, Jaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Mehrangarh Fort</h4>
+        <p>Jodhpur—410ft above city, massive walls, palaces, museum, panoramic Blue City views, intricate carvings, zip-lining adventure, architectural marvel, iconic.</p>
+        <div class="tags"><span class="tag">Largest</span><span class="tag">Blue City</span><span class="tag">Zip-lining</span></div>
+        <button class="map-btn" onclick="openMap('Mehrangarh Fort, Jodhpur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>✨ Jaisalmer Fort</h4>
+        <p>Golden Fort—living fort, yellow sandstone, 2nd oldest, havelis inside, sunset views, desert backdrop, Sonar Qila, UNESCO, unique, must-visit.</p>
+        <div class="tags"><span class="tag">Living Fort</span><span class="tag">UNESCO</span><span class="tag">Golden</span></div>
+        <button class="map-btn" onclick="openMap('Jaisalmer Fort, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🗡️ Chittorgarh Fort</h4>
+        <p>Largest fort India—700 acres, Vijay Stambh, Kirti Stambh, Rani Padmini Palace, Gaumukh Reservoir, Rajput valor, UNESCO, historical significance, epic.</p>
+        <div class="tags"><span class="tag">Largest</span><span class="tag">UNESCO</span><span class="tag">Epic History</span></div>
+        <button class="map-btn" onclick="openMap('Chittorgarh Fort, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏯 Kumbhalgarh Fort</h4>
+        <p>2nd longest wall after China—36km wall, UNESCO, birthplace of Maharana Pratap, 360 temples, Aravalli hills, trekking, light-sound show, spectacular views.</p>
+        <div class="tags"><span class="tag">2nd Longest Wall</span><span class="tag">UNESCO</span><span class="tag">Spectacular</span></div>
+        <button class="map-btn" onclick="openMap('Kumbhalgarh Fort, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏰 Nahargarh Fort</h4>
+        <p>Jaipur—Tiger Fort, sunset viewpoint, panoramic city views, Madhavendra Palace, film shooting location, accessible, romantic, photography paradise, peaceful.</p>
+        <div class="tags"><span class="tag">Sunset</span><span class="tag">Views</span><span class="tag">Accessible</span></div>
+        <button class="map-btn" onclick="openMap('Nahargarh Fort, Jaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏛️ Grand Palaces</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>💎 Hawa Mahal</h4>
+        <p>Palace of Winds—Jaipur, 953 windows, pink sandstone, honeycomb structure, royal ladies viewing street, iconic facade, photography hotspot, must-visit, unique.</p>
+        <div class="tags"><span class="tag">Iconic</span><span class="tag">953 Windows</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Hawa Mahal, Jaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌊 Lake Palace</h4>
+        <p>Udaipur—floating palace on Lake Pichola, white marble, luxury hotel, Taj property, romantic, James Bond location, boat access only, stunning, iconic.</p>
+        <div class="tags"><span class="tag">Floating</span><span class="tag">Luxury</span><span class="tag">Iconic</span></div>
+        <button class="map-btn" onclick="openMap('Lake Palace, Udaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏛️ City Palace Jaipur</h4>
+        <p>Royal residence—blend of Mughal-Rajput architecture, museums, Chandra Mahal, Mubarak Mahal, courtyards, art galleries, still inhabited, must-visit, grand.</p>
+        <div class="tags"><span class="tag">Royal</span><span class="tag">Museum</span><span class="tag">Grand</span></div>
+        <button class="map-btn" onclick="openMap('City Palace, Jaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌅 City Palace Udaipur</h4>
+        <p>Lake Pichola shore—11 palaces complex, Maharana's residence, lake views, museums, royal artifacts, architecture marvel, intricate designs, must-visit, stunning.</p>
+        <div class="tags"><span class="tag">11 Palaces</span><span class="tag">Lake Views</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('City Palace, Udaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💧 Jal Mahal</h4>
+        <p>Water Palace—Jaipur, Man Sagar Lake, 4 floors submerged, red sandstone, Rajput-Mughal architecture, sunset views, photography spot, unique, romantic.</p>
+        <div class="tags"><span class="tag">Water Palace</span><span class="tag">Unique</span><span class="tag">Photography</span></div>
+        <button class="map-btn" onclick="openMap('Jal Mahal, Jaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>👑 Umaid Bhawan Palace</h4>
+        <p>Jodhpur—world's 6th largest private residence, luxury hotel, museum, Art Deco, still royal residence, Taj property, opulent, architectural gem, stunning.</p>
+        <div class="tags"><span class="tag">6th Largest</span><span class="tag">Luxury</span><span class="tag">Art Deco</span></div>
+        <button class="map-btn" onclick="openMap('Umaid Bhawan Palace, Jodhpur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏜️ Desert & Safari</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🐪 Sam Sand Dunes</h4>
+        <p>Jaisalmer—Thar Desert, camel safari, sunset views, desert camping, cultural performances, dune bashing, stargazing, traditional Rajasthani nights, must-do, iconic.</p>
+        <div class="tags"><span class="tag">Camel Safari</span><span class="tag">Must-Do</span><span class="tag">Camping</span></div>
+        <button class="map-btn" onclick="openMap('Sam Sand Dunes, Jaisalmer, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌅 Khuri Sand Dunes</h4>
+        <p>42km Jaisalmer—peaceful alternative to Sam, traditional villages, authentic desert experience, fewer crowds, camel rides, homestays, cultural immersion, serene.</p>
+        <div class="tags"><span class="tag">Peaceful</span><span class="tag">Authentic</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Khuri Sand Dunes, Jaisalmer, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏜️ Desert National Park</h4>
+        <p>3000 sq km—Thar Desert, Great Indian Bustard, blackbuck, desert fox, migratory birds, unique ecosystem, Jaisalmer, wildlife safari, conservation, rare.</p>
+        <div class="tags"><span class="tag">Wildlife</span><span class="tag">Great Bustard</span><span class="tag">Unique</span></div>
+        <button class="map-btn" onclick="openMap('Desert National Park, Jaisalmer, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🐫 Osian</h4>
+        <p>Jodhpur desert—ancient temples, sand dunes, camel safari, offbeat destination, Jain temples, peaceful, cultural village, desert experience, accessible.</p>
+        <div class="tags"><span class="tag">Temples</span><span class="tag">Offbeat</span><span class="tag">Safari</span></div>
+        <button class="map-btn" onclick="openMap('Osian, Jodhpur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏕️ Pushkar Camel Fair</h4>
+        <p>November—world's largest camel fair, 50,000 camels, trading, cultural events, Pushkar Lake, religious significance, vibrant, unique experience, must-attend.</p>
+        <div class="tags"><span class="tag">November</span><span class="tag">Largest</span><span class="tag">Must-Attend</span></div>
+        <button class="map-btn" onclick="openMap('Pushkar, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌄 Bikaner Desert</h4>
+        <p>Camel breeding farm—desert safari, Junagarh Fort, Karni Mata Temple (Rat Temple), snacks capital, offbeat desert, cultural experiences, heritage city.</p>
+        <div class="tags"><span class="tag">Camel Farm</span><span class="tag">Offbeat</span><span class="tag">Heritage</span></div>
+        <button class="map-btn" onclick="openMap('Bikaner, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🐅 Wildlife & Nature</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🐯 Ranthambore National Park</h4>
+        <p>Tiger Reserve—Project Tiger, Bengal tigers, Ranthambore Fort, leopards, safari, photography paradise, wildlife heaven, must-visit, best tiger sightings India.</p>
+        <div class="tags"><span class="tag">Tiger Reserve</span><span class="tag">Must-Visit</span><span class="tag">Best Sightings</span></div>
+        <button class="map-btn" onclick="openMap('Ranthambore National Park, Sawai Madhopur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦅 Keoladeo National Park</h4>
+        <p>Bharatpur Bird Sanctuary—UNESCO, 370+ bird species, migratory birds, Siberian cranes, wetland ecosystem, cycling, boating, birdwatching paradise, must-visit.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">370+ Birds</span><span class="tag">Birdwatching</span></div>
+        <button class="map-btn" onclick="openMap('Keoladeo National Park, Bharatpur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🐆 Sariska Tiger Reserve</h4>
+        <p>Alwar—tigers, leopards, nilgai, Kankwari Fort, temple ruins, safari, Aravalli hills, accessible from Delhi, wildlife, peaceful, offbeat alternative.</p>
+        <div class="tags"><span class="tag">Tiger Reserve</span><span class="tag">Accessible</span><span class="tag">Aravalli</span></div>
+        <button class="map-btn" onclick="openMap('Sariska Tiger Reserve, Alwar, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🐆 Jawai Leopard Reserve</h4>
+        <p>Pali—leopard capital, guaranteed sightings, granite hills, leopard safaris, Rabari tribes, unique ecosystem, offbeat, photography, conservation success.</p>
+        <div class="tags"><span class="tag">Leopard Capital</span><span class="tag">Guaranteed</span><span class="tag">Unique</span></div>
+        <button class="map-btn" onclick="openMap('Jawai Leopard Reserve, Pali, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Mount Abu Wildlife Sanctuary</h4>
+        <p>Hill station—subtropical forests, leopards, sloth bears, sambar, unique flora-fauna, trekking, Dilwara Temples nearby, cool climate, peaceful, offbeat.</p>
+        <div class="tags"><span class="tag">Hill Station</span><span class="tag">Subtropical</span><span class="tag">Cool</span></div>
+        <button class="map-btn" onclick="openMap('Mount Abu Wildlife Sanctuary, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🦌 Kumbhalgarh Wildlife Sanctuary</h4>
+        <p>Aravalli Range—leopards, wolves, hyenas, sloth bears, fort nearby, trekking, scenic beauty, offbeat, conservation, pristine forests, peaceful.</p>
+        <div class="tags"><span class="tag">Aravalli</span><span class="tag">Fort Nearby</span><span class="tag">Offbeat</span></div>
+        <button class="map-btn" onclick="openMap('Kumbhalgarh Wildlife Sanctuary, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🌊 Lakes & Heritage Sites</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>🌅 Lake Pichola</h4>
+        <p>Udaipur—artificial lake, boat rides, Lake Palace, City Palace views, Jag Mandir, sunset cruises, romantic, photography, must-do, iconic experience.</p>
+        <div class="tags"><span class="tag">Boat Rides</span><span class="tag">Romantic</span><span class="tag">Must-Do</span></div>
+        <button class="map-btn" onclick="openMap('Lake Pichola, Udaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💧 Pushkar Lake</h4>
+        <p>Sacred lake—52 ghats, Brahma Temple, religious significance, Pushkar Fair, sunset aarti, pilgrimage, vegetarian town, spiritual, peaceful, must-visit.</p>
+        <div class="tags"><span class="tag">Sacred</span><span class="tag">Brahma Temple</span><span class="tag">Spiritual</span></div>
+        <button class="map-btn" onclick="openMap('Pushkar Lake, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏞️ Nakki Lake</h4>
+        <p>Mount Abu—man-made lake, boating, Toad Rock, sunset point, hill station, cool climate, family spot, peaceful, accessible, scenic beauty.</p>
+        <div class="tags"><span class="tag">Hill Station</span><span class="tag">Boating</span><span class="tag">Cool</span></div>
+        <button class="map-btn" onclick="openMap('Nakki Lake, Mount Abu, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🛕 Dilwara Temples</h4>
+        <p>Mount Abu—Jain temples, 11th-15th century, white marble, intricate carvings, architectural masterpiece, religious significance, photography, peaceful, must-visit.</p>
+        <div class="tags"><span class="tag">Jain</span><span class="tag">Marble</span><span class="tag">Masterpiece</span></div>
+        <button class="map-btn" onclick="openMap('Dilwara Temples, Mount Abu, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🔭 Jantar Mantar</h4>
+        <p>Jaipur—astronomical observatory, UNESCO, 18th century, Sawai Jai Singh II, 19 instruments, scientific heritage, architectural marvel, must-visit, unique.</p>
+        <div class="tags"><span class="tag">UNESCO</span><span class="tag">Observatory</span><span class="tag">Unique</span></div>
+        <button class="map-btn" onclick="openMap('Jantar Mantar, Jaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🕌 Ajmer Sharif Dargah</h4>
+        <p>Sufi shrine—Khwaja Moinuddin Chishti, pilgrimage center, qawwali, religious harmony, spiritual, annual Urs festival, must-visit, peaceful, devotional.</p>
+        <div class="tags"><span class="tag">Sufi</span><span class="tag">Pilgrimage</span><span class="tag">Spiritual</span></div>
+        <button class="map-btn" onclick="openMap('Ajmer Sharif Dargah, Ajmer, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+
+    <div class="category-header"><h3>🏙️ Royal Cities</h3></div>
+    <div class="grid">
+      <div class="card">
+        <h4>💎 Jaipur (Pink City)</h4>
+        <p>Capital—Amber Fort, Hawa Mahal, City Palace, Jantar Mantar, markets, UNESCO, planned city, gateway, jewelry, textiles, vibrant, must-visit.</p>
+        <div class="tags"><span class="tag">Pink City</span><span class="tag">Capital</span><span class="tag">UNESCO</span></div>
+        <button class="map-btn" onclick="openMap('Jaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🌊 Udaipur (City of Lakes)</h4>
+        <p>Venice of East—Lake Pichola, City Palace, romantic, lakes, palaces, heritage hotels, sunset cruises, cultural shows, must-visit, most romantic.</p>
+        <div class="tags"><span class="tag">City of Lakes</span><span class="tag">Romantic</span><span class="tag">Must-Visit</span></div>
+        <button class="map-btn" onclick="openMap('Udaipur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>💙 Jodhpur (Blue City)</h4>
+        <p>Sun City—Mehrangarh Fort, blue houses, Umaid Bhawan, clock tower, markets, spices, handicrafts, gateway to Thar, vibrant, must-visit.</p>
+        <div class="tags"><span class="tag">Blue City</span><span class="tag">Sun City</span><span class="tag">Fort</span></div>
+        <button class="map-btn" onclick="openMap('Jodhpur, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>✨ Jaisalmer (Golden City)</h4>
+        <p>Desert jewel—Golden Fort, sand dunes, camel safari, havelis, desert culture, Thar Desert, UNESCO, unique, offbeat, must-visit, magical.</p>
+        <div class="tags"><span class="tag">Golden City</span><span class="tag">Desert</span><span class="tag">UNESCO</span></div>
+        <button class="map-btn" onclick="openMap('Jaisalmer, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🛕 Pushkar</h4>
+        <p>Holy town—Brahma Temple, sacred lake, camel fair, hippie culture, vegetarian, spiritual, colorful markets, peaceful, offbeat, unique, must-visit.</p>
+        <div class="tags"><span class="tag">Holy Town</span><span class="tag">Brahma Temple</span><span class="tag">Spiritual</span></div>
+        <button class="map-btn" onclick="openMap('Pushkar, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+      <div class="card">
+        <h4>🏔️ Mount Abu</h4>
+        <p>Hill station—only hill station Rajasthan, Dilwara Temples, Nakki Lake, cool climate, honeymoon destination, trekking, peaceful, summer retreat, scenic.</p>
+        <div class="tags"><span class="tag">Hill Station</span><span class="tag">Cool</span><span class="tag">Temples</span></div>
+        <button class="map-btn" onclick="openMap('Mount Abu, Rajasthan')">
+          <span>📍</span>View on Map
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title">Loading…</h2>
+      <div class="image-scroller" id="image-scroller"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <script>
+    const GM_KEY = '1ba40ef259msh14c2d3c440f745bp1d4c5cjsn2b02677fdcd4';
+    const GM_HOST = 'google-map-places.p.rapidapi.com';
+
+    document.addEventListener('DOMContentLoaded',() => {
+      document.getElementById('weather-btn')
+        .addEventListener('click',()=>window.open('https://weather.com/en-IN/weather/today/l/Jaipur+Rajasthan','_blank'));
+      document.getElementById('travel-planner-btn')
+        .addEventListener('click',()=>document.getElementById('ai-recommendations').scrollIntoView({behavior:'smooth'}));
+      document.getElementById('preferences-form')
+        .addEventListener('submit',handleForm);
+      setupModal();
+    });
+
+    async function handleForm(e){
+      e.preventDefault();
+      const fd=new FormData(e.target),
+            prefs={ duration:fd.get('duration'), budget:fd.get('budget'),
+                    style:fd.get('style'), additional:fd.get('additional')||'None',
+                    interests:[] };
+      document.querySelectorAll('input[name="interests"]:checked')
+        .forEach(ch=>prefs.interests.push(ch.value));
+      if(!prefs.duration||!prefs.budget||prefs.interests.length===0){
+        return alert('Select duration, budget & at least one interest!');
+      }
+      await getAI(prefs);
+    }
+
+    function formatAI(text){
+      text=text.trim().replace(/^["']|["']$/g,'');
+      text=text.replace(/\\n/g,'\n').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>');
+      text=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+      text=text.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g,'<em>$1</em>');
+      if(!text.includes('<p>'))text='<p>'+text+'</p>';
+      text=text.replace(/<p><\/p>/g,'').replace(/<p>\s*<br>/g,'<p>');
+      return text;
+    }
+
+    async function getAI(p){
+      const results = document.getElementById('ai-results'),
+            content = document.getElementById('recommendation-content');
+      results.style.display = 'block';
+      content.innerHTML = `
+        <div style="text-align:center;padding:20px;">
+          <div style="font-size:2rem;">🤖</div>
+          <p>Generating your Rajasthan travel plan…</p>
+        </div>`;
+
+      const prompt = `You are a travel expert for Rajasthan, India. Given these preferences, craft a personalized itinerary:
+
+Duration: ${p.duration}
+Budget: ${p.budget}
+Style: ${p.style}
+Interests: ${p.interests.join(', ')}
+Additional: ${p.additional}
+
+Include:
+1. Top destinations in Rajasthan (Jaipur, Udaipur, Jaisalmer, Jodhpur, Pushkar, etc.)
+2. Attractions per interest (forts, palaces, desert safari, wildlife, lakes, culture)
+3. Sample day-wise itinerary
+4. Budget tips for accommodation and food
+5. Best seasons to visit
+6. Local experiences (camel safari, folk dances, puppet shows, Rajasthani cuisine, handicrafts shopping)
+7. Transport suggestions
+
+Rajasthan is known as the Land of Kings with majestic forts (Amber, Mehrangarh, Jaisalmer), grand palaces (Hawa Mahal, Lake Palace, City Palaces), Thar Desert safaris, Ranthambore tigers, UNESCO World Heritage sites, colorful culture, royal heritage, and vibrant festivals.
+
+Make it engaging, detailed, and practical. Format with clear sections.`;
+
+      try {
+        const resp = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBjTBW_cresSRlMWsb45NlOt06iVqlV4OQ",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              contents: [
+                {
+                  parts: [{ text: prompt }]
+                }
+              ]
+            })
+          }
+        );
+
+        if (!resp.ok) throw new Error("AI API error");
+
+        const data = await resp.json();
+        let ai = '';
+
+        if (
+          data &&
+          data.candidates &&
+          data.candidates[0] &&
+          data.candidates[0].content &&
+          data.candidates[0].content.parts &&
+          data.candidates[0].content.parts[0] &&
+          data.candidates[0].content.parts[0].text
+        ) {
+          ai = data.candidates[0].content.parts[0].text;
+        } else {
+          ai = 'Unable to generate response';
+        }
+
+        content.innerHTML = `
+          <div style="background:rgba(255,153,51,0.05);padding:25px;border-radius:12px;">
+            ${formatAI(ai)}
+          </div>
+          <div style="text-align:center;margin-top:20px;">
+            <button onclick="window.print()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#138808;color:#fff;">🖨️ Print</button>
+            <button onclick="sharePlan()" style="margin:5px;padding:10px 20px;cursor:pointer;border-radius:8px;border:none;background:#ff9933;color:#fff;">📤 Share</button>
+          </div>`;
+
+      } catch (err) {
+        console.error("AI Error:", err);
+        content.innerHTML = `<p style="color:red;text-align:center;">Failed to generate recommendations. Please check console for details.</p>`;
+      }
+    }
+
+    function sharePlan(){
+      const txt=document.getElementById('recommendation-content').innerText;
+      if(navigator.share) {
+        navigator.share({title:'Rajasthan Travel Plan',text:txt})
+          .catch(err=>console.log('Share failed',err));
+      } else {
+        navigator.clipboard.writeText(txt)
+          .then(()=>alert('Plan copied to clipboard!'))
+          .catch(()=>alert('Unable to copy'));
+      }
+    }
+
+    function setupModal(){
+      const modal=document.getElementById('mapModal'),
+            close=modal.querySelector('.close');
+      close.onclick=()=>modal.classList.remove('open');
+      window.onclick=e=>{ if(e.target===modal) modal.classList.remove('open'); };
+    }
+
+    async function openMap(loc){
+      const modal=document.getElementById('mapModal'),
+            title=modal.querySelector('#modal-title'),
+            scroller=modal.querySelector('#image-scroller'),
+            actions=modal.querySelector('#modal-actions');
+      
+      title.textContent=loc;
+      modal.classList.add('open');
+      
+      const enc=encodeURIComponent(loc);
+      
+      scroller.innerHTML=`<p style="padding:50px;text-align:center;color:#888;">Loading images…</p>`;
+      
+      const mapLink=`https://www.google.com/maps/search/?api=1&query=${enc}`,
+            photoLink=`https://www.google.com/search?tbm=isch&q=${enc}`;
+      actions.innerHTML=`
+        <a href="${mapLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>🗺️</span>View Map</a>
+        <a href="${photoLink}" target="_blank" class="map-btn" style="text-decoration:none;"><span>📸</span>View Photos</a>
+      `;
+
+      scroller.innerHTML=`
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+      `;
+
+      const url=`https://${GM_HOST}/maps/api/streetview?size=600x400&location=${enc}`;
+      try{
+        const res=await fetch(url,{method:'GET',headers:{
+          'x-rapidapi-key':GM_KEY,'x-rapidapi-host':GM_HOST
+        }});
+        if(res.ok) {
+          const blob=await res.blob(),
+                svURL=URL.createObjectURL(blob);
+          scroller.innerHTML = `
+            <img src="${svURL}" alt="Street view of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=${enc}&zoom=14&size=600x400&maptype=roadmap" alt="Map of ${loc}" style="border-radius:10px;width:100%;max-height:300px;object-fit:cover;"/>
+          `;
+        }
+      }catch(e){
+        console.log('Street view not available for this location');
+      }
+    }
+  </script>
+</body>
+</html>
